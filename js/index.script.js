@@ -20,15 +20,15 @@ $(document).ready(function() {
 	}, 5000);
 	
 	
-	const button = $("#onoffSwitch");
+	const button = $('#onoffSwitch');
 	
   	button.click(function() {
 
-	$(".heading").toggleClass('-darkmode');
-	$("#nameWrapper").toggleClass('-darkmode');
-	$("#mainWrapper").toggleClass('-darkmode');
-    $(".statsBox").toggleClass('-darkmode');
-	$("#chartBox").toggleClass('-darkmode');
+	$('.heading').toggleClass('-darkmode');
+	$('#nameWrapper').toggleClass('-darkmode');
+	$('#mainWrapper').toggleClass('-darkmode');
+    $('.statsBox').toggleClass('-darkmode');
+	$('#chartBox').toggleClass('-darkmode');
 	console.log("test");
 	
   });
