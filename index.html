@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
 <script src="js/index.script.js"></script>
 </head>
 <body>
@@ -39,8 +40,40 @@
             <span></span><span></span>
         </div>
     
-    	<div id="chartBox"></div>
-        
+    	<div id="chartWrapper">
+        	<canvas id="chart" width="400" height="70"></canvas>
+            <script>
+            let chart = document.getElementById("chart").getContext("2d");
+			let TestChart = new Chart(chart, {
+				responsive:'true',
+				type: 'line',
+				data: {
+					labels: ["1", "2", "3", "4", "5", "6"],
+					datasets: [{
+						label: '# of Votes',
+						data: [12, 19, 3, 5, 2, 3],
+						backgroundColor: [
+							'#009E7F'
+						],
+						borderColor: [
+							'#00846B',
+						],
+						borderWidth: 5
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero:true
+							}
+						}]
+					}
+				}
+			});
+            </script>
+        </div>
+     
     </div>
 
 </body>

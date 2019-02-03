@@ -130,7 +130,7 @@ align-self:center;
 	
 }
 
-#chartBox {
+#chartWrapper {
 
 height:300px;	
 flex: 0 0 95%;
@@ -197,7 +197,7 @@ background:#1A2A30;
 	
 }
 
-#chartBox.-darkmode {
+#chartWrapper.-darkmode {
 
 height:300px;	
 flex: 0 0 95%;
@@ -225,7 +225,7 @@ width:250px;
 
 }
 
-#chartBox {
+#chartWrapper {
 
 height:250px;	
 flex: 0 0 89%;	
@@ -251,7 +251,7 @@ width:230px;
 
 }
 
-#chartBox {
+#chartWrapper {
 
 height:230px;	
 flex: 0 0 89%;	
