@@ -42,36 +42,6 @@
     
     	<div id="chartWrapper">
         	<canvas id="chart" width="400" height="70"></canvas>
-            <script>
-            let chart = document.getElementById("chart").getContext("2d");
-			let TestChart = new Chart(chart, {
-				responsive:'true',
-				type: 'line',
-				data: {
-					labels: ["1", "2", "3", "4", "5", "6"],
-					datasets: [{
-						label: '# of Votes',
-						data: [12, 19, 3, 5, 2, 3],
-						backgroundColor: [
-							'#009E7F'
-						],
-						borderColor: [
-							'#00846B',
-						],
-						borderWidth: 5
-					}]
-				},
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero:true
-							}
-						}]
-					}
-				}
-			});
-            </script>
         </div>
      
     </div>
