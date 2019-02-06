@@ -18,7 +18,7 @@ module.exports = {
       console.log("Writing to database");
       let obj = JSON.parse(event);
       
-      var data = "INSERT INTO weatherinfo (ID, Temperature, AirHumidity, SoilHumidity, WaterSurface, Date) VALUES (\'"+obj.identification.id+"\',\'"+ obj.info.temperature+"\',\'"+ obj.info.humidityAir+"\',\'"+ obj.info.humiditySoil+"\',\'"+ obj.info.watersurface+"\',\'"+ obj.date.date+"\')";
+      var data = "INSERT INTO weatherinfo (ArduinoID, Temperature, AirHumidity, SoilHumidity, WaterSurface, Date) VALUES (\'"+obj.identification.id+"\',\'"+ obj.info.temperature+"\',\'"+ obj.info.humidityAir+"\',\'"+ obj.info.humiditySoil+"\',\'"+ obj.info.watersurface+"\',\'"+ obj.date.date+"\')";
       con.query(data, function (err, result) {
         if (err) throw err;
         console.log("Record successfully inserted");
@@ -26,12 +26,12 @@ module.exports = {
       
     },
     
-    getWeatherData()
+    getWeatherData(data)
     {
-      con.query("SELECT * FROM weatherinfo limit 1", function (err, result, fields) {
+      con.query("SELECT * FROM weatherinfo order by ID DESC LIMIT 30", function (err, result, fields) {
         if (err) throw err;
-        //console.log(JSON.stringify(result));
-        return JSON.stringify(result);
+        delete result[0].ID;
+        data(JSON.stringify(result));
       });
     }
 };
