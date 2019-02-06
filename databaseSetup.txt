@@ -1,0 +1,6 @@
+﻿CREATE USER 'plantserver'@'localhost' IDENTIFIED BY 'akademiasovy';
+CREATE DATABASE plant_database;
+USE plant_database;
+CREATE TABLE Identification(ArduinoID VARCHAR(20) primary key, PlantName VARCHAR(25));
+CREATE TABLE WeatherInfo(ID int auto_increment primary key, ArduinoID VARCHAR(20), Temperature FLOAT, AirHumidity FLOAT, SoilHumidity FLOAT, WaterSurface FLOAT, Date DATETIME);
+GRANT SELECT, INSERT, UPDATE ON plant_database.* TO 'plantserver'@'localhost';
