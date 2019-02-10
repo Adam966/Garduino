@@ -452,3 +452,54 @@ width: 87vw;
 }
 
 }
+
+
+
+@media (min-width: 1400px) {
+
+/*#middleWrapper{
+
+background:black;
+
+}*/
+
+.statsBox {
+
+height:15vw;
+width:15vw;
+
+}
+
+
+#chartWrapper {
+
+height:15vw;
+width: 84vw;
+
+}
+
+.plantName {
+
+font-size:40px;
+margin-left:6.5vw;
+
+}
+
+
+.statsBox.-darkmode {
+
+height:15vw;
+width:15vw;
+
+}
+
+
+#chartWrapper.-darkmode {
+
+height:15vw;
+width: 84vw;
+
+}
+
+}
+
