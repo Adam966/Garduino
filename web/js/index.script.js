@@ -5,22 +5,20 @@ $(document).ready(function() {
 	/*const socket = () => { io('http://localhost:5485') };
 	//socket();*/
 	
-	/*const socket = io.connect('http://localhost:5485');
+	const socket = io.connect('http://localhost:5485');
+	socket.on('connect', function(data) {
+	    console.log('check',socket.connected);
+	    socket.emit('weatherData');
+    });
 	
-	socket.on('connect',function(){
-		console.log('check',socket.connected);
-	});
-	
-	socket.on('data',function(data){
-		console.log('data');
-		let obj = JSON.parse('data');
-		
+	socket.on('weatherData', function(data) {
+      console.log(data[0].info);
+
 		$('#stat1').text(obj.info.temperature);
 		$('#stat2').text(obj.info.humidityAir);
 		$('#stat3').text(obj.info.humiditySoil);
 		$('#stat4').text(obj.info.watersurface);
-		
-	});*/
+    });
 	
   	$('#onoffSwitch').click(() => {
 	$('.heading').toggleClass('-darkmode');
@@ -30,6 +28,7 @@ $(document).ready(function() {
 	$('#chartWrapper').toggleClass('-darkmode');
 	
 	});
+
 	Chart.defaults.global.maintainAspectRatio = false;
 	let chart = document.getElementById("chart").getContext("2d");
 		let TestChart = new Chart(chart, {
