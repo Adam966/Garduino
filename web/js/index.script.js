@@ -5,41 +5,36 @@ $(document).ready(function() {
 	/*const socket = () => { io('http://localhost:5485') };
 	//socket();*/
 	
-	const socket = io.connect('http://localhost:5485');
+    const socket = io.connect('http://localhost:5485');
 	socket.on('connect', function(data) {
 	    console.log('check',socket.connected);
 	    socket.emit('weatherData');
     });
 	
 	socket.on('weatherData', function(data) {
-      console.log(data[0].info);
+      //console.log(data);
 
-		$('#stat1').text(obj.info.temperature);
-		$('#stat2').text(obj.info.humidityAir);
-		$('#stat3').text(obj.info.humiditySoil);
-		$('#stat4').text(obj.info.watersurface);
-    });
-	
-  	$('#onoffSwitch').click(() => {
-	$('.heading').toggleClass('-darkmode');
-	$('#nameWrapper').toggleClass('-darkmode');
-	$('#middleWrapper').toggleClass('-darkmode');
-    $('.statsBox').toggleClass('-darkmode');
-	$('#chartWrapper').toggleClass('-darkmode');
-	
-	});
+      let obj = JSON.parse(data);
+      console.log(obj);
 
-	Chart.defaults.global.maintainAspectRatio = false;
-	let chart = document.getElementById("chart").getContext("2d");
+		$('#stat1').text(obj[0].Temperature);
+		$('#stat2').text(obj[0].AirHumidity);
+		$('#stat3').text(obj[0].SoilHumidity);
+		$('#stat4').text(obj[0].WaterSurface);
+
+
+
+		Chart.defaults.global.maintainAspectRatio = false;
+		let chart = document.getElementById("chart").getContext("2d");
 		let TestChart = new Chart(chart, {
-			maintainAspectRatio : 'false',
+			//maintainAspectRatio : 'false',
 			responsive: 'true',
 			type: 'line',
 			data: {
-				labels: ["1", "2", "3", "4", "5", "6"],
+				labels: ["Temperature"],
 				datasets: [{
 					label: '# of Votes',
-					data: [12, 19, 3, 5, 2, 3],
+					data: [obj[0].Temperature,obj],
 					backgroundColor: [
 						'#009E7F'
 					],
@@ -59,4 +54,17 @@ $(document).ready(function() {
 				}
 			}
 		});
+    
+    });
+	
+  	$('#onoffSwitch').click(() => {
+	$('.heading').toggleClass('-darkmode');
+	$('#nameWrapper').toggleClass('-darkmode');
+	$('#middleWrapper').toggleClass('-darkmode');
+    $('.statsBox').toggleClass('-darkmode');
+	$('#chartWrapper').toggleClass('-darkmode');
+	
+	});
+
+	
 });
