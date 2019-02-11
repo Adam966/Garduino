@@ -39,10 +39,30 @@ outline:none;
 margin:auto;
 height:100%;
 width:100px;
-background:url(../img/icon.png) center / contain no-repeat;
+background:url(../img/icon1.png) center / contain no-repeat;
+background-size: 70px 70px;
 cursor:pointer;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
 	
 }
+
+.colorChange.-darkmode {
+	
+float:right;
+border:none;
+outline:none;
+margin:auto;
+height:100%;
+width:100px;
+background:url(../img/icon2.png) center / contain no-repeat;
+background-size: 70px 70px;
+cursor:pointer;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+	
+}
+
 
 #nameWrapper {
 

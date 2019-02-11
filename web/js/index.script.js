@@ -58,11 +58,12 @@ $(document).ready(function() {
     });*/
 	
   	$('#onoffSwitch').click(() => {
-	$('.heading').toggleClass('-darkmode');
-	$('#nameWrapper').toggleClass('-darkmode');
-	$('#middleWrapper').toggleClass('-darkmode');
-    $('.statsBox').toggleClass('-darkmode');
-	$('#chartWrapper').toggleClass('-darkmode');
+		$('.colorChange').toggleClass('-darkmode');
+		$('.heading').toggleClass('-darkmode');
+		$('#nameWrapper').toggleClass('-darkmode');
+		$('#middleWrapper').toggleClass('-darkmode');
+		$('.statsBox').toggleClass('-darkmode');
+		$('#chartWrapper').toggleClass('-darkmode');
 	
 	});
 
