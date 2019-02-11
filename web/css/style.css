@@ -121,7 +121,7 @@ color:#97AFAD;
 
 #stat1,#stat2,#stat3,#stat4 {
 
-font-size:5.5rem;
+font-size:4rem;
 color:#009E7F;	
 font-weight:bold;
 /*background:blue;
@@ -226,6 +226,14 @@ background:red;
 
 }*/
 
+.heading {
+
+margin-left:5%;
+font-size:1.5rem;
+color:#97AFAD;
+
+}
+
 .statsBox {
 
 height:55vw;
@@ -239,6 +247,14 @@ margin:3%;
 
 height:55vw;
 width: 80vw;
+
+}
+
+.heading.-darkmode {
+
+margin-left:5%;
+font-size:1.5rem;
+color:white;
 
 }
 
@@ -283,6 +299,14 @@ width: 80vw;
 
 }
 
+.heading {
+
+margin-left:5%;
+font-size:1.7rem;
+color:#97AFAD;
+
+}
+
 .plantName {
 
 font-size:40px;
@@ -302,6 +326,21 @@ width:35vw;
 
 height:35vw;
 width: 80vw;
+
+}
+
+.plantName.-darkmode {
+
+font-size:40px;
+margin-left:10vw;
+
+}
+
+.heading.-darkmode {
+
+margin-left:5%;
+font-size:1.7rem;
+color:white;
 
 }
 
@@ -332,13 +371,21 @@ width: 94vw;
 
 }
 
+.heading {
+
+margin-left:5%;
+font-size:1.7rem;
+color:#97AFAD;
+
+}
+
+
 .plantName {
 
 font-size:40px;
 margin-left:2vw;
 
 }
-
 
 .statsBox.-darkmode {
 
@@ -352,6 +399,14 @@ width:30vw;
 
 height:30vw;
 width: 94vw;
+
+}
+
+.heading.-darkmode {
+
+margin-left:5%;
+font-size:1.7rem;
+color:white;
 
 }
 
@@ -380,6 +435,15 @@ width: 93vw;
 
 }
 
+.heading {
+
+margin-left:5%;
+font-size:1.7rem;
+color:#97AFAD;
+
+}
+
+
 .plantName {
 
 font-size:40px;
@@ -402,6 +466,13 @@ width: 93vw;
 
 }
 
+.heading.-darkmode {
+
+margin-left:5%;
+font-size:1.7rem;
+color:white;
+
+}
 
 }
 
@@ -428,6 +499,14 @@ width: 87vw;
 
 }
 
+.heading {
+
+margin-left:5%;
+font-size:1.7rem;
+color:#97AFAD;
+
+}
+
 .plantName {
 
 font-size:40px;
@@ -435,6 +514,13 @@ margin-left:6.5vw;
 
 }
 
+.heading.-darkmode {
+
+margin-left:5%;
+font-size:1.7rem;
+color:#97AFAD;
+
+}
 
 .statsBox.-darkmode {
 
@@ -451,13 +537,21 @@ width: 87vw;
 
 }
 
+.heading.-darkmode {
+
+margin-left:5%;
+font-size:1.7rem;
+color:white;
+
+}
+
 }
 
 
 
 @media (min-width: 1400px) {
-
-/*#middleWrapper{
+/*
+#middleWrapper{
 
 background:black;
 
@@ -465,41 +559,58 @@ background:black;
 
 .statsBox {
 
-height:15vw;
-width:15vw;
+height:15.5vw;
+width:15.5vw;
 
 }
 
 
 #chartWrapper {
 
-height:15vw;
-width: 84vw;
+height:15.5vw;
+width: 84.5vw;
+
+}
+
+.heading {
+
+margin-left:5%;
+font-size:1.7rem;
+color:#97AFAD;
 
 }
 
 .plantName {
 
 font-size:40px;
-margin-left:6.5vw;
+margin-left:7.5vw;
 
 }
 
 
 .statsBox.-darkmode {
 
-height:15vw;
-width:15vw;
+height:15.5vw;
+width:15.5vw;
 
 }
 
 
 #chartWrapper.-darkmode {
 
-height:15vw;
-width: 84vw;
+height:15.5vw;
+width: 84.5vw;
 
 }
+
+.heading.-darkmode {
+
+margin-left:5%;
+font-size:1.7rem;
+color:white;
+
+}
+
 
 }
 

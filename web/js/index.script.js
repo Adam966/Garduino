@@ -5,7 +5,7 @@ $(document).ready(function() {
 	/*const socket = () => { io('http://localhost:5485') };
 	//socket();*/
 	
-    const socket = io.connect('http://localhost:5485');
+    /*const socket = io.connect('http://localhost:5485');
 	socket.on('connect', function(data) {
 	    console.log('check',socket.connected);
 	    socket.emit('weatherData');
@@ -34,7 +34,7 @@ $(document).ready(function() {
 				labels: ["Temperature"],
 				datasets: [{
 					label: '# of Votes',
-					data: [obj[0].Temperature,obj],
+					data: [obj[0].Temperature],
 					backgroundColor: [
 						'#009E7F'
 					],
@@ -55,7 +55,7 @@ $(document).ready(function() {
 			}
 		});
     
-    });
+    });*/
 	
   	$('#onoffSwitch').click(() => {
 	$('.heading').toggleClass('-darkmode');
