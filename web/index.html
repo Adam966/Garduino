@@ -17,32 +17,44 @@
 	
     <div id="middleWrapper">
         
-        <div class="statsBox">
+        <div class="statsBox1">
         	<div id="headingWrapper"><span class="heading">Temperature</span></div>
         	<div id="stat1"></div>
             <span></span><span></span>
         </div>
         
-        <div class="statsBox">
+        <div class="statsBox2">
        		<div id="headingWrapper"><span class="heading">Humidity Air</span></div>
         	<div id="stat2"></div>
             <span></span><span></span>
         </div>
         
-        <div class="statsBox">
+        <div class="statsBox3">
         	<div id="headingWrapper"><span class="heading">Humidity Soil</span></div>
         	<div id="stat3"></div>
             <span></span><span></span>
         </div>
         
-        <div class="statsBox">
+        <div class="statsBox4">
         	<div id="headingWrapper"><span class="heading">Water level</span></div>
         	<div id="stat4"></div>
             <span></span><span></span>
         </div>
     
-    	<div id="chartWrapper">
-        	<canvas id="chart"></canvas>
+    	<div id="chartWrapper" class="chart1">
+        	<canvas id="chartTemp"></canvas>
+        </div>
+
+        <div id="chartWrapper" class="chart2">
+            <canvas id="chartAirh"></canvas>
+        </div>
+
+         <div id="chartWrapper" class="chart3">
+            <canvas id="chartSoilh"></canvas>
+        </div>
+
+         <div id="chartWrapper" class="chart4">
+            <canvas id="chartWater"></canvas>
         </div>
      
     </div>

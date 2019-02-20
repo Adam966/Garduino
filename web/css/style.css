@@ -91,7 +91,7 @@ transition: all .2s linear 0s;
 }
 
 
-.statsBox {
+.statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
 height:21vw;
 width:21vw;
@@ -175,7 +175,7 @@ color:white;
 
 }
 
-.statsBox.-darkmode {
+.statsBox1.-darkmode,.statsBox2.-darkmode,.statsBox3.-darkmode,.statsBox4.-darkmode {
 
 height:21vw;
 width:21vw;
@@ -239,6 +239,12 @@ transition: all .2s linear 0s;
 	
 }
 
+.chart2,.chart3,.chart4 {
+
+display:none;
+
+}
+
 @media (max-width: 590px) {
 /*
 #middleWrapper{
@@ -255,7 +261,7 @@ color:#97AFAD;
 
 }
 
-.statsBox {
+.statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
 height:55vw;
 width:55vw;
@@ -279,7 +285,7 @@ color:white;
 
 }
 
-.statsBox.-darkmode {
+.statsBox1.-darkmode,.statsBox2.-darkmode,.statsBox3.-darkmode,.statsBox4.-darkmode {
 
 height:55vw;
 width:55vw;
@@ -305,7 +311,7 @@ background:grey;
 
 }*/
 
-.statsBox {
+.statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
 height:35vw;
 width:35vw;
@@ -335,7 +341,7 @@ margin-left:10vw;
 
 }
 
-.statsBox.-darkmode {
+.statsBox1.-darkmode,.statsBox2.-darkmode,.statsBox3.-darkmode,.statsBox4.-darkmode {
 
 height:35vw;
 width:35vw;
@@ -377,7 +383,7 @@ background:green;
 }*/
 
 
-.statsBox {
+.statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
 height:30vw;
 width:30vw;
@@ -408,7 +414,7 @@ margin-left:2vw;
 
 }
 
-.statsBox.-darkmode {
+.statsBox1.-darkmode,.statsBox2.-darkmode,.statsBox3.-darkmode,.statsBox4.-darkmode {
 
 height:30vw;
 width:30vw;
@@ -441,7 +447,7 @@ background:yellow;
 
 }*/
 
-.statsBox {
+.statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
 height:21vw;
 width:21vw;
@@ -472,7 +478,7 @@ margin-left:3vw;
 
 }
 
-.statsBox.-darkmode {
+.statsBox1.-darkmode,.statsBox2.-darkmode,.statsBox3.-darkmode,.statsBox4.-darkmode {
 
 height:21vw;
 width:21vw;
@@ -505,7 +511,7 @@ background:blue;
 
 }*/
 
-.statsBox {
+.statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
 height:17vw;
 width:17vw;
@@ -543,7 +549,7 @@ color:#97AFAD;
 
 }
 
-.statsBox.-darkmode {
+.statsBox1.-darkmode,.statsBox2.-darkmode,.statsBox3.-darkmode,.statsBox4.-darkmode {
 
 height:17vw;
 width:17vw;
@@ -578,7 +584,7 @@ background:black;
 
 }
 */
-.statsBox {
+.statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
 height:15.5vw;
 width:15.5vw;
@@ -609,7 +615,7 @@ margin-left:7.5vw;
 }
 
 
-.statsBox.-darkmode {
+.statsBox1.-darkmode,.statsBox2.-darkmode,.statsBox3.-darkmode,.statsBox4.-darkmode {
 
 height:15.5vw;
 width:15.5vw;
