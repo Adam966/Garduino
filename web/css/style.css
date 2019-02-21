@@ -116,10 +116,14 @@ margin-left:0.5vw;
 
 .waterIcon {
 
-height:100%;
-width:100px;
-margin-left:1vw;
+min-height:80px;
+width:50px;
+/*margin-left:1vw;*/
 background:red;
+background:url(../img/icon4.svg) center / contain no-repeat;
+/*background: red;*/
+background-size: 50px 50px;
+cursor:pointer;
 
 }
 
@@ -342,33 +346,20 @@ background:red;
 #nameWrapper {
 
 /*min-height:80px;*/
-width:100%;
 height:auto;
-margin:0 auto;
-background:#CADADB;
 display:block;
 
 }
 
 .plantName {
 
-height: 100%;
-font-size:40px;
-color:#009E7F;
-font-weight:bold;
-margin-left:0vw;
-background:blue;
+margin-left:5vw;
 
 }
 
 #conditionWrapper {
 
-height:100%;
-/*background: yellow;*/
-display:flex;
-align-items:center;
-margin-left:0vw;
-background:green;
+margin-left:5vw;
 
 }
 
