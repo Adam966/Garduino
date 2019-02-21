@@ -1,6 +1,6 @@
 // JavaScript Document
 
-$(document).ready(function() {
+$(document).ready(() => {
 
 	//divs for display data from server
 	let stat1 = $('#stat1');
@@ -12,6 +12,9 @@ $(document).ready(function() {
 	let onoff = $('#onoffSwitch');
 	let colorChange = $('.colorChange');
 
+	//div for settings button
+	let settings = $('.settingsBtn');
+
 	//divs for dark mode
 	let heading = $('.heading');
 	let nameWrapper = $('#nameWrapper');
@@ -22,14 +25,16 @@ $(document).ready(function() {
 	let statsBox4 = $('.statsBox4');
 	let chartWrapper = $('#chartWrapper');
 
-
 	//divs for charts
 	let divChart1 = $('.chart1');
 	let divChart2 = $('.chart2');
 	let divChart3 = $('.chart3');
 	let divChart4 = $('.chart4');
 
-    const socket = io.connect('http://localhost:5485');
+	//div for settings
+	let middleSettings = $('#middleSettings');
+
+    /*const socket = io.connect('http://localhost:5485');
 
 	socket.on('connect', (data) => {
 	    console.log('check',socket.connected);
@@ -42,10 +47,10 @@ $(document).ready(function() {
       let obj = JSON.parse(data);
       console.log(obj);
 
-		/*$('#stat1').text(obj[0].Temperature);
+		$('#stat1').text(obj[0].Temperature);
 		$('#stat2').text(obj[0].AirHumidity);
 		$('#stat3').text(obj[0].SoilHumidity);
-		$('#stat4').text(obj[0].WaterSurface);*/
+		$('#stat4').text(obj[0].WaterSurface);
 		
 		stat1.text(obj[0].Temperature);
 		stat2.text(obj[0].AirHumidity);
@@ -183,12 +188,9 @@ $(document).ready(function() {
 			}
 		});
 
-
-
-    });
+    });*/
 
 	onoff.click(() => {
-
 		colorChange.toggleClass('-darkmode');
 		heading.toggleClass('-darkmode');
 		nameWrapper.toggleClass('-darkmode');
@@ -198,7 +200,7 @@ $(document).ready(function() {
 		statsBox3.toggleClass('-darkmode');
 		statsBox4.toggleClass('-darkmode');
 		chartWrapper.toggleClass('-darkmode');
-
+		middleSettings.toggleClass('-darkmode');
 	});
 
 	statsBox1.click(() => {
@@ -207,7 +209,6 @@ $(document).ready(function() {
 		divChart2.css('display','none');
 		divChart3.css('display','none');
 		divChart4.css('display','none');
-
 	});
 
 	statsBox2.click(() => {
@@ -232,6 +233,12 @@ $(document).ready(function() {
 		divChart2.css('display','none');
 		divChart3.css('display','none');
 		divChart4.css('display','block');
+	});
+
+	settings.click(() => {
+		console.log("test settings button");
+		middleWrapper.css('display','none');
+		middleSettings.css('display','block');
 	});
 
   	/*$('#onoffSwitch').click(() => {

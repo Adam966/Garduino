@@ -39,12 +39,28 @@ outline:none;
 margin:auto;
 height:100%;
 width:100px;
-background:url(../img/icon1.png) center / contain no-repeat;
-background-size: 70px 70px;
+background:url(../img/icon1.svg) center / contain no-repeat;
+/*background: red;*/
+background-size: 60px 60px;
 cursor:pointer;
 -webkit-transition: all .2s linear 0s;
 transition: all .2s linear 0s;
 	
+}
+
+.settingsBtn {
+
+float:right;
+border:none;
+outline:none;
+height:100%;
+width:100px;
+background:url(../img/icon3.svg) center / contain no-repeat;
+background-size: 60px 60px;
+cursor:pointer;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+
 }
 
 
@@ -72,6 +88,40 @@ font-weight:bold;
 
 }
 
+#conditionWrapper {
+
+height:100%;
+/*background: yellow;*/
+display:flex;
+align-items:center;
+margin-left:2.5vw;
+
+}
+
+.conditionName {
+
+font-size:40px;
+color:#929999;
+
+}
+
+.health {
+
+font-size:40px;
+color:#9DA5A5;
+margin-left:0.5vw;
+/*color:#009B4A;*/
+
+}
+
+.waterIcon {
+
+height:100%;
+width:100px;
+margin-left:1vw;
+background:red;
+
+}
 
 #middleWrapper {
 	
@@ -90,6 +140,19 @@ transition: all .2s linear 0s;
 	
 }
 
+#middleSettings {
+	
+display: none;
+height:auto;
+min-height:80%;
+width:100%;	
+margin:0 auto;
+/*background: red;*/
+background:#D2E3E5;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+	
+}
 
 .statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
@@ -231,8 +294,8 @@ outline:none;
 margin:auto;
 height:100%;
 width:100px;
-background:url(../img/icon2.png) center / contain no-repeat;
-background-size: 70px 70px;
+background:url(../img/icon2.svg) center / contain no-repeat;
+background-size: 60px 60px;
 cursor:pointer;
 -webkit-transition: all .2s linear 0s;
 transition: all .2s linear 0s;
@@ -245,13 +308,70 @@ display:none;
 
 }
 
-@media (max-width: 590px) {
+#middleSettings.-darkmode {
+	
+display: none;
+height:auto;
+min-height:80%;
+width:100%;	
+margin:0 auto;
+/*background: red;*/
+background:#1A2A30;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+	
+}
+
 /*
+#middleWrapper.-settings {
+
+display:none;
+
+}*/
+
+
+@media (max-width: 590px) {
+
+
 #middleWrapper{
 
 background:red;
 
-}*/
+}
+
+#nameWrapper {
+
+/*min-height:80px;*/
+width:100%;
+height:auto;
+margin:0 auto;
+background:#CADADB;
+display:block;
+
+}
+
+.plantName {
+
+height: 100%;
+font-size:40px;
+color:#009E7F;
+font-weight:bold;
+margin-left:0vw;
+background:blue;
+
+}
+
+#conditionWrapper {
+
+height:100%;
+/*background: yellow;*/
+display:flex;
+align-items:center;
+margin-left:0vw;
+background:green;
+
+}
+
 
 .heading {
 
@@ -304,12 +424,24 @@ width: 80vw;
 }
 
 @media (min-width: 590px) {
+
+.plantName {
+
+font-size:40px;
+color:#009E7F;
+font-weight:bold;
+
+}
+
+
 /*
 #middleWrapper{
 
 background:grey;
 
-}*/
+}
+
+*/
 
 .statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
@@ -640,4 +772,3 @@ color:white;
 
 
 }
-

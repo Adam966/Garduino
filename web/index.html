@@ -11,10 +11,22 @@
 </head>
 <body>
 
-	<div id="barUp"><input type="button" class="colorChange" id="onoffSwitch"></div>
-    
-    <div id="nameWrapper"><span class="plantName">Plant 1 </span></div>
-	
+	<div id="barUp">
+        <input type="button" class="colorChange" id="onoffSwitch">
+        <input type="button" class="settingsBtn">
+    </div>
+
+    <div id="nameWrapper">
+        <span class="plantName">Plant 1 </span>
+        <!--<span class="conditionName">Condition:</span>
+        <span class="health">GOOD</span>
+        <div class="waterIcon"></div>-->
+        <div id="conditionWrapper">
+            <span class="conditionName">Condition:</span>
+            <span class="health">GOOD</span>
+            <span class="waterIcon"></span>
+        </div>
+    </div>
     <div id="middleWrapper">
         
         <div class="statsBox1">
@@ -57,6 +69,10 @@
             <canvas id="chartWater"></canvas>
         </div>
      
+    </div>
+
+    <div id="middleSettings">
+
     </div>
 
 </body>
