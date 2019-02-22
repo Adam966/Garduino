@@ -13,26 +13,26 @@ con.connect(function(err) {
   });
 
 module.exports = {
-    writeData(event)
+    writeData(obj)
     {
       console.log("Writing to database");
       //let obj = JSON.parse(event);
-      let obj = event;
-
-      let data = "INSERT INTO weatherinfo (ArduinoID, Temperature, AirHumidity, SoilHumidity, WaterSurface, Date) VALUES (\'"+obj.identification.id+"\',\'"+ obj.info.temperature+"\',\'"+ obj.info.humidityAir+"\',\'"+ obj.info.humiditySoil+"\',\'"+ obj.info.watersurface+"\',\'"+ obj.date.date+"\')";
-      con.query(data, function (err, result) {
+      const query = "INSERT INTO weatherinfo (ArduinoID, Temperature, AirHumidity, SoilHumidity, WaterSurface, Date) VALUES (\'"+obj.identification.id+"\',\'"+ obj.info.temperature+"\',\'"+ obj.info.humidityAir+"\',\'"+ obj.info.humiditySoil+"\',\'"+ obj.info.watersurface+"\',\'"+ obj.date.date+"\')";
+      con.query(query, err => {
         if (err) throw err;
         console.log("Record successfully inserted");
       });
       
     },
     
-    getWeatherData(data)
+    getWeatherData(interval, data)
     {
-      con.query("SELECT * FROM weatherinfo order by ID DESC LIMIT 30", function (err, result, fields) {
-        if (err) throw err;
-        delete result[0].ID;
-        data(JSON.stringify(result));
+      console.log(interval);
+      const query = "SELECT Temperature, AirHumidity, SoilHumidity, WaterSurface, Date FROM WeatherInfo WHERE Date > (NOW() - INTERVAL 1 "+ interval + ")";
+      console.log(query);
+      con.query(query, (err, result) =>{
+           if (err) throw err;
+           data(JSON.stringify(result));
       });
     }
 };

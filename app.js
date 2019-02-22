@@ -5,23 +5,28 @@ const io = require('socket.io')(server);
 io.set('origins', '*:*');
 
 console.log("Server started");
-io.on('connection', function(client){ 
+io.on('connection', client =>{ 
     console.log("Client connected");
 	   
-	    client.on('arduinoData',function(event){ 
+	client.on('arduinoData', event =>{ 
         database.writeData(event);
-    });
-
-        client.on('weatherData',function(event){ 
-
-        database.getWeatherData(function(data) {
-                console.log(data);
-                client.emit('weatherData', data);
-         });
+        client.emit('weatherData', event);
     });
     
-     	client.on('disconnect',function(){
-	  	console.log('Client has disconnected');
+    client.on('disconnect', ()=>{
+	    console.log('Client has disconnected');
+    });
+});
+
+app.get('/weatherData7', (req, res) =>{
+    database.getWeatherData("WEEK" , data =>{
+        res.status(200).send(data);
+    });
+});
+
+app.get('/weatherData30', (req, res) =>{
+    database.getWeatherData("MONTH" , data =>{
+        res.status(200).send(data);
     });
 });
 server.listen(5485);
