@@ -24,6 +24,7 @@ $(document).ready(() => {
 	let statsBox3 = $('.statsBox3');
 	let statsBox4 = $('.statsBox4');
 	let chartWrapper = $('#chartWrapper');
+	let conditionName = $('.conditionName');
 
 	//divs for charts
 	let divChart1 = $('.chart1');
@@ -201,6 +202,7 @@ $(document).ready(() => {
 		statsBox4.toggleClass('-darkmode');
 		chartWrapper.toggleClass('-darkmode');
 		middleSettings.toggleClass('-darkmode');
+		conditionName.toggleClass('-darkmode');
 	});
 
 	statsBox1.click(() => {
