@@ -24,9 +24,10 @@
         <div id="conditionWrapper">
             <span class="conditionName">Condition:</span>
             <span class="health">GOOD</span>
-            <span class="waterIcon"></span>
+            <span class="waterIcon" title="Click for water plants"></span>
         </div>
     </div>
+
     <div id="middleWrapper">
         
         <div class="statsBox1">
@@ -52,23 +53,32 @@
         	<div id="headingWrapper"><span class="heading">Water level</span></div>
         	<div id="stat4">400</div>
         </div>
-    
-    	<div id="chartWrapper" class="chart1">
-        	<canvas id="chartTemp"></canvas>
+
+        <div id="chartAndTimeWrap">
+            <div id="timeWrapper">
+                <div class="today">Today</div>
+                <div class="lastDay">Last day</div>
+                <div class="lastWeek">Last week</div>
+            </div>
+
+        	<div id="chartWrapper" class="chart1">
+            	<canvas id="chartTemp"></canvas>
+            </div>
+
+            <div id="chartWrapper" class="chart2">
+                <canvas id="chartAirh"></canvas>
+            </div>
+
+             <div id="chartWrapper" class="chart3">
+                <canvas id="chartSoilh"></canvas>
+            </div>
+
+             <div id="chartWrapper" class="chart4">
+                <canvas id="chartWater"></canvas>
+            </div>
         </div>
 
-        <div id="chartWrapper" class="chart2">
-            <canvas id="chartAirh"></canvas>
-        </div>
 
-         <div id="chartWrapper" class="chart3">
-            <canvas id="chartSoilh"></canvas>
-        </div>
-
-         <div id="chartWrapper" class="chart4">
-            <canvas id="chartWater"></canvas>
-        </div>
-     
     </div>
 
     <div id="middleSettings">
