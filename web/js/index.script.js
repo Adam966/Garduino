@@ -3,37 +3,58 @@
 $(document).ready(() => {
 
 	//divs for display data from server
-	let stat1 = $('#stat1');
-	let stat2 = $('#stat2');
-	let stat3 = $('#stat3');
-	let stat4 = $('#stat4');
+	const stat1 = $('#stat1');
+	const stat2 = $('#stat2');
+	const stat3 = $('#stat3');
+	const stat4 = $('#stat4');
 
 	//div for dark mode onoffSwitch
-	let onoff = $('#onoffSwitch');
-	let colorChange = $('.colorChange');
+	const onoff = $('#onoffSwitch');
+	const colorChange = $('.colorChange');
 
 	//div for settings button
-	let settings = $('.settingsBtn');
+	const settings = $('.settingsBtn');
 
 	//divs for dark mode
-	let heading = $('.heading');
-	let nameWrapper = $('#nameWrapper');
-	let middleWrapper = $('#middleWrapper');
-	let statsBox1 = $('.statsBox1');
-	let statsBox2 = $('.statsBox2');
-	let statsBox3 = $('.statsBox3');
-	let statsBox4 = $('.statsBox4');
-	let chartWrapper = $('#chartWrapper');
-	let conditionName = $('.conditionName');
+	const heading = $('.heading');
+	const nameWrapper = $('#nameWrapper');
+	const middleWrapper = $('#middleWrapper');
+	const statsBox1 = $('.statsBox1');
+	const statsBox2 = $('.statsBox2');
+	const statsBox3 = $('.statsBox3');
+	const statsBox4 = $('.statsBox4');
+	const chartWrapper = $('#chartWrapper');
+	const conditionName = $('.conditionName');
+	const today = $('.today');
+	const lastWeek = $('.lastWeek');
+	const lastMonth = $('.lastMonth');
 
 	//divs for charts
-	let divChart1 = $('.chart1');
-	let divChart2 = $('.chart2');
-	let divChart3 = $('.chart3');
-	let divChart4 = $('.chart4');
+	const divChart1 = $('.chart1');
+	const divChart2 = $('.chart2');
+	const divChart3 = $('.chart3');
+	const divChart4 = $('.chart4');
 
 	//div for settings
-	let middleSettings = $('#middleSettings');
+	const middleSettings = $('#middleSettings');
+
+	//settings range sliders
+	const slider1 = $('#myRange1')[0];
+	const slider2 = $('#myRange2')[0];
+	const slider3 = $('#myRange3')[0];
+	const slider4 = $('#myRange4')[0];
+	const slider5 = $('#myRange5')[0];
+	const slider6 = $('#myRange6')[0];
+	const slider7 = $('#myRange7')[0];
+	const slider8 = $('#myRange8')[0];
+	let output1 = $('#output1')[0];
+	let output2 = $('#output2')[0];
+	let output3 = $('#output3')[0];
+	let output4 = $('#output4')[0];
+	let output5 = $('#output5')[0];
+	let output6 = $('#output6')[0];
+	let output7 = $('#output7')[0];
+	let output8 = $('#output8')[0];
 
     /*const socket = io.connect('http://localhost:5485');
 
@@ -203,6 +224,9 @@ $(document).ready(() => {
 		chartWrapper.toggleClass('-darkmode');
 		middleSettings.toggleClass('-darkmode');
 		conditionName.toggleClass('-darkmode');
+		today.toggleClass('-darkmode');
+		lastWeek.toggleClass('-darkmode');
+		lastMonth.toggleClass('-darkmode');
 	});
 
 	statsBox1.click(() => {
@@ -240,8 +264,52 @@ $(document).ready(() => {
 	settings.click(() => {
 		console.log("test settings button");
 		middleWrapper.css('display','none');
-		middleSettings.css('display','block');
+		middleSettings.css('display','flex');
 	});
+
+
+	output1.innerHTML = slider1.value;
+	output2.innerHTML = slider2.value;
+	output3.innerHTML = slider3.value;
+	output4.innerHTML = slider4.value;
+	output5.innerHTML = slider5.value;
+	output6.innerHTML = slider6.value;
+	output7.innerHTML = slider7.value;
+	output8.innerHTML = slider8.value;
+
+	slider1.oninput = function() {
+	  output1.innerHTML = this.value;
+	}
+
+	slider2.oninput = function() {
+	  output2.innerHTML = this.value;
+	}
+
+	slider3.oninput = function() {
+	  output3.innerHTML = this.value;
+	}
+
+	slider4.oninput = function() {
+	  output4.innerHTML = this.value;
+	}
+
+	slider5.oninput = function() {
+	  output5.innerHTML = this.value;
+	}
+
+	slider6.oninput = function() {
+	  output6.innerHTML = this.value;
+	}
+
+	slider7.oninput = function() {
+	  output7.innerHTML = this.value;
+	}
+
+	slider8.oninput = function() {
+	  output8.innerHTML = this.value;
+	}
+
+
 
   	/*$('#onoffSwitch').click(() => {
 
