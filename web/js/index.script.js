@@ -61,6 +61,9 @@ $(document).ready(() => {
 	let output7 = $('#output7')[0];
 	let output8 = $('#output8')[0];
 
+	//div for water plant
+	const water = $('#water');
+
     /*const socket = io.connect('http://localhost:5485');
 
 	socket.on('connect', (data) => {
@@ -319,7 +322,18 @@ $(document).ready(() => {
 	  output8.innerHTML = this.value;
 	}
 
-
+	submitBtn.click(() => {
+		slider1.value;
+		slider2.value;
+		slider3.value;
+		slider4.value;
+		slider5.value;
+		slider6.value;
+		slider7.value;
+		slider8.value;
+		middleWrapper.css('display','flex');
+		middleSettings.css('display','none');
+	});
 
   	/*$('#onoffSwitch').click(() => {
 
@@ -331,5 +345,13 @@ $(document).ready(() => {
 		$('#chartWrapper').toggleClass('-darkmode');
 	
 	});*/
+
+	water.click(() => {
+		console.log("test");
+		socket.emit('water');
+	});
+
+
+
 
 });
