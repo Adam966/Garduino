@@ -28,6 +28,11 @@ $(document).ready(() => {
 	const today = $('.today');
 	const lastWeek = $('.lastWeek');
 	const lastMonth = $('.lastMonth');
+	const setupWrapper1 = $('.setupWrapperUp');
+	const setupWrapper2 = $('.setupWrapperB');
+	const submitBtn = $('#submitSettings');
+	const setupHeading = $('.setupHeading');
+	const rangeText = $('.rangeText');
 
 	//divs for charts
 	const divChart1 = $('.chart1');
@@ -227,6 +232,11 @@ $(document).ready(() => {
 		today.toggleClass('-darkmode');
 		lastWeek.toggleClass('-darkmode');
 		lastMonth.toggleClass('-darkmode');
+		setupWrapper1.toggleClass('-darkmode');
+		setupWrapper2.toggleClass('-darkmode');
+		submitBtn.toggleClass('-darkmode');
+		setupHeading.toggleClass('-darkmode');
+		rangeText.toggleClass('-darkmode');
 	});
 
 	statsBox1.click(() => {
