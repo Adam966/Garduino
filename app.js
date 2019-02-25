@@ -2,7 +2,13 @@ let database = require('./db');
 const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+
 io.set('origins', '*:*');
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });  
 
 console.log("Server started");
 io.on('connection', client =>{ 

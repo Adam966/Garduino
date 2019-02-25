@@ -16,7 +16,7 @@ module.exports = {
     writeData(obj)
     {
       console.log("Writing to database");
-      //let obj = JSON.parse(event);
+      //obj = JSON.parse(obj);
       const query = "INSERT INTO weatherinfo (ArduinoID, Temperature, AirHumidity, SoilHumidity, WaterSurface, Date) VALUES (\'"+obj.identification.id+"\',\'"+ obj.info.temperature+"\',\'"+ obj.info.humidityAir+"\',\'"+ obj.info.humiditySoil+"\',\'"+ obj.info.watersurface+"\',\'"+ obj.date.date+"\')";
       con.query(query, err => {
         if (err) throw err;
