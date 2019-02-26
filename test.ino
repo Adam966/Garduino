@@ -4,6 +4,7 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
+#include "DHT.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,13 +18,16 @@ const char* password = "heslo123456789";
 
 #define waterSurface A0
 #define wsPower 1
-
-
+#define analogPin A0
+#define digitalPin 3
+#define vccPin 4
+#define pinDHT 5
+#define pump 6
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 SocketIoClient webSocket;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
-
+DHT dht(pinDHT, DHT22);
 ////////////////////////////////////////////////// SETUP /////////////////////////////////////////////
 
 void setup() {
@@ -72,6 +76,10 @@ void setup() {
 
     //setup pinMode
     pinMode(wsPower, OUTPUT); //D4
+    pinMode(analogPinSoil, INPUT);//soilhumidity
+    pinMode(digitalPinSoil, INPUT);//soilhumidity
+    pinMode(pinNapajeni, OUTPUT);//watersurface
+    pinMode(pump,OUTPUT);//pump
 }
 
 /////////////////////////////////////////// WIFI reconection /////////////////////////////////////
@@ -168,6 +176,31 @@ String getDate() {
   return date;
 }
 
+float getSoilHumidity() {
+  digitalWrite(vccPin, HIGH);
+  float humidity = analogRead(analogPin);
+  delay(100);
+  digitalWrite(vccPin, LOW);
+  return humidity;
+}
+
+float getWaterSurface(){
+  digitalWrite(pinNapajeni, HIGH);
+  float analog = analogRead(pinAnalog);
+  delay(100);
+  digitalWrite(pinNapajeni, LOW);
+  return analog;
+  }
+float getTemperature(){
+  float temperature = dht.readTemperature();
+  return temperature;
+  }  
+float getHumidity(){
+  float humidity = dht.readHumidity();
+  return humidity;
+  }
+
+
 //////////////////////////////////////// JSON Creation /////////////////////////////////////////////////
 
 void createJson(float temperature, float humidityAir, float humiditySoil, float waterSurface, String id) {
@@ -212,6 +245,12 @@ void disconection(const char * payload, size_t length) {
    Serial.println("Client disconnected from server.");
    webSocket.begin("192.168.1.109", 5485, "/socket.io/?transport=websocket");
 }
+
+void startPump(){
+  digitalWrite(pump,HIGH);
+  delay(10000);
+  digitalWrite(pump,LOW);
+  }  
 
 /////////////////////////////////////////////// LOOP ///////////////////////////////////////////
 
