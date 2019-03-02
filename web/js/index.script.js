@@ -355,7 +355,10 @@ $(document).ready(() => {
 		let airhToChart = obj.map(item => item.AirHumidity);
 		let soilhToChart = obj.map(item => item.SoilHumidity);
 		let waterToChart = obj.map(item => item.WaterSurface);
-		let date = obj.map(item => item.Date);
+		const searchStr = '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])';
+		const regex = new RegExp(searchStr,'i');
+		let date = obj.map(item => regex.test(item.Date));
+		//let date = obj.map(item => item.Date);
 		console.log(tempToChart);
 		console.log(airhToChart);
 		console.log(soilhToChart);
@@ -501,6 +504,10 @@ $(document).ready(() => {
 
 	submitBtn.click(() => {
 		/*slider1.value;*/
+		let sliderArr = [];
+		sliderArr.push(slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value);
+
+		console.log(sliderArr);
 		middleWrapper.css('display','flex');
 		middleSettings.css('display','none');
 	});
