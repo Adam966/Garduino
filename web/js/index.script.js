@@ -23,7 +23,6 @@ $(document).ready(() => {
 	const statsBox2 = $('.statsBox2');
 	const statsBox3 = $('.statsBox3');
 	const statsBox4 = $('.statsBox4');
-	const chartWrapper = $('#chartWrapper');
 	const conditionName = $('.conditionName');
 	const today = $('.today');
 	const lastWeek = $('.lastWeek');
@@ -35,10 +34,10 @@ $(document).ready(() => {
 	const rangeText = $('.rangeText');
 
 	//divs for charts
-	const divChart1 = $('.chart1');
-	const divChart2 = $('.chart2');
-	const divChart3 = $('.chart3');
-	const divChart4 = $('.chart4');
+	const divChart1 = $('#chartWrapper1');
+	const divChart2 = $('#chartWrapper2');
+	const divChart3 = $('#chartWrapper3');
+	const divChart4 = $('#chartWrapper4');
 
 	//div for settings
 	const middleSettings = $('#middleSettings');
@@ -158,7 +157,7 @@ $(document).ready(() => {
        let obj = JSON.parse(this.responseText);
        console.log(obj);
 
-        $('#stat1').text(obj[0].Temperature);
+      /*  $('#stat1').text(obj[0].Temperature);
 		$('#stat2').text(obj[0].AirHumidity);
 		$('#stat3').text(obj[0].SoilHumidity);
 		$('#stat4').text(obj[0].WaterSurface);
@@ -166,12 +165,12 @@ $(document).ready(() => {
 		stat1.text(obj[0].Temperature);
 		stat2.text(obj[0].AirHumidity);
 		stat3.text(obj[0].SoilHumidity);
-		stat4.text(obj[0].WaterSurface);
+		stat4.text(obj[0].WaterSurface); 
 
 		barTemp.height(obj[0].Temperature+'%');
 		barAir.height(obj[0].AirHumidity+'%');
 		barSoil.height(obj[0].SoilHumidity+'%');
-		barWater.height(obj[0].WaterSurface+'%');
+		barWater.height(obj[0].WaterSurface+'%'); */
 
 		let tempToChart = obj.map(item => item.Temperature);
 		let airhToChart = obj.map(item => item.AirHumidity);
@@ -214,7 +213,7 @@ $(document).ready(() => {
        let obj = JSON.parse(this.responseText);
        console.log(obj);
 
-   		$('#stat1').text(obj[0].Temperature);
+   	/*	$('#stat1').text(obj[0].Temperature);
 		$('#stat2').text(obj[0].AirHumidity);
 		$('#stat3').text(obj[0].SoilHumidity);
 		$('#stat4').text(obj[0].WaterSurface);
@@ -222,12 +221,12 @@ $(document).ready(() => {
 		stat1.text(obj[0].Temperature);
 		stat2.text(obj[0].AirHumidity);
 		stat3.text(obj[0].SoilHumidity);
-		stat4.text(obj[0].WaterSurface);
+		stat4.text(obj[0].WaterSurface); 
 
 		barTemp.height(obj[0].Temperature+'%');
 		barAir.height(obj[0].AirHumidity+'%');
 		barSoil.height(obj[0].SoilHumidity+'%');
-		barWater.height(obj[0].WaterSurface+'%');
+		barWater.height(obj[0].WaterSurface+'%'); */
 
 		let tempToChart = obj.map(item => item.Temperature);
 		let airhToChart = obj.map(item => item.AirHumidity);
@@ -397,7 +396,10 @@ $(document).ready(() => {
 		statsBox2.toggleClass('-darkmode');
 		statsBox3.toggleClass('-darkmode');
 		statsBox4.toggleClass('-darkmode');
-		chartWrapper.toggleClass('-darkmode');
+		divChart1.toggleClass('-darkmode');
+		divChart2.toggleClass('-darkmode');
+		divChart3.toggleClass('-darkmode');
+		divChart4.toggleClass('-darkmode');
 		middleSettings.toggleClass('-darkmode');
 		conditionName.toggleClass('-darkmode');
 		today.toggleClass('-darkmode');

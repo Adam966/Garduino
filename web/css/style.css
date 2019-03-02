@@ -206,7 +206,7 @@ border-radius:0 0 8px 8px;
 
 }
 
-#chartWrapper {
+#chartWrapper1,#chartWrapper2,#chartWrapper3,#chartWrapper4 {
 
 height:21vw;
 width: 93vw;
@@ -527,7 +527,8 @@ transition: all .2s linear 0s;
 	
 }
 
-#chartWrapper.-darkmode {
+
+#chartWrapper1.-darkmode,#chartWrapper2.-darkmode,#chartWrapper3.-darkmode,#chartWrapper4.-darkmode {
 
 height:21vw;
 width: 93vw;
@@ -553,10 +554,10 @@ background-size: 60px 60px;
 cursor:pointer;
 -webkit-transition: all .2s linear 0s;
 transition: all .2s linear 0s;
-	
+	w
 }
 
-.chart2,.chart3,.chart4 {
+#chartWrapper2,#chartWrapper3,#chartWrapper4 {
 
 display:none;
 
@@ -803,7 +804,7 @@ margin:3%;
 }
 
 
-#chartWrapper {
+#chartWrapper1,#chartWrapper2,#chartWrapper3,#chartWrapper4 {
 
 height:55vw;
 width: 80vw;
@@ -827,7 +828,7 @@ margin:3%;
 }
 
 
-#chartWrapper.-darkmode {
+#chartWrapper1.-darkmode,#chartWrapper2.-darkmode,#chartWrapper3.-darkmode,#chartWrapper4.-darkmode {
 
 height:55vw;
 width: 80vw;
@@ -1074,7 +1075,7 @@ width:35vw;
 }
 
 
-#chartWrapper {
+#chartWrapper1,#chartWrapper2,#chartWrapper3,#chartWrapper4 {
 
 height:35vw;
 width: 80vw;
@@ -1104,7 +1105,7 @@ width:35vw;
 }
 
 
-#chartWrapper.-darkmode {
+#chartWrapper1.-darkmode,#chartWrapper2.-darkmode,#chartWrapper3.-darkmode,#chartWrapper4.-darkmode {
 
 height:35vw;
 width: 80vw;
@@ -1288,7 +1289,7 @@ width:30vw;
 }
 
 
-#chartWrapper {
+#chartWrapper1,#chartWrapper2,#chartWrapper3,#chartWrapper4 {
 
 height:30vw;
 width: 94vw;
@@ -1319,7 +1320,7 @@ width:30vw;
 }
 
 
-#chartWrapper.-darkmode {
+#chartWrapper1.-darkmode,#chartWrapper2.-darkmode,#chartWrapper3.-darkmode,#chartWrapper4.-darkmode {
 
 height:30vw;
 width: 94vw;
@@ -1482,7 +1483,7 @@ width:21vw;
 }
 
 
-#chartWrapper {
+#chartWrapper1,#chartWrapper2,#chartWrapper3,#chartWrapper4 {
 
 height:21vw;
 width: 93vw;
@@ -1513,7 +1514,7 @@ width:21vw;
 }
 
 
-#chartWrapper.-darkmode {
+#chartWrapper1.-darkmode,#chartWrapper2.-darkmode,#chartWrapper3.-darkmode,#chartWrapper4.-darkmode {
 
 height:21vw;
 width: 93vw;
@@ -1704,7 +1705,7 @@ width:17vw;
 }
 
 
-#chartWrapper {
+#chartWrapper1,#chartWrapper2,#chartWrapper3,#chartWrapper4 {
 
 height:17vw;
 width: 87vw;
@@ -1742,7 +1743,7 @@ width:17vw;
 }
 
 
-#chartWrapper.-darkmode {
+#chartWrapper1.-darkmode,#chartWrapper2.-darkmode,#chartWrapper3.-darkmode,#chartWrapper4.-darkmode {
 
 height:17vw;
 width: 87vw;
@@ -1825,7 +1826,7 @@ width:15.5vw;
 }
 
 
-#chartWrapper {
+#chartWrapper1,#chartWrapper2,#chartWrapper3,#chartWrapper4 {
 
 height:15.5vw;
 width: 84.5vw;
@@ -1912,7 +1913,7 @@ width:15.5vw;
 }
 
 
-#chartWrapper.-darkmode {
+#chartWrapper1.-darkmode,#chartWrapper2.-darkmode,#chartWrapper3.-darkmode,#chartWrapper4.-darkmode {
 
 height:15.5vw;
 width: 84.5vw;
