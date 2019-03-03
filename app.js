@@ -42,6 +42,12 @@ io.on('connection', client =>{
     });
 });
 
+app.get('/weatherData1', (req, res) =>{
+    database.getWeatherData("DAY" , data =>{
+        res.status(200).send(data);
+    });
+});
+
 app.get('/weatherData7', (req, res) =>{
     database.getWeatherData("WEEK" , data =>{
         res.status(200).send(data);
