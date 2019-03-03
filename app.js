@@ -13,10 +13,28 @@ app.use(function(req, res, next) {
 console.log("Server started");
 io.on('connection', client =>{ 
     console.log("Client connected");
+
+    client.on('join', room => {
+        client.join(room);
+        console.log('client joined to ' + room);
+    });
 	   
 	client.on('arduinoData', event =>{ 
         database.writeData(event);
-        client.emit('weatherData', event);
+        io.to('webclient').emit('weatherData', event);
+        console.log("Latest data sent to client");
+    });
+
+    client.on('water', () => {
+        io.to('arduinoclient').emit('water');
+    });
+
+    let webroom = io.of('/webclient');
+        webroom.on('connection', socket =>{
+    });
+
+    let arduinoroom = io.of('/arduinoclient');
+        arduinoroom.on('connection', socket =>{
     });
     
     client.on('disconnect', ()=>{
