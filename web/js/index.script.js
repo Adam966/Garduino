@@ -113,33 +113,40 @@ $(document).ready(() => {
 		barAir.height(obj[1].humidityAir+'%');
 		barSoil.height(obj[1].humiditySoil+'%');
 		barWater.height(obj[1].watersurface+'%');
+
+		let temp = obj[1].temperature;
+		let airH = obj[1].humidityAir;
+		let soilH = obj[1].humiditySoil;
+		let water = obj[1].watersurface;
+		let date = obj[2].date;
+
 		//myChartData.datasets[0].data = myChartData.datasets[0].data.concat(result);
-		socketTemp = obj.filter(item => typeof item.temperature === 'string').map(item => item.temperature);
+		/*socketTemp = obj.filter(item => typeof item.temperature === 'string').map(item => item.temperature);
 		socketAirh = obj.filter(item => typeof item.humidityAir === 'string').map(item => item.humidityAir);
 		socketSoilh = obj.filter(item => typeof item.humiditySoil === 'string').map(item => item.humiditySoil);
 		socketWater = obj.filter(item => typeof item.watersurface === 'string').map(item => item.watersurface);
-		socketDate = obj.filter(item => typeof item.date === 'string').map(item => item.date);
+		socketDate = obj.filter(item => typeof item.date === 'string').map(item => item.date);*/
 
-		console.log(socketTemp);
-		console.log(socketAirh);
-		console.log(socketSoilh);
-		console.log(socketWater);
-		console.log(socketDate);
+		console.log(temp);
+		console.log(airH);
+		console.log(soilH);
+		console.log(water);
+		console.log(date);
 
-		Chart1.data.datasets[0].data = Chart1.data.datasets[0].data.concat(socketTemp);
-		Chart1.data.labels = Chart1.data.labels.concat(socketDate);
+		Chart1.data.datasets[0].data = Chart1.data.datasets[0].data.concat(temp);
+		Chart1.data.labels = Chart1.data.labels.concat(date);
 		Chart1.update();
 
-		Chart2.data.datasets[0].data = Chart2.data.datasets[0].data.concat(socketAirh);
-		Chart2.data.labels = Chart2.data.labels.concat(socketDate);
+		Chart2.data.datasets[0].data = Chart2.data.datasets[0].data.concat(airH);
+		Chart2.data.labels = Chart2.data.labels.concat(date);
 		Chart2.update();
 
-		Chart3.data.datasets[0].data = Chart3.data.datasets[0].data.concat(socketSoilh);
-		Chart3.data.labels = Chart3.data.labels.concat(socketDate);
+		Chart3.data.datasets[0].data = Chart3.data.datasets[0].data.concat(soilH);
+		Chart3.data.labels = Chart3.data.labels.concat(date);
 		Chart3.update();
 
-		Chart4.data.datasets[0].data = Chart4.data.datasets[0].data.concat(socketWater);
-		Chart4.data.labels = Chart4.data.labels.concat(socketDate);
+		Chart4.data.datasets[0].data = Chart4.data.datasets[0].data.concat(water);
+		Chart4.data.labels = Chart4.data.labels.concat(date);
 		Chart4.update();
 
     });
