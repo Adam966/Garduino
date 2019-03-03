@@ -70,11 +70,11 @@ $(document).ready(() => {
 	let barWater = $('#barWater');
 
 	//variable for socket data (charts)
-	let sockeTemp;
-	let socketAirh;
-	let socketSoilh;
-	let socketWater;
-	let socketDate;
+	let socketTemp = [];
+	let socketAirh = [];
+	let socketSoilh = [];
+	let socketWater = [];
+	let socketDate = [];
 
 	//barTemp.height('100%');
 	//barTemp.height('100'+'%');
@@ -119,6 +119,22 @@ $(document).ready(() => {
 		let soilH = obj[1].humiditySoil;
 		let water = obj[1].watersurface;
 		let date = obj[2].date;
+
+		/*socketTemp = socketTemp.concat(temp);
+		console.log("dd");
+		console.log(socketTemp);*/
+
+		socketTemp.push(temp);
+		socketAirh.push(airH);
+		socketSoilh.push(soilH);
+		socketWater.push(water);
+		socketDate.push(date);
+
+		console.log(socketTemp);
+		console.log(socketAirh);
+		console.log(socketSoilh);
+		console.log(socketWater);
+		console.log(socketDate);
 
 		//myChartData.datasets[0].data = myChartData.datasets[0].data.concat(result);
 		/*socketTemp = obj.filter(item => typeof item.temperature === 'string').map(item => item.temperature);
