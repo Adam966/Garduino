@@ -69,6 +69,13 @@ $(document).ready(() => {
 	let barSoil = $('#barSoil');
 	let barWater = $('#barWater');
 
+	//variable for socket data (charts)
+	let sockeTemp;
+	let socketAirh;
+	let socketSoilh;
+	let socketWater;
+	let socketDate;
+
 	//barTemp.height('100%');
 	//barTemp.height('100'+'%');
 
@@ -89,49 +96,51 @@ $(document).ready(() => {
 
       let obj = JSON.parse(data);
       console.log(obj);
+      obj = Object.values(obj);
+      console.log(obj);
 
-		$('#stat1').text(obj[0].Temperature);
-		$('#stat2').text(obj[0].AirHumidity);
-		$('#stat3').text(obj[0].SoilHumidity);
-		$('#stat4').text(obj[0].WaterSurface);
+		$('#stat1').text(obj[1].temperature);
+		$('#stat2').text(obj[1].humidityAir);
+		$('#stat3').text(obj[1].humiditySoil);
+		$('#stat4').text(obj[1].watersurface);
 		
-		stat1.text(obj[0].Temperature);
-		stat2.text(obj[0].AirHumidity);
-		stat3.text(obj[0].SoilHumidity);
-		stat4.text(obj[0].WaterSurface);
+		stat1.text(obj[1].temperature);
+		stat2.text(obj[1].humidityAir);
+		stat3.text(obj[1].humidtySoil);
+		stat4.text(obj[1].watersurface);
 
-		barTemp.height(obj[0].Temperature+'%');
-		barAir.height(obj[0].AirHumidity+'%');
-		barSoil.height(obj[0].SoilHumidity+'%');
-		barWater.height(obj[0].WaterSurface+'%');
+		barTemp.height(obj[1].temperature+'%');
+		barAir.height(obj[1].humidityAir+'%');
+		barSoil.height(obj[1].humiditySoil+'%');
+		barWater.height(obj[1].watersurface+'%');
+		//myChartData.datasets[0].data = myChartData.datasets[0].data.concat(result);
+		socketTemp = obj.filter(item => typeof item.temperature === 'string').map(item => item.temperature);
+		socketAirh = obj.filter(item => typeof item.humidityAir === 'string').map(item => item.humidityAir);
+		socketSoilh = obj.filter(item => typeof item.humiditySoil === 'string').map(item => item.humiditySoil);
+		socketWater = obj.filter(item => typeof item.watersurface === 'string').map(item => item.watersurface);
+		socketDate = obj.filter(item => typeof item.date === 'string').map(item => item.date);
 
-		/*function updateChartTemp (){
-		Chart1.data.labels.push('Test'+tempID++);
-		Chart1.data.datasets[0].data.push(obj[0].Temperature);
+		console.log(socketTemp);
+		console.log(socketAirh);
+		console.log(socketSoilh);
+		console.log(socketWater);
+		console.log(socketDate);
+
+		Chart1.data.datasets[0].data = Chart1.data.datasets[0].data.concat(socketTemp);
+		Chart1.data.labels = Chart1.data.labels.concat(socketDate);
 		Chart1.update();
 
-		}
-
-		function updateChartAirH (){
-		Chart2.data.labels.push('Test'+airID++);
-		Chart2.data.datasets[0].data.push(obj[0].AirHumidity);
+		Chart2.data.datasets[0].data = Chart2.data.datasets[0].data.concat(socketAirh);
+		Chart2.data.labels = Chart2.data.labels.concat(socketDate);
 		Chart2.update();
 
-		}
-
-		function updateChartSoilH (){
-		Chart3.data.labels.push('Test'+soilID++);
-		Chart3.data.datasets[0].data.push(obj[0].SoilHumidity);
+		Chart3.data.datasets[0].data = Chart3.data.datasets[0].data.concat(socketSoilh);
+		Chart3.data.labels = Chart3.data.labels.concat(socketDate);
 		Chart3.update();
 
-		}
-
-		function updateChartWaterH (){
-		Chart4.data.labels.push('Test'+waterID++);
-		Chart4.data.datasets[0].data.push(obj[0].Water);
+		Chart4.data.datasets[0].data = Chart4.data.datasets[0].data.concat(socketWater);
+		Chart4.data.labels = Chart4.data.labels.concat(socketDate);
 		Chart4.update();
-
-		}*/
 
     });
 
@@ -265,6 +274,25 @@ $(document).ready(() => {
 			}
 		});	
 
+
+	/*today.click(() => {
+
+		console.log("testToday");
+
+		Chart1.data.datasets[0].data = socketTemp;
+		Chart1.update();
+
+		Chart2.data.datasets[0].data = socketAirh;
+		Chart2.update();
+
+		Chart3.data.datasets[0].data = socketSoilh;
+		Chart3.update();
+
+		Chart4.data.datasets[0].data = socketWater;
+		Chart4.update();
+
+	});*/
+
 	lastWeek.click(() => {
 
 	let req = 'http://localhost:5485/weatherData7';
@@ -355,6 +383,7 @@ $(document).ready(() => {
 		let airhToChart = obj.map(item => item.AirHumidity);
 		let soilhToChart = obj.map(item => item.SoilHumidity);
 		let waterToChart = obj.map(item => item.WaterSurface);
+		//TODO replace pre regex hodnotu
 		const searchStr = '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])';
 		const regex = new RegExp(searchStr,'i');
 		let date = obj.map(item => regex.test(item.Date));
