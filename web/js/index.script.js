@@ -124,6 +124,7 @@ $(document).ready(() => {
 		console.log("dd");
 		console.log(socketTemp);*/
 
+		//push data to socket variables for Today chart use
 		socketTemp.push(temp);
 		socketAirh.push(airH);
 		socketSoilh.push(soilH);
@@ -143,12 +144,14 @@ $(document).ready(() => {
 		socketWater = obj.filter(item => typeof item.watersurface === 'string').map(item => item.watersurface);
 		socketDate = obj.filter(item => typeof item.date === 'string').map(item => item.date);*/
 
+		/*
 		console.log(temp);
 		console.log(airH);
 		console.log(soilH);
 		console.log(water);
-		console.log(date);
+		console.log(date);*/
 
+		//dataset update with concat function
 		Chart1.data.datasets[0].data = Chart1.data.datasets[0].data.concat(temp);
 		Chart1.data.labels = Chart1.data.labels.concat(date);
 		Chart1.update();
@@ -298,23 +301,27 @@ $(document).ready(() => {
 		});	
 
 
-	/*today.click(() => {
+	today.click(() => {
 
 		console.log("testToday");
 
 		Chart1.data.datasets[0].data = socketTemp;
-		Chart1.update();
+    	Chart1.data.labels = socketDate;
+    	Chart1.update();
 
-		Chart2.data.datasets[0].data = socketAirh;
-		Chart2.update();
+    	Chart2.data.datasets[0].data = socketAirh;
+    	Chart2.data.labels = socketDate;
+    	Chart2.update();
 
-		Chart3.data.datasets[0].data = socketSoilh;
-		Chart3.update();
+    	Chart3.data.datasets[0].data = socketSoilh;
+    	Chart3.data.labels = socketDate;
+    	Chart3.update();
 
-		Chart4.data.datasets[0].data = socketWater;
-		Chart4.update();
+    	Chart4.data.datasets[0].data = socketWater;
+    	Chart4.data.labels = socketDate;
+    	Chart4.update();
 
-	});*/
+	});
 
 	lastWeek.click(() => {
 
