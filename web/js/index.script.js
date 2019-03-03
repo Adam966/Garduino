@@ -79,7 +79,6 @@ $(document).ready(() => {
 	//barTemp.height('100%');
 	//barTemp.height('100'+'%');
 
-
 	//socket connection
     const socket = io.connect('http://localhost:5485');
 
@@ -300,7 +299,7 @@ $(document).ready(() => {
 			}
 		});	
 
-
+	//today data for charts
 	today.click(() => {
 
 		console.log("testToday");
@@ -323,6 +322,7 @@ $(document).ready(() => {
 
 	});
 
+	//last week data for charts
 	lastWeek.click(() => {
 
 	let req = 'http://localhost:5485/weatherData7';
@@ -385,6 +385,8 @@ $(document).ready(() => {
 
 	});
 
+
+	//last month data for charts
 	lastMonth.click(() => {
 
 	let req = 'http://localhost:5485/weatherData30';
