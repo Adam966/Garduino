@@ -102,7 +102,8 @@ $(document).ready(() => {
     //socket connection and data emit
 	socket.on('connect', (data) => {
 	    console.log('check',socket.connected);
-	    socket.emit('weatherData');
+	    //socket.emit('weatherData');
+	    socket.emit('join',"webclient");
 	    console.log(data);
     });
 	
@@ -129,7 +130,7 @@ $(document).ready(() => {
 		barAir.height(obj[1].humidityAir+'%');
 		barSoil.height(obj[1].humiditySoil+'%');
 		barWater.height(obj[1].watersurface+'%');
-
+/*
 		//under 20%
 		if(tempHeight < 20 ) barTemp.css('background-color', '#eab70c');
 		if(airHeight < 20 ) barAir.css('background-color', '#eab70c');
@@ -153,7 +154,7 @@ $(document).ready(() => {
 		if(airHeight > 90 ) barAir.css('background-color', '#e54242');
 		if(soilHeight > 90 ) barSoil.css('background-color', '#e54242');
 		if(waterHeight > 90 ) barWater.css('background-color', '#e54242');
-
+*/
 		let temp = obj[1].temperature;
 		let airH = obj[1].humidityAir;
 		let soilH = obj[1].humiditySoil;
