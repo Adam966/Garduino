@@ -417,6 +417,9 @@ $(document).ready(() => {
 		}
 	};
 
+	xhttp.open("GET", req , true);
+	xhttp.send();
+
 	});
 
 	//last week data for charts
