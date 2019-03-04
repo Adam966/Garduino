@@ -343,10 +343,10 @@ $(document).ready(() => {
 
 	//today data for charts
 	today.click(() => {
-
+		
 		console.log("testToday");
 
-		Chart1.data.datasets[0].data = socketTemp;
+		/*Chart1.data.datasets[0].data = socketTemp;
     	Chart1.data.labels = socketDate;
     	Chart1.update();
 
@@ -360,7 +360,62 @@ $(document).ready(() => {
 
     	Chart4.data.datasets[0].data = socketWater;
     	Chart4.data.labels = socketDate;
+    	Chart4.update();*/
+
+    	let req = 'http://localhost:5485/weatherData1';
+		let xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+       	let obj = JSON.parse(this.responseText);
+       	console.log(obj);
+
+      /*$('#stat1').text(obj[0].Temperature);
+		$('#stat2').text(obj[0].AirHumidity);
+		$('#stat3').text(obj[0].SoilHumidity);
+		$('#stat4').text(obj[0].WaterSurface);
+		
+		stat1.text(obj[0].Temperature);
+		stat2.text(obj[0].AirHumidity);
+		stat3.text(obj[0].SoilHumidity);
+		stat4.text(obj[0].WaterSurface); 
+
+		barTemp.height(obj[0].Temperature+'%');
+		barAir.height(obj[0].AirHumidity+'%');
+		barSoil.height(obj[0].SoilHumidity+'%');
+		barWater.height(obj[0].WaterSurface+'%'); */
+
+		let tempToChart = obj.map(item => item.Temperature);
+		let airhToChart = obj.map(item => item.AirHumidity);
+		let soilhToChart = obj.map(item => item.SoilHumidity);
+		let waterToChart = obj.map(item => item.WaterSurface);
+		let date = obj.map(item => item.Date);
+		console.log(tempToChart);
+		console.log(airhToChart);
+		console.log(soilhToChart);
+		console.log(waterToChart);
+		console.log(date);
+
+		/*let context1 = document.querySelector('#chartTemp').getContext('2d');
+    	new Chart(context1).Line(tempToChart);*/
+
+    	Chart1.data.datasets[0].data = tempToChart;
+    	Chart1.data.labels = date;
+    	Chart1.update();
+
+    	Chart2.data.datasets[0].data = airhToChart;
+    	Chart2.data.labels = date;
+    	Chart2.update();
+
+    	Chart3.data.datasets[0].data = soilhToChart;
+    	Chart3.data.labels = date;
+    	Chart3.update();
+
+    	Chart4.data.datasets[0].data = waterToChart;
+    	Chart4.data.labels = date;
     	Chart4.update();
+
+		}
+	};
 
 	});
 
