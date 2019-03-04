@@ -2,7 +2,6 @@
 
 $(document).ready(() => {
 
-
 	//divs for display data from server
 	const stat1 = $('#stat1');
 	const stat2 = $('#stat2');
@@ -86,16 +85,6 @@ $(document).ready(() => {
 	barSoil.height('21%');
 	barWater.height('95%');*/
 
-	let tempHeight = barTemp.height() / barTemp.parent().height()*100;
-	let airHeight = barAir.height() / barAir.parent().height()*100;
-	let soilHeight = barSoil.height() / barSoil.parent().height()*100;
-	let waterHeight = barWater.height() / barWater.parent().height()*100;
-
-	console.log(tempHeight);
-	console.log(airHeight);
-	console.log(soilHeight);
-	console.log(waterHeight);
-
 	//socket connection
     const socket = io.connect('http://localhost:5485');
 
@@ -130,7 +119,13 @@ $(document).ready(() => {
 		barAir.height(obj[1].humidityAir+'%');
 		barSoil.height(obj[1].humiditySoil+'%');
 		barWater.height(obj[1].watersurface+'%');
-/*
+
+
+		let tempHeight = barTemp.height() / barTemp.parent().height()*100;
+		let airHeight = barAir.height() / barAir.parent().height()*100;
+		let soilHeight = barSoil.height() / barSoil.parent().height()*100;
+		let waterHeight = barWater.height() / barWater.parent().height()*100;
+
 		//under 20%
 		if(tempHeight < 20 ) barTemp.css('background-color', '#eab70c');
 		if(airHeight < 20 ) barAir.css('background-color', '#eab70c');
@@ -154,7 +149,7 @@ $(document).ready(() => {
 		if(airHeight > 90 ) barAir.css('background-color', '#e54242');
 		if(soilHeight > 90 ) barSoil.css('background-color', '#e54242');
 		if(waterHeight > 90 ) barWater.css('background-color', '#e54242');
-*/
+
 		let temp = obj[1].temperature;
 		let airH = obj[1].humidityAir;
 		let soilH = obj[1].humiditySoil;
@@ -432,7 +427,7 @@ $(document).ready(() => {
        let obj = JSON.parse(this.responseText);
        console.log(obj);
 
-      /*  $('#stat1').text(obj[0].Temperature);
+      /*$('#stat1').text(obj[0].Temperature);
 		$('#stat2').text(obj[0].AirHumidity);
 		$('#stat3').text(obj[0].SoilHumidity);
 		$('#stat4').text(obj[0].WaterSurface);
