@@ -1,0 +1,255 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url('https://fonts.googleapis.com/css?family=Exo+2');
+
+html,body {
+
+height:100%;
+width:100%;
+margin:0;
+padding: 0;
+font-family: 'Exo 2', sans-serif;
+	
+}
+
+#mainWrapper {
+	
+height:100%;
+width:100%;
+	
+}
+
+#barUp {
+
+height:10%;
+min-height:80px;
+width:100%;
+margin:0 auto;
+background:#1F313A;
+box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+}
+
+.colorChange {
+	
+float:right;
+border:none;
+outline:none;
+margin:auto;
+height:100%;
+width:100px;
+background:url(../img/icon1.svg) center / contain no-repeat;
+/*background: red;*/
+background-size: 60px 60px;
+cursor:pointer;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+	
+}
+
+#nameWrapper {
+
+height:10%;
+min-height:80px;
+width:100%;
+margin:0 auto;
+background:#CADADB;
+display:flex;
+align-items: center;
+justify-content:start;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+
+}
+
+.plantName {
+
+font-size:40px;
+margin-left:7vw;
+color:#009E7F;
+font-weight:bold;
+
+}
+
+#middleWrapper {
+	
+height:auto;
+min-height:80%;
+width:100%;	
+margin:0 auto;
+display: flex;
+flex-direction:row;
+justify-content:space-evenly;
+align-items:center;
+flex-wrap:wrap;
+background:#D2E3E5;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+	
+}
+
+#middleWrapper.-darkmode {
+	
+height:auto;
+min-height:80%;
+width:100%;	
+margin:0 auto;
+display: flex;
+flex-direction:row;
+justify-content:space-evenly;
+align-items:center;
+flex-wrap:wrap;
+background:#1A2A30;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+	
+}
+
+#nameWrapper.-darkmode {
+
+height:10%;
+min-height:80px;
+width:100%;
+margin:0 auto;
+background:#162428;
+display:flex;
+align-items: center;
+justify-content:start;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+
+}
+
+.colorChange.-darkmode {
+	
+float:right;
+border:none;
+outline:none;
+margin:auto;
+height:100%;
+width:100px;
+background:url(../img/icon2.svg) center / contain no-repeat;
+background-size: 60px 60px;
+cursor:pointer;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+
+}
+
+@media (max-width: 590px) {
+
+
+#middleSettings {
+
+/*background:red;*/
+flex-direction:column;
+
+}
+
+#middleSettings.-darkmode {
+
+/*background:red;*/
+flex-direction:column;
+
+}
+
+}
+
+@media (min-width: 590px) {
+
+#middleSettings{
+
+/*background:grey;*/
+flex-direction:column;
+
+}
+
+#middleSettings.-darkmode {
+
+/*background:grey;*/
+flex-direction:column;
+
+}
+
+}
+
+
+@media (min-width: 768px) {
+
+
+#middleSettings {
+
+/*background:green;*/
+flex-direction: column;
+
+}
+
+#middleSettings.-darkmode {
+
+/*background:green;*/
+flex-direction: column;
+
+}
+
+
+}
+
+@media (min-width: 992px) {
+
+#middleSettings {
+
+/*background:yellow;*/
+flex-direction: row;
+
+}
+
+#middleSettings.-darkmode {
+
+/*background:yellow;*/
+flex-direction: row;
+
+}
+
+}
+
+@media (min-width: 1200px) {
+
+#middleSettings{
+
+/*background:blue;*/
+flex-direction: row;
+
+}
+
+
+#middleSettings.-darkmode {
+
+/*background:blue;*/
+flex-direction: row;
+
+}
+
+}
+
+
+@media (min-width: 1400px) {
+
+
+#middleSettings{
+
+/*background:black;*/
+flex-direction: row;
+
+}
+
+#middleSettings.-darkmode{
+
+/*background:black;*/
+flex-direction: row;
+
+}
+
+
+
+}
