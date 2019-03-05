@@ -142,7 +142,6 @@ void arduinoOTA() {
 ////////////////////////////////////////// MEASURE DATA ////////////////////////////////////////////
 
 void measureData() {
-  String id = "kgj45as";
   float temperature = 50; 
   float humidityAir = 25.5;
   float humiditySoil = 65.5;
@@ -210,7 +209,9 @@ void createJson(float temperature, float humidityAir, float humiditySoil, float 
     JsonObject& root = jsonBuffer.createObject();
     
     JsonObject& identification = root.createNestedObject("identification");
-    identification["id"] = id;
+    byte mac[6];
+    WiFi.macAddress(mac);
+    identification["id"] = (String(mac[0], HEX) + ":" + String(mac[1], HEX) + ":" + String(mac[2], HEX) + ":" + String(mac[3], HEX) + ":" + String(mac[4], HEX) + ":" + String(mac[5], HEX));
     
     JsonObject& info = root.createNestedObject("info");
     info["temperature"] = temperature;
