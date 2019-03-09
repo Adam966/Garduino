@@ -202,8 +202,11 @@ $(document).ready(() => {
 
     });
 
-		//chart for Temperature data
+		//global settings for charts
 		Chart.defaults.global.maintainAspectRatio = false;
+		Chart.defaults.global.defaultFontColor = '#97AFAD';
+
+		//chart for Temperature data
 		let chartTemp = document.getElementById("chartTemp").getContext("2d");
 		let Chart1 = new Chart(chartTemp, {
 			//maintainAspectRatio : 'false',
@@ -235,7 +238,6 @@ $(document).ready(() => {
 		});
 
     	//chart for Air Humidity data
-		Chart.defaults.global.maintainAspectRatio = false;
 		let chartAirh = document.getElementById("chartAirh").getContext("2d");
 		let Chart2 = new Chart(chartAirh, {
 			//maintainAspectRatio : 'false',
@@ -268,7 +270,6 @@ $(document).ready(() => {
     
    
 		//chart for Soil Humidity data
-		Chart.defaults.global.maintainAspectRatio = false;
 		let chartSoilh = document.getElementById("chartSoilh").getContext("2d");
 		let Chart3 = new Chart(chartSoilh, {
 			//maintainAspectRatio : 'false',
@@ -301,7 +302,6 @@ $(document).ready(() => {
     	
 
 		//chart for Water Surface data
-		Chart.defaults.global.maintainAspectRatio = false;
 		let chartWater = document.getElementById("chartWater").getContext("2d");
 		let Chart4 = new Chart(chartWater, {
 			//maintainAspectRatio : 'false',
@@ -393,7 +393,7 @@ $(document).ready(() => {
 		let airhToChart = obj.map(item => item.AirHumidity);
 		let soilhToChart = obj.map(item => item.SoilHumidity);
 		let waterToChart = obj.map(item => item.WaterSurface);
-		let date = obj.map(item => item.Date);
+		let date = obj.map(item => item.Date.slice(0,10));
 		console.log(tempToChart);
 		console.log(airhToChart);
 		console.log(soilhToChart);
@@ -438,9 +438,9 @@ $(document).ready(() => {
 		let soilhToChart = obj.map(item => item.SoilHumidity);
 		let waterToChart = obj.map(item => item.WaterSurface);
 		//TODO replace pre regex hodnotu
-		const searchStr = '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])';
-		const regex = new RegExp(searchStr,'i');
-		let date = obj.map(item => regex.test(item.Date));
+		/*const searchStr = '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])';
+		const regex = new RegExp(searchStr,'i');*/
+		let date = obj.map(item => item.Date.slice(0,10));
 		//let date = obj.map(item => item.Date);
 		console.log(tempToChart);
 		console.log(airhToChart);
@@ -473,6 +473,7 @@ $(document).ready(() => {
 	});
 
 	onoff.click(() => {
+
 		colorChange.toggleClass('-darkmode');
 		heading.toggleClass('-darkmode');
 		nameWrapper.toggleClass('-darkmode');
