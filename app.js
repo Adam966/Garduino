@@ -2,6 +2,9 @@ let database = require('./db');
 const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
 
 io.set('origins', '*:*');
 app.use(function(req, res, next) {
@@ -56,6 +59,17 @@ app.get('/weatherData7', (req, res) =>{
 
 app.get('/weatherData30', (req, res) =>{
     database.getWeatherData("MONTH" , data =>{
+        res.status(200).send(data);
+    });
+});
+
+app.post('/minmax', (req, res) =>{
+    database.writeMinMax(req.body);
+    //console.log(req.body);
+});
+
+app.get('/minmax', (req, res) =>{
+    database.getMinMax(data =>{
         res.status(200).send(data);
     });
 });
