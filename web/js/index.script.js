@@ -86,7 +86,7 @@ $(document).ready(() => {
 	barWater.height('95%');*/
 
 	//request for load min max values to range inputs
-	let req = 'http://localhost:5485/getminmax';
+	let req = 'http://localhost:5485/minmax';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -215,7 +215,7 @@ $(document).ready(() => {
 			data: {
 				labels: [],
 				datasets: [{
-					label: '# of Votes',
+					label: 'Temperature',
 					data: [],
 					backgroundColor: [
 						'#009E7F'
@@ -227,6 +227,9 @@ $(document).ready(() => {
 				}]
 			},
 			options: {
+				legend:{
+					display: false
+				},
 				scales: {
 					yAxes: [{
 						ticks: {
@@ -246,7 +249,7 @@ $(document).ready(() => {
 			data: {
 				labels: [],
 				datasets: [{
-					label: '# of Votes',
+					label: 'Air Humidity',
 					data: [],
 					backgroundColor: [
 						'#009E7F'
@@ -258,6 +261,9 @@ $(document).ready(() => {
 				}]
 			},
 			options: {
+				legend:{
+					display: false
+				},
 				scales: {
 					yAxes: [{
 						ticks: {
@@ -278,7 +284,7 @@ $(document).ready(() => {
 			data: {
 				labels: [],
 				datasets: [{
-					label: '# of Votes',
+					label: 'Soil Humidity',
 					data: [],
 					backgroundColor: [
 						'#009E7F'
@@ -290,6 +296,9 @@ $(document).ready(() => {
 				}]
 			},
 			options: {
+				legend:{
+					display: false
+				},
 				scales: {
 					yAxes: [{
 						ticks: {
@@ -310,7 +319,7 @@ $(document).ready(() => {
 			data: {
 				labels: [],
 				datasets: [{
-					label: '# of Votes',
+					label: 'Water Level',
 					data: [],
 					backgroundColor: [
 						'#009E7F'
@@ -322,6 +331,9 @@ $(document).ready(() => {
 				}]
 			},
 			options: {
+				legend:{
+					display: false
+				},
 				scales: {
 					yAxes: [{
 						ticks: {
@@ -441,6 +453,7 @@ $(document).ready(() => {
 		/*const searchStr = '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])';
 		const regex = new RegExp(searchStr,'i');*/
 		let date = obj.map(item => item.Date.slice(0,10));
+		//let date = obj.map(item => Date.parse(item.Date));
 		//let date = obj.map(item => item.Date);
 		console.log(tempToChart);
 		console.log(airhToChart);
@@ -583,16 +596,20 @@ $(document).ready(() => {
 	//$('input[type=range]').val(20);
 
 	/*slider1.value;*/
-	let sliderArr = JSON.stringify([{
-		"TemperatureMax":slider1.value,
-		"TemperatureMin":slider2.value,
-		"AirHumidityMax":slider3.value,
-		"AirHumidityMin":slider4.value,
-		"SoilHumidityMax":slider5.value,
-		"SoilHumidityMin":slider6.value,
-		"WaterLevelMax":slider6.value,
-		"WaterLevelMin":slider7.value
-	}]);
+	let sliderArr = JSON.stringify({
+		"identification":{
+			"id": "sdf256s5df63", "plantname": "MyPlant1"
+		},
+			"optimalValues":{
+				"TemperatureMax":slider1.value,
+				"TemperatureMin":slider2.value,
+				"AirHumidityMax":slider3.value,
+				"AirHumidityMin":slider4.value,
+				"SoilHumidityMax":slider5.value,
+				"SoilHumidityMin":slider6.value, 
+				"WaterLevelMin":slider7.value
+			}
+		});
 	//console.log(sliderArr[0].TemperatureMin);
 	console.log(sliderArr);
 	//sliderArr.push(slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value);
