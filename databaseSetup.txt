@@ -1,4 +1,4 @@
-﻿CREATE USER 'plantserver'@'localhost' IDENTIFIED BY 'akademiasovy';
+CREATE USER 'plantserver'@'localhost' IDENTIFIED BY 'akademiasovy';
 CREATE DATABASE plant_database;
 USE plant_database;
 CREATE TABLE PlantCare(ArduinoID VARCHAR(20) primary key, PlantName VARCHAR(25), TemperatureMin TINYINT, TemperatureMax TINYINT, AirHumidityMin TINYINT, AirHumidityMax TINYINT, SoilHumidityMin TINYINT, SoilHumidityMax TINYINT);
