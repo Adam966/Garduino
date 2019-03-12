@@ -50,7 +50,7 @@ $(document).ready(() => {
 	const slider5 = $('#myRange5')[0];
 	const slider6 = $('#myRange6')[0];
 	const slider7 = $('#myRange7')[0];
-	const slider8 = $('#myRange8')[0];
+	//const slider8 = $('#myRange8')[0];
 	let output1 = $('#output1')[0];
 	let output2 = $('#output2')[0];
 	let output3 = $('#output3')[0];
@@ -58,7 +58,7 @@ $(document).ready(() => {
 	let output5 = $('#output5')[0];
 	let output6 = $('#output6')[0];
 	let output7 = $('#output7')[0];
-	let output8 = $('#output8')[0];
+	//let output8 = $('#output8')[0];
 
 	//div for water plant
 	const water = $('#water');
@@ -92,6 +92,36 @@ $(document).ready(() => {
     if (this.readyState == 4 && this.status == 200) {
        let obj = JSON.parse(this.responseText);
        console.log(obj);
+       console.log(obj[0].TemperatureMax);
+       //console.log(slider1);
+
+       //Temp Max
+       slider1.value = obj[0].TemperatureMax;
+       output1.innerHTML = obj[0].TemperatureMax;
+
+       //Temp Min
+       slider2.value = obj[0].TemperatureMin;
+       output2.innerHTML = obj[0].TemperatureMin;
+
+       //Air Humidity Max
+       slider3.value = obj[0].AirHumidityMax;
+       output3.innerHTML = obj[0].AirHumidityMax;
+
+       //Air Humidity Min
+       slider4.value = obj[0].AirHumidityMin;
+       output4.innerHTML = obj[0].AirHumidityMin;
+
+       //Soil Humidity Max
+       slider5.value = obj[0].SoilHumidityMax;
+       output5.innerHTML = obj[0].SoilHumidityMax;
+
+       //Soil Humidity Min
+       slider6.value = obj[0].SoilHumidityMin;
+       output6.innerHTML = obj[0].SoilHumidityMin;
+
+       //Soil Humidity Min
+       slider7.value = obj[0].WaterLevelMin;
+       output7.innerHTML = obj[0].WaterLevelMin;
 
 	   }
 	};
@@ -228,7 +258,7 @@ $(document).ready(() => {
 			},
 			options: {
 				legend:{
-					display: false
+					display: true
 				},
 				scales: {
 					yAxes: [{
@@ -262,7 +292,7 @@ $(document).ready(() => {
 			},
 			options: {
 				legend:{
-					display: false
+					display: true
 				},
 				scales: {
 					yAxes: [{
@@ -297,7 +327,7 @@ $(document).ready(() => {
 			},
 			options: {
 				legend:{
-					display: false
+					display: true
 				},
 				scales: {
 					yAxes: [{
@@ -332,7 +362,7 @@ $(document).ready(() => {
 			},
 			options: {
 				legend:{
-					display: false
+					display: true
 				},
 				scales: {
 					yAxes: [{
@@ -557,7 +587,7 @@ $(document).ready(() => {
 	output5.innerHTML = slider5.value;
 	output6.innerHTML = slider6.value;
 	output7.innerHTML = slider7.value;
-	output8.innerHTML = slider8.value;
+	/*output8.innerHTML = slider8.value;*/
 
 	slider1.oninput = function() {
 	  output1.innerHTML = this.value;
@@ -583,55 +613,62 @@ $(document).ready(() => {
 	  output6.innerHTML = this.value;
 	}
 
-	slider7.oninput = function() {
+	/*slider7.oninput = function() {
 	  output7.innerHTML = this.value;
 	}
 
 	slider8.oninput = function() {
 	  output8.innerHTML = this.value;
-	}
+	}*/
 
 	submitBtn.click(() => {
 
 	//$('input[type=range]').val(20);
-
-	/*slider1.value;*/
-	let sliderArr = JSON.stringify({
-		"identification":{
-			"id": "sdf256s5df63", "plantname": "MyPlant1"
-		},
-			"optimalValues":{
-				"TemperatureMax":slider1.value,
-				"TemperatureMin":slider2.value,
-				"AirHumidityMax":slider3.value,
-				"AirHumidityMin":slider4.value,
-				"SoilHumidityMax":slider5.value,
-				"SoilHumidityMin":slider6.value, 
-				"WaterLevelMin":slider7.value
-			}
-		});
 	//console.log(sliderArr[0].TemperatureMin);
-	console.log(sliderArr);
 	//sliderArr.push(slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value);
 	//let valuesToSend = JSON.stringify({ ...[slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value] });
 	//console.log(valuesToSend);
 	//let test = JSON.parse(valuesToSend);
 
-	let req = 'http://localhost:5485/minmax';
-	let xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-       /*let obj = JSON.parse(this.responseText);
-       console.log(obj);*/
+	$.ajax({
+    url: 'http://localhost:5485/minmax',
+    dataType: 'json',
+    type: 'post',
+	headers:{"Content-Type":"application/json"},
+    data: JSON.stringify({
+    	"identification":
+    	{
+    		"id": "sdf256s5df64", 
+    		"plantname": "MyPlant1"
+    	},
 
-	   }
-	};
+    	"optimalValues":{
 
-	xhttp.open("POST", req , true);
-	xhttp.send(sliderArr);
+    	"TemperatureMax":slider1.value,
+    	"TemperatureMin":slider2.value,
+    	"AirHumidityMax":slider3.value,
+    	"AirHumidityMin":slider4.value,
+    	"SoilHumidityMax":slider5.value,
+    	"SoilHumidityMin":slider6.value, 
+    	"WaterLevelMin":slider7.value
+    }}),
+
+    success: function( data, textStatus, jQxhr ){
+		console.log("sent successfully");
+		console.log(data);
+    },
+    error: function( jqXhr, textStatus, errorThrown ){
+        console.log( errorThrown );
+    }
+    });
 
 	middleWrapper.css('display','flex');
 	middleSettings.css('display','none');
+
+	});
+
+	water.click(() => {
+		socket.emit('water');
 
 	});
 
