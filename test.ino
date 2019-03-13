@@ -5,7 +5,7 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include "DHT.h"
-
+#include <LinkedList.h>
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #define interval 15000
@@ -28,6 +28,7 @@ SocketIoClient webSocket;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
 DHT dht(pinDHT, DHT22);
+LinkedList<char*> offlineData;
 ////////////////////////////////////////////////// SETUP /////////////////////////////////////////////
 
 void setup() {
@@ -230,8 +231,17 @@ void createJson(float temperature, float humidityAir, float humiditySoil, float 
 //////////////////////////////////////////// SOCKETIO EVENTS //////////////////////////////////
 
 void sendData(char* output) {
-    webSocket.emit("arduinoData", output);
-    Serial.println("Data sended.");
+    if(WiFi.status() != WL_CONNECTED)
+        offlineData.add(output);
+    else{
+      while(offlineData.size() > 0){
+          char* lastElement = offlineData.pop();
+          webSocket.emit("arduinoData", lastElement);
+          Serial.println("LinkedList data sended.");
+      }
+      webSocket.emit("arduinoData", output);
+      Serial.println("Data sended.");
+    }
 }
 
 void pourFlower(const char * payload, size_t length) {
