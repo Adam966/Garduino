@@ -6,9 +6,9 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
 
-io.set('origins', '*:*');
+io.set('origins', '*:*'); //itsovy.sk:5485
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*"); //http://itsovy.sk
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });  
@@ -33,11 +33,22 @@ io.on('connection', client =>{
     });
 
     let webroom = io.of('/webclient');
+    /*
         webroom.on('connection', socket =>{
     });
+    */
 
     let arduinoroom = io.of('/arduinoclient');
+    /*
         arduinoroom.on('connection', socket =>{
+    });
+    */
+
+    client.on('getSoilHumidity', ()=>{
+        console.log("SENDINGHUMIDITY");
+        database.getSoilHumidity(data =>{
+            client.emit("soilHumidity", data);
+        });
     });
     
     client.on('disconnect', ()=>{
@@ -65,7 +76,6 @@ app.get('/weatherData30', (req, res) =>{
 
 app.post('/minmax', (req, res) =>{
     database.writeMinMax(req.body);
-    //console.log(req.body);
 });
 
 app.get('/minmax', (req, res) =>{
