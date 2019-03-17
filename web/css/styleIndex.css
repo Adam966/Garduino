@@ -1,53 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 
-@import url('https://fonts.googleapis.com/css?family=Exo+2');
-
-html,body {
-
-height:100%;
-width:100%;
-margin:0;
-padding: 0;
-font-family: 'Exo 2', sans-serif;
-	
-}
-
-#mainWrapper {
-	
-height:100%;
-width:100%;
-	
-}
-
-#barUp {
-
-height:10%;
-min-height:80px;
-width:100%;
-margin:0 auto;
-background:#1F313A;
-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-
-}
-
-.colorChange {
-	
-float:right;
-border:none;
-outline:none;
-margin:auto;
-height:100%;
-width:100px;
-background:url(../img/icon1.svg) center / contain no-repeat;
-/*background: red;*/
-background-size: 60px 60px;
-cursor:pointer;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-	
-}
-
 .settingsBtn {
 
 float:right;
@@ -60,31 +13,6 @@ background-size: 60px 60px;
 cursor:pointer;
 -webkit-transition: all .2s linear 0s;
 transition: all .2s linear 0s;
-
-}
-
-
-#nameWrapper {
-
-height:10%;
-min-height:80px;
-width:100%;
-margin:0 auto;
-background:#CADADB;
-display:flex;
-align-items: center;
-justify-content:start;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-.plantName {
-
-font-size:40px;
-margin-left:7vw;
-color:#009E7F;
-font-weight:bold;
 
 }
 
@@ -163,7 +91,7 @@ cursor:pointer;
 	
 }
 
-#headingWrapper {
+.headingWrapper {
 
 width:100%;
 height:50px;
@@ -193,6 +121,32 @@ left: 50%;
 top: 50%;
 -webkit-transform: translateX(-50%) translateY(-50%);
 	
+}
+
+.usesToWaterWrap {
+
+margin:auto;
+position: absolute;
+left: 50%;
+top: 85%;
+-webkit-transform: translateX(-50%) translateY(-85%);
+color:#00997B;
+font-size:1.1rem;
+width:100%;
+/*background: red;*/
+text-align:center;
+
+}
+
+#usesValue {
+
+
+}
+
+.usesLeft {
+
+margin-left:2%;
+
 }
 
 #barTemp,#barAir,#barSoil,#barWater {
@@ -335,23 +289,44 @@ margin-top:1%;
 
 }
 
-.rangeWrapperW {
-
-display:block;
-width:100%;
-height:5vw;
-/*background:red;*/
-text-align:center;
-margin-top:5%;
-
-}
-
 .rangeText {
 
 color:#97AFAD;
 font-size:1.2em;
 
+}
+
+.waterMaxText {
+
+display:block;
+color:#97AFAD;
+font-size:1.2em;
+margin-top:1%;
+
 } 
+
+#capacity {
+
+margin-top:3%;
+-webkit-appearance: none;
+outline: none;
+border:none;
+background:#CFE0E8;
+height:2rem;
+width:10rem;
+font-size:20px;
+text-align:center;
+opacity: 0.7;
+color:#009E7F;
+border-radius:0.5rem;
+
+}
+
+#waterMaxValue:hover {
+
+opacity: 1;
+
+}
 
 .output {
 
@@ -383,6 +358,8 @@ width: 2em;
 height: 2em;
 background: #5D6568;
 cursor: pointer;
+border-radius:0.5rem;
+
 }
 
 .slider::-moz-range-thumb {
@@ -880,7 +857,7 @@ font-weight:bold;
 
 #middleSettings{
 
-background:grey;
+/*background:grey;*/
 flex-direction:column;
 
 }
@@ -957,14 +934,6 @@ border-radius:8px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 margin-top:2%;
 margin-bottom:0;
-
-}
-
-
-#middleSettings.-darkmode {
-
-/*background:grey;*/
-flex-direction:column;
 
 }
 
@@ -1069,6 +1038,12 @@ width:40vw;
 height:0.7em;
 background:#CFE0E8;
 opacity: 0.7;
+
+}
+
+.output {
+
+margin:auto;
 
 }
 
@@ -1176,7 +1151,7 @@ color:white;
 
 #middleSettings{
 
-background:green;
+/*background:green;*/
 flex-direction: column;
 
 }
@@ -1257,8 +1232,6 @@ margin-top:2%;
 margin-bottom:0;
 
 }
-
-
 
 #middleSettings.-darkmode {
 
@@ -1393,7 +1366,7 @@ color:white;
 
 #middleSettings{
 
-background:yellow;
+/*background:yellow;*/
 flex-direction: row;
 
 }
@@ -1598,7 +1571,7 @@ color:white;
 
 #middleSettings{
 
-background:blue;
+/*sbackground:blue;*/
 flex-direction: row;
 
 }
@@ -1910,13 +1883,6 @@ color:#97AFAD;
 
 font-size:40px;
 margin-left:7.5vw;
-
-}
-
-#middleSettings{
-
-/*background:black;*/
-flex-direction: row;
 
 }
 

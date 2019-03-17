@@ -69,12 +69,27 @@ $(document).ready(() => {
 	let barSoil = $('#barSoil');
 	let barWater = $('#barWater');
 
+	//variables for min and max data from http
+	let tempMax;
+	let tempMin;
+
+	let airhMax;
+	let airhMin;
+
+	let soilhMax;
+	let soilhMin;
+
+	let waterMin;
+	let waterCapacity;
+
 	//variable for socket data (charts)
 	let socketTemp = [];
 	let socketAirh = [];
 	let socketSoilh = [];
 	let socketWater = [];
 	let socketDate = [];
+
+	let usesValue = $('#usesValue');
 
 	//barTemp.height('100%');
 	//barTemp.height('100'+'%');
@@ -85,6 +100,13 @@ $(document).ready(() => {
 	barSoil.height('21%');
 	barWater.height('95%');*/
 
+	const calculateUses = (capacity) => {
+	  return Math.round(capacity/100);
+	}
+
+	//TODO
+	const calculateCondition = (temp,airh,soilh,waterl) => {}
+ 
 	//request for load min max values to range inputs
 	let req = 'http://localhost:5485/minmax';
 	let xhttp = new XMLHttpRequest();
@@ -92,36 +114,49 @@ $(document).ready(() => {
     if (this.readyState == 4 && this.status == 200) {
        let obj = JSON.parse(this.responseText);
        console.log(obj);
-       console.log(obj[0].TemperatureMax);
+       //console.log(obj[0].TemperatureMax);
        //console.log(slider1);
 
        //Temp Max
        slider1.value = obj[0].TemperatureMax;
+       tempMax = slider1.value;
        output1.innerHTML = obj[0].TemperatureMax;
 
        //Temp Min
        slider2.value = obj[0].TemperatureMin;
+       tempMin = slider2.value;
        output2.innerHTML = obj[0].TemperatureMin;
 
        //Air Humidity Max
        slider3.value = obj[0].AirHumidityMax;
+       airhMax = slider3.value;
        output3.innerHTML = obj[0].AirHumidityMax;
 
        //Air Humidity Min
        slider4.value = obj[0].AirHumidityMin;
+       airhMin = slider4.value;
        output4.innerHTML = obj[0].AirHumidityMin;
 
        //Soil Humidity Max
        slider5.value = obj[0].SoilHumidityMax;
+       soilhMax = slider5.value;
        output5.innerHTML = obj[0].SoilHumidityMax;
 
        //Soil Humidity Min
        slider6.value = obj[0].SoilHumidityMin;
+       soilhMin = slider6.value;
        output6.innerHTML = obj[0].SoilHumidityMin;
 
-       //Soil Humidity Min
+       //Water level
        slider7.value = obj[0].WaterLevelMin;
+       waterMin = slider7.value;
        output7.innerHTML = obj[0].WaterLevelMin;
+
+       capacity.value = obj[0].ContainerSize;
+       //console.log("uses value= "+calculateUses(capacity.value));
+       let capacityResult = calculateUses(capacity.value);
+       usesValue.html(capacityResult);
+       console.log(capacityResult);
 
 	   }
 	};
@@ -164,35 +199,25 @@ $(document).ready(() => {
 		barSoil.height(obj[1].humiditySoil+'%');
 		barWater.height(obj[1].watersurface+'%');
 
-
 		let tempHeight = barTemp.height() / barTemp.parent().height()*100;
 		let airHeight = barAir.height() / barAir.parent().height()*100;
 		let soilHeight = barSoil.height() / barSoil.parent().height()*100;
 		let waterHeight = barWater.height() / barWater.parent().height()*100;
 
-		//under 20%
-		if(tempHeight < 20 ) barTemp.css('background-color', '#eab70c');
-		if(airHeight < 20 ) barAir.css('background-color', '#eab70c');
-		if(soilHeight < 20 ) barSoil.css('background-color', '#eab70c');
-		if(waterHeight < 20 ) barWater.css('background-color', '#eab70c');
+		if(tempHeight < tempMin) barTemp.css('background-color', '#e54242');
+		if(airHeight < airhMin) barAir.css('background-color', '#e54242');
+		if(soilHeight < soilhMin) barSoil.css('background-color', '#e54242');
+		if(waterHeight < waterMin) barWater.css('background-color', '#e54242');
 
-		//under 10%
-		if(tempHeight < 10 ) barTemp.css('background-color', '#e54242');
-		if(airHeight < 10 ) barAir.css('background-color', '#e54242')
-		if(soilHeight < 10 ) barSoil.css('background-color', '#e54242');
-		if(waterHeight < 10 ) barWater.css('background-color', '#e54242');
+		if(tempHeight > tempMax) barTemp.css('background-color', '#e54242');
+		if(airHeight > airhMax) barAir.css('background-color', '#e54242');
+		if(soilHeight > soilhMax) barSoil.css('background-color', '#e54242');
+		//if(waterHeight > waterMax) barWater.css('background-color', '#e54242');
 
-		//between 20 and 90
-		if(tempHeight > 20 && tempHeight < 90 ) barTemp.css('background-color', '#3ce578');
-		if(airHeight > 20 && airHeight < 90 ) barAir.css('background-color', '#3ce578');
-		if(soilHeight > 20 && soilHeight < 90 ) barSoil.css('background-color', '#3ce578');
-		if(waterHeight > 20 && waterHeight < 90 ) barWater.css('background-color', '#3ce578');
-
-		//between 20 and 90
-		if(tempHeight > 90 ) barTemp.css('background-color', '#e54242');
-		if(airHeight > 90 ) barAir.css('background-color', '#e54242');
-		if(soilHeight > 90 ) barSoil.css('background-color', '#e54242');
-		if(waterHeight > 90 ) barWater.css('background-color', '#e54242');
+		if(tempHeight < tempMax && tempHeight > tempMin) barTemp.css('background-color', '#3ce578');
+		if(airHeight < airhMax && airHeight > airhMin) barAir.css('background-color', '#3ce578');
+		if(soilHeight < soilhMax && soilHeight > soilhMin) barSoil.css('background-color', '#3ce578');
+		//if(waterHeight < waterMax && waterHeight > waterMin) barWater.css('background-color', '#3ce578');
 
 		let temp = obj[1].temperature;
 		let airH = obj[1].humidityAir;
@@ -230,7 +255,7 @@ $(document).ready(() => {
 		Chart4.data.labels = Chart4.data.labels.concat(date);
 		Chart4.update();
 
-    });
+    	});
 
 		//global settings for charts
 		Chart.defaults.global.maintainAspectRatio = false;
@@ -384,18 +409,18 @@ $(document).ready(() => {
 		xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
        	let obj = JSON.parse(this.responseText);
-       	console.log(obj);
+       	//console.log(obj);
 
-		let tempToChart = obj.map(item => item.Temperature);
-		let airhToChart = obj.map(item => item.AirHumidity);
-		let soilhToChart = obj.map(item => item.SoilHumidity);
-		let waterToChart = obj.map(item => item.WaterSurface);
-		let date = obj.map(item => item.Date);
-		console.log(tempToChart);
+		let tempToChart = obj.map(({ Temperature }) => Temperature);
+		let airhToChart = obj.map(({ AirHumidity }) => AirHumidity);
+		let soilhToChart = obj.map(({ SoilHumidity }) => SoilHumidity);
+		let waterToChart = obj.map(({ WaterSurface }) => WaterSurface);
+		let date = obj.map(({ Date }) => Date);
+		/*console.log(tempToChart);
 		console.log(airhToChart);
 		console.log(soilhToChart);
 		console.log(waterToChart);
-		console.log(date);
+		console.log(date);*/
 
     	Chart1.data.datasets[0].data = tempToChart;
     	Chart1.data.labels = date;
@@ -429,18 +454,20 @@ $(document).ready(() => {
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
        let obj = JSON.parse(this.responseText);
-       console.log(obj);
+       //console.log(obj);
 
-		let tempToChart = obj.map(item => item.Temperature);
-		let airhToChart = obj.map(item => item.AirHumidity);
-		let soilhToChart = obj.map(item => item.SoilHumidity);
-		let waterToChart = obj.map(item => item.WaterSurface);
-		let date = obj.map(item => item.Date.slice(0,10));
-		console.log(tempToChart);
+	   let tempToChart = obj.map(({ Temperature }) => Temperature);
+	   let airhToChart = obj.map(({ AirHumidity }) => AirHumidity);
+	   let soilhToChart = obj.map(({ SoilHumidity }) => SoilHumidity);
+	   let waterToChart = obj.map(({ WaterSurface }) => WaterSurface);
+	   //let date = obj.map(({ Date }) => Date.slice(0,10));
+	   let date = obj.map(({ Date }) => moment(Date).format('DD-MMM-YYYY'));
+
+	    /*console.log(tempToChart);
 		console.log(airhToChart);
 		console.log(soilhToChart);
 		console.log(waterToChart);
-		console.log(date);
+		console.log(date);*/
 
     	Chart1.data.datasets[0].data = tempToChart;
     	Chart1.data.labels = date;
@@ -475,39 +502,36 @@ $(document).ready(() => {
        let obj = JSON.parse(this.responseText);
        console.log(obj);
 
-		let tempToChart = obj.map(item => item.Temperature);
-		let airhToChart = obj.map(item => item.AirHumidity);
-		let soilhToChart = obj.map(item => item.SoilHumidity);
-		let waterToChart = obj.map(item => item.WaterSurface);
-		//TODO replace pre regex hodnotu
-		/*const searchStr = '[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])';
-		const regex = new RegExp(searchStr,'i');*/
-		let date = obj.map(item => item.Date.slice(0,10));
-		//let date = obj.map(item => Date.parse(item.Date));
-		//let date = obj.map(item => item.Date);
-		console.log(tempToChart);
-		console.log(airhToChart);
-		console.log(soilhToChart);
-		console.log(waterToChart);
-		console.log(date);
+	   let tempToChart = obj.map(({ Temperature }) => Temperature);
+	   let airhToChart = obj.map(({ AirHumidity }) => AirHumidity);
+	   let soilhToChart = obj.map(({ SoilHumidity }) => SoilHumidity);
+	   let waterToChart = obj.map(({ WaterSurface }) => WaterSurface);
+	   //let date = obj.map(({ Date }) => Date.slice(0,10));
+	   let date = obj.map(({ Date }) => moment(Date).format('DD-MMM-YYYY'));
 
-    	Chart1.data.datasets[0].data = tempToChart;
-    	Chart1.data.labels = date;
-    	Chart1.update();
+	   /*console.log(tempToChart);
+	   console.log(airhToChart);
+	   console.log(soilhToChart);
+	   console.log(waterToChart);
+	   console.log(date);*/
 
-    	Chart2.data.datasets[0].data = airhToChart;
-    	Chart2.data.labels = date;
-    	Chart2.update();
+       Chart1.data.datasets[0].data = tempToChart;
+       Chart1.data.labels = date;
+       Chart1.update();
 
-    	Chart3.data.datasets[0].data = soilhToChart;
-    	Chart3.data.labels = date;
-    	Chart3.update();
+       Chart2.data.datasets[0].data = airhToChart;
+       Chart2.data.labels = date;
+       Chart2.update();
 
-    	Chart4.data.datasets[0].data = waterToChart;
-    	Chart4.data.labels = date;
-    	Chart4.update();
+       Chart3.data.datasets[0].data = soilhToChart;
+       Chart3.data.labels = date;
+       Chart3.update();
 
-		}
+       Chart4.data.datasets[0].data = waterToChart;
+       Chart4.data.labels = date;
+       Chart4.update();
+
+	   }
 	};
 
 	xhttp.open("GET", req , true);
@@ -613,15 +637,23 @@ $(document).ready(() => {
 	  output6.innerHTML = this.value;
 	}
 
-	/*slider7.oninput = function() {
+	slider7.oninput = function() {
 	  output7.innerHTML = this.value;
 	}
-
+	
+	/*
 	slider8.oninput = function() {
 	  output8.innerHTML = this.value;
 	}*/
 
 	submitBtn.click(() => {
+
+	console.log("test");
+	console.log(capacity.value);
+
+	let capacityResult = calculateUses(capacity.value);
+    usesValue.html(capacityResult);
+    console.log(capacityResult);
 
 	//$('input[type=range]').val(20);
 	//console.log(sliderArr[0].TemperatureMin);
@@ -636,21 +668,25 @@ $(document).ready(() => {
     type: 'post',
 	headers:{"Content-Type":"application/json"},
     data: JSON.stringify({
-    	"identification":
-    	{
-    		"id": "sdf256s5df64", 
-    		"plantname": "MyPlant1"
+
+    	"identification":{
+
+    	"id": "sdf256s5df63", 
+    	"plantname": "MyPlant1"
+
     	},
-
+    	
     	"optimalValues":{
-
+    		
     	"TemperatureMax":slider1.value,
     	"TemperatureMin":slider2.value,
     	"AirHumidityMax":slider3.value,
     	"AirHumidityMin":slider4.value,
     	"SoilHumidityMax":slider5.value,
     	"SoilHumidityMin":slider6.value, 
-    	"WaterLevelMin":slider7.value
+    	"WaterLevelMin":slider7.value, 
+    	"ContainerSize":capacity.value
+
     }}),
 
     success: function( data, textStatus, jQxhr ){

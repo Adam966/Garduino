@@ -1,13 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>Garduino</title>
 <meta name='viewport'content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+<link rel="stylesheet" href="css/styleMain.css" type="text/css">
 <link rel="stylesheet" href="css/styleIndex.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
-<script src="js/index.script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="js/index.js"></script>
 </head>
 <body>
 
@@ -23,7 +25,7 @@
         <div class="waterIcon"></div>-->
         <div id="conditionWrapper">
             <span class="conditionName">Condition:</span>
-            <span class="health">GOOD</span>
+            <span class="health"></span>
             <span class="waterIcon" title="Click for water plants" id="water"></span>
         </div>
     </div>
@@ -32,26 +34,27 @@
         
         <div class="statsBox1">
             <div id="barTemp"></div>
-        	<div id="headingWrapper"><span class="heading">Temperature</span></div>
+        	<div class="headingWrapper"><span class="heading">Temperature</span></div>
         	<div id="stat1"></div>
         </div>
         
         <div class="statsBox2">
             <div id="barAir"></div>
-       		<div id="headingWrapper"><span class="heading">Air Humidity</span></div>
+       		<div class="headingWrapper"><span class="heading">Air Humidity</span></div>
         	<div id="stat2"></div>
         </div>
         
         <div class="statsBox3">
             <div id="barSoil"></div>
-        	<div id="headingWrapper"><span class="heading">Soil Humidity</span></div>
+        	<div class="headingWrapper"><span class="heading">Soil Humidity</span></div>
         	<div id="stat3"></div>
         </div>
         
         <div class="statsBox4">
             <div id="barWater"></div>
-        	<div id="headingWrapper"><span class="heading">Water level</span></div>
+        	<div class="headingWrapper"><span class="heading">Water level</span></div>
         	<div id="stat4"></div>
+            <div class="usesToWaterWrap"><span id="usesValue"></span><span class="usesLeft">water uses left</span></div>
         </div>
 
         <div id="chartAndTimeWrap">
@@ -136,10 +139,15 @@
         <div class="setupWrapperB">
             <span class="setupHeading">Water level</span>
 
-                 <div class="rangeWrapperW">
+                 <div class="rangeWrapperUp">
                         <span class="rangeText">Enter Min value:</span>
                         <div id="output7" class="output"></div>
                         <input type="range" min="1" max="100" value="1" class="slider" id="myRange7">
+                </div>
+
+                <div class="rangeWrapperB">
+                    <span class="waterMaxText">Enter Container Capacity</span>
+                    <input type="number" id="capacity" value="1">
                 </div>
 
                <!-- <div class="rangeWrapperB">
