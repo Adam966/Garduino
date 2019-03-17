@@ -117,43 +117,52 @@ $(document).ready(() => {
        //console.log(obj[0].TemperatureMax);
        //console.log(slider1);
 
-       //Temp Max
+       //Temp Max range input
        slider1.value = obj[0].TemperatureMax;
+       //Temp Max to compare
        tempMax = slider1.value;
        output1.innerHTML = obj[0].TemperatureMax;
 
-       //Temp Min
+       //Temp Min range input
        slider2.value = obj[0].TemperatureMin;
+       //Temp Min to compare
        tempMin = slider2.value;
        output2.innerHTML = obj[0].TemperatureMin;
 
-       //Air Humidity Max
+       //Air Humidity Max range input
        slider3.value = obj[0].AirHumidityMax;
+       //Air Max to compare
        airhMax = slider3.value;
        output3.innerHTML = obj[0].AirHumidityMax;
 
-       //Air Humidity Min
+       //Air Humidity Min range input
        slider4.value = obj[0].AirHumidityMin;
+       //Air Min to compare
        airhMin = slider4.value;
        output4.innerHTML = obj[0].AirHumidityMin;
 
-       //Soil Humidity Max
+       //Soil Humidity Max range input
        slider5.value = obj[0].SoilHumidityMax;
+       //Soil Max to compare
        soilhMax = slider5.value;
        output5.innerHTML = obj[0].SoilHumidityMax;
 
-       //Soil Humidity Min
+       //Soil Humidity Min range input
        slider6.value = obj[0].SoilHumidityMin;
+       //Soil Min to compare
        soilhMin = slider6.value;
        output6.innerHTML = obj[0].SoilHumidityMin;
 
-       //Water level
+       //Water level range input
        slider7.value = obj[0].WaterLevelMin;
+       //Water Min to compare
        waterMin = slider7.value;
        output7.innerHTML = obj[0].WaterLevelMin;
 
+       //Water container capacity
        capacity.value = obj[0].ContainerSize;
-       //console.log("uses value= "+calculateUses(capacity.value));
+
+       //calculation for water uses
        let capacityResult = calculateUses(capacity.value);
        usesValue.html(capacityResult);
        console.log(capacityResult);
@@ -648,58 +657,58 @@ $(document).ready(() => {
 
 	submitBtn.click(() => {
 
-	console.log("test");
-	console.log(capacity.value);
+		console.log("test");
+		console.log(capacity.value);
 
-	let capacityResult = calculateUses(capacity.value);
-    usesValue.html(capacityResult);
-    console.log(capacityResult);
+		let capacityResult = calculateUses(capacity.value);
+	    usesValue.html(capacityResult);
+	    console.log(capacityResult);
 
-	//$('input[type=range]').val(20);
-	//console.log(sliderArr[0].TemperatureMin);
-	//sliderArr.push(slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value);
-	//let valuesToSend = JSON.stringify({ ...[slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value] });
-	//console.log(valuesToSend);
-	//let test = JSON.parse(valuesToSend);
+		//$('input[type=range]').val(20);
+		//console.log(sliderArr[0].TemperatureMin);
+		//sliderArr.push(slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value);
+		//let valuesToSend = JSON.stringify({ ...[slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value] });
+		//console.log(valuesToSend);
+		//let test = JSON.parse(valuesToSend);
 
-	$.ajax({
-    url: 'http://localhost:5485/minmax',
-    dataType: 'json',
-    type: 'post',
-	headers:{"Content-Type":"application/json"},
-    data: JSON.stringify({
+		$.ajax({
+	    url: 'http://localhost:5485/minmax',
+	    dataType: 'json',
+	    type: 'post',
+		headers:{"Content-Type":"application/json"},
+	    data: JSON.stringify({
 
-    	"identification":{
+	    	"identification":{
 
-    	"id": "sdf256s5df63", 
-    	"plantname": "MyPlant1"
+	    	"id": "sdf256s5df63", 
+	    	"plantname": "MyPlant1"
 
-    	},
-    	
-    	"optimalValues":{
-    		
-    	"TemperatureMax":slider1.value,
-    	"TemperatureMin":slider2.value,
-    	"AirHumidityMax":slider3.value,
-    	"AirHumidityMin":slider4.value,
-    	"SoilHumidityMax":slider5.value,
-    	"SoilHumidityMin":slider6.value, 
-    	"WaterLevelMin":slider7.value, 
-    	"ContainerSize":capacity.value
+	    	},
+	    	
+	    	"optimalValues":{
+	    		
+	    	"TemperatureMax":slider1.value,
+	    	"TemperatureMin":slider2.value,
+	    	"AirHumidityMax":slider3.value,
+	    	"AirHumidityMin":slider4.value,
+	    	"SoilHumidityMax":slider5.value,
+	    	"SoilHumidityMin":slider6.value, 
+	    	"WaterLevelMin":slider7.value, 
+	    	"ContainerSize":capacity.value
 
-    }}),
+	    }}),
 
-    success: function( data, textStatus, jQxhr ){
-		console.log("sent successfully");
-		console.log(data);
-    },
-    error: function( jqXhr, textStatus, errorThrown ){
-        console.log( errorThrown );
-    }
-    });
+	    success: function( data, textStatus, jQxhr ){
+			console.log("sent successfully");
+			console.log(data);
+	    },
+	    error: function( jqXhr, textStatus, errorThrown ){
+	        console.log( errorThrown );
+	    }
+	    });
 
-	middleWrapper.css('display','flex');
-	middleSettings.css('display','none');
+		middleWrapper.css('display','flex');
+		middleSettings.css('display','none');
 
 	});
 
