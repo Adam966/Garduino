@@ -105,7 +105,13 @@ $(document).ready(() => {
 	}
 
 	//TODO
-	const calculateCondition = (temp,airh,soilh,waterl) => {}
+	/*const calculateCondition = (tempmax,tempmin,airhmax,airhmin,soilhmax,soilhmin,watermax,watermin) => {
+		
+		if(){
+
+		}
+		
+	}*/
  
 	//request for load min max values to range inputs
 	let req = 'http://localhost:5485/minmax';
@@ -113,74 +119,115 @@ $(document).ready(() => {
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
        let obj = JSON.parse(this.responseText);
+       console.log("data from http");
        console.log(obj);
        //console.log(obj[0].TemperatureMax);
        //console.log(slider1);
 
-       if(obj == 0){
-       		console.log("cannot get data");
-       }
-       else
-       {
+	       if(obj == 0){
+	       		console.log("cannot get data http request");
+	       }
+	       else
+	       {
 
-       //Temp Max range input
-       slider1.value = obj[0].TemperatureMax;
-       //Temp Max to compare
-       tempMax = slider1.value;
-       output1.innerHTML = obj[0].TemperatureMax;
+	       //Temp Max range input
+	       slider1.value = obj[0].TemperatureMax;
+	       output1.innerHTML = obj[0].TemperatureMax;
 
-       //Temp Min range input
-       slider2.value = obj[0].TemperatureMin;
-       //Temp Min to compare
-       tempMin = slider2.value;
-       output2.innerHTML = obj[0].TemperatureMin;
+	       //Temp Min range input
+	       slider2.value = obj[0].TemperatureMin;
+	       output2.innerHTML = obj[0].TemperatureMin;
 
-       //Air Humidity Max range input
-       slider3.value = obj[0].AirHumidityMax;
-       //Air Max to compare
-       airhMax = slider3.value;
-       output3.innerHTML = obj[0].AirHumidityMax;
+	       //Air Humidity Max range input
+	       slider3.value = obj[0].AirHumidityMax;
+	       output3.innerHTML = obj[0].AirHumidityMax;
 
-       //Air Humidity Min range input
-       slider4.value = obj[0].AirHumidityMin;
-       //Air Min to compare
-       airhMin = slider4.value;
-       output4.innerHTML = obj[0].AirHumidityMin;
+	       //Air Humidity Min range input
+	       slider4.value = obj[0].AirHumidityMin;
+	       output4.innerHTML = obj[0].AirHumidityMin;
 
-       //Soil Humidity Max range input
-       slider5.value = obj[0].SoilHumidityMax;
-       //Soil Max to compare
-       soilhMax = slider5.value;
-       output5.innerHTML = obj[0].SoilHumidityMax;
+	       //Soil Humidity Max range input
+	       slider5.value = obj[0].SoilHumidityMax;
+	       output5.innerHTML = obj[0].SoilHumidityMax;
 
-       //Soil Humidity Min range input
-       slider6.value = obj[0].SoilHumidityMin;
-       //Soil Min to compare
-       soilhMin = slider6.value;
-       output6.innerHTML = obj[0].SoilHumidityMin;
+	       //Soil Humidity Min range input
+	       slider6.value = obj[0].SoilHumidityMin;
+	       output6.innerHTML = obj[0].SoilHumidityMin;
 
-       //Water level range input
-       slider7.value = obj[0].WaterLevelMin;
-       //Water Min to compare
-       waterMin = slider7.value;
-       output7.innerHTML = obj[0].WaterLevelMin;
+	       //Water level range input
+	       slider7.value = obj[0].WaterLevelMin;
+	       output7.innerHTML = obj[0].WaterLevelMin;
 
-       //Water container capacity
-       capacity.value = obj[0].ContainerSize;
-       waterCapacity = capacity.value;
+	       //Water container capacity
+	       capacity.value = obj[0].ContainerSize;
 
-       //calculation for water uses
-       let capacityResult = calculateUses(capacity.value);
-       usesValue.html(capacityResult);
-       console.log(capacityResult);
-
-       }
+	       }
 
 	   }
 	};
 
 	xhttp.open("GET", req , true);
 	xhttp.send();
+
+
+	//ajax request for get data to compare
+	function checkData() {
+
+    $.ajax({
+
+       type: "GET",
+       url: "http://localhost:5485/minmax",
+       success: function (data) {
+       console.log(data);
+
+       let obj = JSON.parse(data);
+       console.log("data from ajax");
+       console.log(obj);
+       //console.log(obj[0].TemperatureMax);
+       //console.log(slider1);
+
+	       if(obj == 0){
+	       		console.log("cannot get data ajax");
+	       }
+	       else
+	       {
+
+	       //Temp Max range input
+	       tempMax = obj[0].TemperatureMax;
+
+	       //Temp Max range input
+	       tempMin = obj[0].TemperatureMin;
+
+	       //Air Max to compare
+	       airhMax = obj[0].AirHumidityMax;
+
+	       //Air Min to compare
+	       airhMin = obj[0].AirHumidityMin;
+
+	       //Soil Max to compare
+	       soilhMax = obj[0].SoilHumidityMax;
+
+	       //Soil Min to compare
+	       soilhMin = obj[0].SoilHumidityMin;
+
+	       //Water Min to compare
+	       waterMin = obj[0].SoilHumidityMin;
+
+	       waterCapacity = obj[0].ContainerSize;
+
+	       //calculation for water uses
+	       let capacityResult = calculateUses(capacity.value);
+	       usesValue.html(capacityResult);
+	       console.log(capacityResult);
+
+	       }
+
+        }
+    });
+
+	}
+
+	setInterval(checkData, 2000);
 
 	//socket connection
     const socket = io.connect('http://localhost:5485');
@@ -250,11 +297,11 @@ $(document).ready(() => {
 		socketWater.push(water);
 		socketDate.push(date);
 
-		console.log(socketTemp);
+		/*console.log(socketTemp);
 		console.log(socketAirh);
 		console.log(socketSoilh);
 		console.log(socketWater);
-		console.log(socketDate);
+		console.log(socketDate);*/
 
 		//dataset update with concat function
 		Chart1.data.datasets[0].data = Chart1.data.datasets[0].data.concat(temp);
@@ -433,7 +480,7 @@ $(document).ready(() => {
 		let airhToChart = obj.map(({ AirHumidity }) => AirHumidity);
 		let soilhToChart = obj.map(({ SoilHumidity }) => SoilHumidity);
 		let waterToChart = obj.map(({ WaterSurface }) => WaterSurface);
-		let date = obj.map(({ Date }) => Date);
+		let date = obj.map(({ Date }) => moment(Date).format("hh:mm A"));
 		/*console.log(tempToChart);
 		console.log(airhToChart);
 		console.log(soilhToChart);
@@ -586,45 +633,47 @@ $(document).ready(() => {
 	statsBox1.click(() => {
 		console.log("test1");
 		//divChart1.addClass('-view');
-		divChart1.removeClass('-hide');
-		divChart1.addClass('-view');
-		divChart2.addClass('-hide');
-		divChart3.addClass('-hide');
-		divChart4.addClass('-hide');
+		divChart1.removeClass().addClass('-view');
+		divChart2.removeClass().addClass('-hide');
+		divChart3.removeClass().addClass('-hide');
+		divChart4.removeClass().addClass('-hide');
 	});
 
 	statsBox2.click(() => {
 		console.log("test2");
 
-		divChart1.addClass('-hide');
-		divChart2.removeClass('-hide');
-		divChart2.addClass('-view');
-		divChart3.addClass('-hide');
-		divChart4.addClass('-hide');
+		divChart1.removeClass().addClass('-hide');
+		divChart2.removeClass().addClass('-view');
+		divChart3.removeClass().addClass('-hide');
+		divChart4.removeClass().addClass('-hide');
 	});
 
 	statsBox3.click(() => {
 		console.log("test3");
-		divChart1.css('display','none');
-		divChart2.css('display','none');
-		divChart3.css('display','block');
-		divChart4.css('display','none');
+
+		divChart1.removeClass().addClass('-hide');
+		divChart2.removeClass().addClass('-hide');
+		divChart3.removeClass().addClass('-view');
+		divChart4.removeClass().addClass('-hide');
 	});
 
 	statsBox4.click(() => {
 		console.log("test4");
-		divChart1.css('display','none');
-		divChart2.css('display','none');
-		divChart3.css('display','none');
-		divChart4.css('display','block');
+
+		divChart1.removeClass().addClass('-hide');
+		divChart2.removeClass().addClass('-hide');
+		divChart3.removeClass().addClass('-hide');
+		divChart4.removeClass().addClass('-view');
 	});
 
 	settings.click(() => {
 		console.log("test settings button");
+
 		middleWrapper.css('display','none');
 		middleSettings.css('display','flex');
-	});
-	*/
+
+	});*/
+	
 	
 	statsBox1.click(() => {
 		console.log("test1");
@@ -691,7 +740,7 @@ $(document).ready(() => {
 
 	slider5.oninput = function() {
 	  output5.innerHTML = this.value;
-	}
+	} 
 
 	slider6.oninput = function() {
 	  output6.innerHTML = this.value;
@@ -714,13 +763,6 @@ $(document).ready(() => {
 		let capacityResult = calculateUses(capacity.value);
 	    usesValue.html(capacityResult);
 	    console.log(capacityResult);
-
-		//$('input[type=range]').val(20);
-		//console.log(sliderArr[0].TemperatureMin);
-		//sliderArr.push(slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value);
-		//let valuesToSend = JSON.stringify({ ...[slider1.value,slider2.value,slider3.value,slider4.value,slider5.value,slider6.value,slider7.value,slider8.value] });
-		//console.log(valuesToSend);
-		//let test = JSON.parse(valuesToSend);
 
 		$.ajax({
 	    url: 'http://localhost:5485/minmax',
@@ -752,6 +794,7 @@ $(document).ready(() => {
 	    success: function( data, textStatus, jQxhr ){
 			console.log("sent successfully");
 			console.log(data);
+			console.log(checkData());
 	    },
 	    error: function( jqXhr, textStatus, errorThrown ){
 	        console.log( errorThrown );
