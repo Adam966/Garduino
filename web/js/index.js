@@ -573,7 +573,50 @@ $(document).ready(() => {
 		setupHeading.toggleClass('-darkmode');
 		rangeText.toggleClass('-darkmode');
 	});
+	/*
+	statsBox1.click(() => {
+		console.log("test1");
+		//divChart1.addClass('-view');
+		divChart1.removeClass('-hide');
+		divChart1.addClass('-view');
+		divChart2.addClass('-hide');
+		divChart3.addClass('-hide');
+		divChart4.addClass('-hide');
+	});
 
+	statsBox2.click(() => {
+		console.log("test2");
+
+		divChart1.addClass('-hide');
+		divChart2.removeClass('-hide');
+		divChart2.addClass('-view');
+		divChart3.addClass('-hide');
+		divChart4.addClass('-hide');
+	});
+
+	statsBox3.click(() => {
+		console.log("test3");
+		divChart1.css('display','none');
+		divChart2.css('display','none');
+		divChart3.css('display','block');
+		divChart4.css('display','none');
+	});
+
+	statsBox4.click(() => {
+		console.log("test4");
+		divChart1.css('display','none');
+		divChart2.css('display','none');
+		divChart3.css('display','none');
+		divChart4.css('display','block');
+	});
+
+	settings.click(() => {
+		console.log("test settings button");
+		middleWrapper.css('display','none');
+		middleSettings.css('display','flex');
+	});
+	*/
+	
 	statsBox1.click(() => {
 		console.log("test1");
 		divChart1.css('display','block');
@@ -611,7 +654,6 @@ $(document).ready(() => {
 		middleWrapper.css('display','none');
 		middleSettings.css('display','flex');
 	});
-
 
 	output1.innerHTML = slider1.value;
 	output2.innerHTML = slider2.value;
