@@ -16,6 +16,7 @@ module.exports = {
     writeData(obj)
     {
       console.log("Writing to database");
+      obj = JSON.parse(obj);
       if(validJSON(obj))
       {
         writeArduinoData();
@@ -70,7 +71,7 @@ module.exports = {
     getWeatherData(interval, data)
     {
       console.log(interval);
-      const query = "SELECT Temperature, AirHumidity, SoilHumidity, WaterSurface, Date FROM WeatherInfo WHERE Date > (NOW() - INTERVAL 1 "+ interval + ")";
+      const query = "SELECT Temperature, AirHumidity, SoilHumidity, WaterSurface,  Date FROM WeatherInfo WHERE Date > (NOW() - INTERVAL 1 "+ interval + ")";
       con.query(query, (err, result) =>{
            if (err)
            {
