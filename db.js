@@ -16,7 +16,6 @@ module.exports = {
     writeData(obj)
     {
       console.log("Writing to database");
-      obj = JSON.parse(obj);
       if(validJSON(obj))
       {
         writeArduinoData();
