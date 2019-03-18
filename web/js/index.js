@@ -117,6 +117,12 @@ $(document).ready(() => {
        //console.log(obj[0].TemperatureMax);
        //console.log(slider1);
 
+       if(obj == 0){
+       		console.log("cannot get data");
+       }
+       else
+       {
+
        //Temp Max range input
        slider1.value = obj[0].TemperatureMax;
        //Temp Max to compare
@@ -161,11 +167,14 @@ $(document).ready(() => {
 
        //Water container capacity
        capacity.value = obj[0].ContainerSize;
+       waterCapacity = capacity.value;
 
        //calculation for water uses
        let capacityResult = calculateUses(capacity.value);
        usesValue.html(capacityResult);
        console.log(capacityResult);
+
+       }
 
 	   }
 	};
@@ -221,12 +230,12 @@ $(document).ready(() => {
 		if(tempHeight > tempMax) barTemp.css('background-color', '#e54242');
 		if(airHeight > airhMax) barAir.css('background-color', '#e54242');
 		if(soilHeight > soilhMax) barSoil.css('background-color', '#e54242');
-		//if(waterHeight > waterMax) barWater.css('background-color', '#e54242');
+		if(waterHeight > waterCapacity) barWater.css('background-color', '#e54242');
 
 		if(tempHeight < tempMax && tempHeight > tempMin) barTemp.css('background-color', '#3ce578');
 		if(airHeight < airhMax && airHeight > airhMin) barAir.css('background-color', '#3ce578');
 		if(soilHeight < soilhMax && soilHeight > soilhMin) barSoil.css('background-color', '#3ce578');
-		//if(waterHeight < waterMax && waterHeight > waterMin) barWater.css('background-color', '#3ce578');
+		if(waterHeight < waterCapacity && waterHeight > waterMin) barWater.css('background-color', '#3ce578');
 
 		let temp = obj[1].temperature;
 		let airH = obj[1].humidityAir;
