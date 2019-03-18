@@ -16,7 +16,6 @@ module.exports = {
     writeData(obj)
     {
       console.log("Writing to database");
-
       if(validJSON(obj))
       {
         writeArduinoData();
@@ -30,13 +29,12 @@ module.exports = {
       {
         const query = "INSERT INTO weatherinfo (ArduinoID, Temperature, AirHumidity, SoilHumidity, WaterSurface, Date) VALUES (\'"+obj.identification.id+"\',\'"+ obj.info.temperature+"\',\'"+ obj.info.humidityAir+"\',\'"+ obj.info.humiditySoil+"\',\'"+ obj.info.watersurface+"\',\'"+ obj.date.date+"\')";
         con.query(query, err => {
-          if (err) 
+          if (err)
           {
             console.log(err);
           }
           else
           {
-            data(JSON.stringify(result));
             console.log("Record successfully inserted");
           }
         });
@@ -48,41 +46,33 @@ module.exports = {
         {
           return false;
         }
-        if(!data.identification.hasOwnProperty('plantname'))
+        if(!data.info.hasOwnProperty('temperature'))
         {
           return false;
         }
-        if(!data.info.hasOwnProperty('Temperature'))
+        if(!data.info.hasOwnProperty('humidityAir'))
         {
           return false;
         }
-        if(!data.info.hasOwnProperty('AirHumidity'))
+        if(!data.info.hasOwnProperty('humiditySoil'))
         {
           return false;
         }
-        if(!data.info.hasOwnProperty('SoilHumidity'))
-        {
-          return false;
-        }
-        if(!data.info.hasOwnProperty('WaterSurface'))
-        {
-          return false;
-        }
-        if(!data.info.hasOwnProperty('Date'))
+        if(!data.date.hasOwnProperty('date'))
         {
           return false;
         }
         return true;
       }
-      
+
     },
-    
+
     getWeatherData(interval, data)
     {
       console.log(interval);
       const query = "SELECT Temperature, AirHumidity, SoilHumidity, WaterSurface, Date FROM WeatherInfo WHERE Date > (NOW() - INTERVAL 1 "+ interval + ")";
       con.query(query, (err, result) =>{
-           if (err) 
+           if (err)
            {
              console.log(err);
              data("Error");
@@ -121,7 +111,7 @@ module.exports = {
             writeDataMinMax();
             console.log("Data writed");
           }
-          
+
         });
       }
       else
@@ -133,7 +123,7 @@ module.exports = {
       {
           const query = "SELECT ArduinoID from plantcare";
           con.query(query, (err, result) =>{
-            if (err) 
+            if (err)
             {
               console.log(err);
             }
@@ -145,7 +135,7 @@ module.exports = {
       {
         const query = "INSERT INTO plantcare (ArduinoID, PlantName, TemperatureMin, TemperatureMax, AirHumidityMin, AirHumidityMax, SoilHumidityMin, SoilHumidityMax, WaterLevelMin, ContainerSize) VALUES (\'"+data.identification.id+"\',\'"+ data.identification.plantname+"\',\'"+ data.optimalValues.TemperatureMin+"\',\'"+ data.optimalValues.TemperatureMax+"\',\'"+ data.optimalValues.AirHumidityMin+"\',\'"+  data.optimalValues.AirHumidityMax + "\',\'"+ data.optimalValues.SoilHumidityMin+"\',\'" + data.optimalValues.AirHumidityMax+"\',\'"+ data.optimalValues.WaterLevelMin+"\',\'"+data.optimalValues.ContainerSize+"\')";
         con.query(query, err => {
-          if (err) 
+          if (err)
           {
             console.log(err);
           }
@@ -160,7 +150,7 @@ module.exports = {
       {
         const query = "UPDATE plantcare SET PlantName=\'"+data.identification.plantname+"\',TemperatureMin=\'"+data.optimalValues.TemperatureMin+"\', TemperatureMax=\'"+data.optimalValues.TemperatureMax+"\', AirHumidityMin=\'"+data.optimalValues.AirHumidityMin+"\', AirHumidityMax=\'"+data.optimalValues.AirHumidityMax+"\', SoilHumidityMin=\'"+data.optimalValues.SoilHumidityMin+"\', SoilHumidityMax=\'"+data.optimalValues.SoilHumidityMax+"\', WaterLevelMin=\'"+data.optimalValues.WaterLevelMin+"\', ContainerSize=\'"+data.optimalValues.ContainerSize+"\'";
         con.query(query, function (err, result) {
-          if (err) 
+          if (err)
           {
             console.log(err);
           }
@@ -223,14 +213,14 @@ module.exports = {
         }
         return true;
       }
- 
+
     },
 
     getMinMax(data) //returns the minimal and maximal values
     {
       const query = "SELECT * from plantcare";
       con.query(query, (err, result) =>{
-        if (err) 
+        if (err)
         {
           console.log(err);
           data("Error");
@@ -246,7 +236,7 @@ module.exports = {
     {
       const query = "SELECT SoilHumidityMin, SoilHumidityMax from plantcare";
       con.query(query, (err, result) =>{
-           if (err) 
+           if (err)
            {
              console.log(err);
              data("Error");

@@ -32,18 +32,6 @@ io.on('connection', client =>{
         io.to('arduinoclient').emit('water');
     });
 
-    let webroom = io.of('/webclient');
-    /*
-        webroom.on('connection', socket =>{
-    });
-    */
-
-    let arduinoroom = io.of('/arduinoclient');
-    /*
-        arduinoroom.on('connection', socket =>{
-    });
-    */
-
     client.on('getSoilHumidity', ()=>{
         console.log("SENDINGHUMIDITY");
         database.getSoilHumidity(data =>{
