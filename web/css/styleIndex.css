@@ -11,8 +11,6 @@ width:100px;
 background:url(../img/icon3.svg) center / contain no-repeat;
 background-size: 60px 60px;
 cursor:pointer;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
 
 }
 
@@ -26,8 +24,6 @@ width:100px;
 background:url(../img/icon3hover.svg) center / contain no-repeat;
 background-size: 60px 60px;
 cursor:pointer;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
 
 }
 
@@ -41,8 +37,6 @@ width:100px;
 background:url(../img/icon3click.svg) center / contain no-repeat;
 background-size: 60px 60px;
 cursor:pointer;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
 
 }
 
@@ -708,9 +702,7 @@ width:100px;
 background:url(../img/icon2.svg) center / contain no-repeat;
 background-size: 60px 60px;
 cursor:pointer;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-	
+
 }
 
 #chartWrapper2,#chartWrapper3,#chartWrapper4 {

@@ -287,6 +287,8 @@ $(document).ready(() => {
 		let water = obj[1].watersurface;
 		let date = obj[2].date;
 
+		moment(date).format("hh:mm A");
+
 		//push data to socket variables for Today chart use
 		socketTemp.push(temp);
 		socketAirh.push(airH);
@@ -805,7 +807,6 @@ $(document).ready(() => {
 
 	water.click(() => {
 		socket.emit('water');
-		console.log($('[type=number]').val());
 		console.log($('#usesValue').html());
 
 	});
