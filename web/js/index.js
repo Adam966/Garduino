@@ -91,6 +91,8 @@ $(document).ready(() => {
 
 	let usesValue = $('#usesValue');
 
+	let health = $('.health');
+
 	//barTemp.height('100%');
 	//barTemp.height('100'+'%');
 
@@ -105,11 +107,68 @@ $(document).ready(() => {
 	}
 
 	//todo
-	const calculateCondition = (barTemp) => {
+	const calculateCondition = (c1,c2,c3,c4) => {
+
+		//rgb(60, 229, 120) - zelena
+		//rgb(229, 66, 66) - cervena
+
+		let c1bool=false;//T
+		let c2bool=false;//A
+		let c3bool=false;//S
+		let c4bool=false;//W
+
+		if(c1 == "rgb(229, 66, 66)"){
+			c1bool = true;
+		}
+		else{
+			c1bool = false;
+		}
+
+		if(c2 == "rgb(229, 66, 66)"){
+			c2bool = true;
+		}
+		else{
+			c2bool = false;
+		}
+
+		if(c3 == "rgb(229, 66, 66)"){
+			c3bool = true;
+		}
+		else{
+			c3bool = false;
+		}
+
+		if(c4 == "rgb(229, 66, 66)"){
+			c4bool = true;
+		}
+		else{
+			c4bool = false;
+		}
+
+
+		if(	(c1bool == true && c2bool == true && c3bool == true) || 
+			(c2bool == true && c3bool == true && c4bool == true) ||
+			(c1bool == true && c3bool == true && c4bool == true))
+		{
+			health.html("Bad");
+		}
+		else
+		{
+			//health.html("good");
+			if(c1bool == false && c2bool == false && c3bool == false && c4bool == false){
+				health.html("Perfect");
+			}
+			else
+			{
+				health.html("Good");
+			}
+		}
+
+
 
 	}
  
-	//request for load min max values to range inputs
+	//request for load min max values to range inputs and for get data to compare
 	let req = 'http://localhost:5485/minmax';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -157,40 +216,10 @@ $(document).ready(() => {
 	       //Water container capacity
 	       capacity.value = obj[0].ContainerSize;
 
-	       }
-	   }
-	};
-
-	xhttp.open("GET", req , true);
-	xhttp.send();
-
-
-	//ajax request for get data to compare
-	function checkData() {
-
-    $.ajax({
-
-       type: "GET",
-       url: "http://localhost:5485/minmax",
-       success: function (data) {
-       console.log(data);
-
-       let obj = JSON.parse(data);
-       console.log("data from ajax");
-       console.log(obj);
-       //console.log(obj[0].TemperatureMax);
-       //console.log(slider1);
-
-	       if(obj == 0){
-	       		console.log("cannot get data ajax");
-	       }
-	       else
-	       {
-
-	       //Temp Max range input
+	       	       //Temp Max to compare
 	       tempMax = obj[0].TemperatureMax;
 
-	       //Temp Max range input
+	       //Temp Max to compare
 	       tempMin = obj[0].TemperatureMin;
 
 	       //Air Max to compare
@@ -206,7 +235,7 @@ $(document).ready(() => {
 	       soilhMin = obj[0].SoilHumidityMin;
 
 	       //Water Min to compare
-	       waterMin = obj[0].SoilHumidityMin;
+	       waterMin = obj[0].WaterLevelMin;
 
 	       waterCapacity = obj[0].ContainerSize;
 
@@ -216,13 +245,11 @@ $(document).ready(() => {
 	       console.log(capacityResult);
 
 	       }
+	   }
+	};
 
-        }
-    });
-
-	}
-
-	setInterval(checkData, 2000);
+	xhttp.open("GET", req , true);
+	xhttp.send();
 
 	//socket connection
     const socket = io.connect('http://localhost:5485');
@@ -272,12 +299,11 @@ $(document).ready(() => {
 		if(tempHeight > tempMax) barTemp.css('background-color', '#e54242');
 		if(airHeight > airhMax) barAir.css('background-color', '#e54242');
 		if(soilHeight > soilhMax) barSoil.css('background-color', '#e54242');
-		if(waterHeight > waterCapacity) barWater.css('background-color', '#e54242');
 
 		if(tempHeight < tempMax && tempHeight > tempMin) barTemp.css('background-color', '#3ce578');
 		if(airHeight < airhMax && airHeight > airhMin) barAir.css('background-color', '#3ce578');
 		if(soilHeight < soilhMax && soilHeight > soilhMin) barSoil.css('background-color', '#3ce578');
-		if(waterHeight < waterCapacity && waterHeight > waterMin) barWater.css('background-color', '#3ce578');
+		if(waterHeight > waterMin) barWater.css('background-color', '#3ce578');
 
 		let temp = obj[1].temperature;
 		let airH = obj[1].humidityAir;
@@ -287,6 +313,18 @@ $(document).ready(() => {
 
 		date = moment(date).format("hh:mm A");
 		console.log(date)
+
+		let c1 = document.getElementById("barTemp").style.backgroundColor;
+		let c2 = document.getElementById("barAir").style.backgroundColor;
+		let c3 = document.getElementById("barSoil").style.backgroundColor;
+		let c4 = document.getElementById("barWater").style.backgroundColor;
+
+		console.log(c1);
+		console.log(c2);
+		console.log(c3);
+		console.log(c4);
+
+		calculateCondition(c1,c2,c3,c4);
 
 		//push data to socket variables for Today chart use
 		socketTemp.push(temp);
@@ -792,7 +830,6 @@ $(document).ready(() => {
 	    success: function( data, textStatus, jQxhr ){
 			console.log("sent successfully");
 			console.log(data);
-			console.log(checkData());
 	    },
 	    error: function( jqXhr, textStatus, errorThrown ){
 	        console.log( errorThrown );
