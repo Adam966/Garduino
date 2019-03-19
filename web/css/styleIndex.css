@@ -123,40 +123,6 @@ transition: all .2s linear 0s;
 
 }
 
-#middleWrapper.-view {
-	
-height:auto;
-min-height:80%;
-width:100%;	
-margin:0 auto;
-display: flex;
-flex-direction:row;
-justify-content:space-evenly;
-align-items:center;
-flex-wrap:wrap;
-background:#D2E3E5;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#middleWrapper.-hide {
-	
-height:auto;
-min-height:80%;
-width:100%;	
-margin:0 auto;
-display: none;
-flex-direction:row;
-justify-content:space-evenly;
-align-items:center;
-flex-wrap:wrap;
-background:#D2E3E5;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
 .statsBox1,.statsBox2,.statsBox3,.statsBox4 {
 
 height:21vw;
@@ -238,6 +204,7 @@ margin-left:2%;
 
 width:100%;
 height:0%;
+max-height: 100%;
 background: #CFE0E8;
 position: absolute;
 bottom: 0px;
@@ -251,36 +218,6 @@ height:21vw;
 width: 93vw;
 /*width:84.5em;*/
 position: relative;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#chartWrapper1.-view,#chartWrapper2.-view,#chartWrapper3.-view,#chartWrapper4.-view {
-
-height:21vw;
-width: 93vw;
-/*width:84.5em;*/
-display:block;
-position: relative;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#chartWrapper1.-hide,#chartWrapper2.-hide,#chartWrapper3.-hide,#chartWrapper4.-hide {
-
-height:21vw;
-width: 93vw;
-/*width:84.5em;*/
-position: relative;
-display:none;
 background:#F0FEFF;
 border-radius:8px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -334,42 +271,6 @@ margin-left:0.3vw;
 #middleSettings {
 	
 display: none;
-flex-direction:row;
-justify-content:space-evenly;
-align-items:center;
-flex-wrap:wrap;
-height:auto;
-min-height:80%;
-width:100%;	
-margin:0 auto;
-/*background: red;*/
-background:#D2E3E5;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-	
-}
-
-#middleSettings.-hide {
-	
-display: none;
-flex-direction:row;
-justify-content:space-evenly;
-align-items:center;
-flex-wrap:wrap;
-height:auto;
-min-height:80%;
-width:100%;	
-margin:0 auto;
-/*background: red;*/
-background:#D2E3E5;
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-	
-}
-
-#middleSettings.-view {
-	
-display: flex;
 flex-direction:row;
 justify-content:space-evenly;
 align-items:center;
@@ -750,20 +651,6 @@ flex-direction:column;
 
 }
 
-#middleSettings.-view{
-
-display:flex;
-flex-direction:column;
-
-}
-
-#middleSettings.-hide{
-
-display:none;
-flex-direction:column;
-
-}
-
 #submitSettings {
 
 margin-top:2%;
@@ -978,37 +865,6 @@ margin:3%;
 
 height:55vw;
 width: 80vw;
-
-}
-
-
-#chartWrapper1.-view,#chartWrapper2.-view,#chartWrapper3.-view,#chartWrapper4.-view {
-
-height:55vw;
-width: 80vw;
-/*width:84.5em;*/
-display:block;
-position: relative;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#chartWrapper1.-hide,#chartWrapper2.-hide,#chartWrapper3.-hide,#chartWrapper4.-hide {
-
-height:55vw;
-width: 80vw;
-/*width:84.5em;*/
-position: relative;
-display:none;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
 
 }
 
@@ -1292,36 +1148,6 @@ width: 80vw;
 
 }
 
-#chartWrapper1.-view,#chartWrapper2.-view,#chartWrapper3.-view,#chartWrapper4.-view {
-
-height:35vw;
-width: 80vw;
-/*width:84.5em;*/
-display:block;
-position: relative;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#chartWrapper1.-hide,#chartWrapper2.-hide,#chartWrapper3.-hide,#chartWrapper4.-hide {
-
-height:35vw;
-width: 80vw;
-/*width:84.5em;*/
-position: relative;
-display:none;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
 .heading {
 
 margin-left:5%;
@@ -1545,36 +1371,6 @@ width: 94vw;
 
 }
 
-#chartWrapper1.-view,#chartWrapper2.-view,#chartWrapper3.-view,#chartWrapper4.-view {
-
-height:30vw;
-width: 94vw;
-/*width:84.5em;*/
-display:block;
-position: relative;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#chartWrapper1.-hide,#chartWrapper2.-hide,#chartWrapper3.-hide,#chartWrapper4.-hide {
-
-height:30vw;
-width: 94vw;
-/*width:84.5em;*/
-position: relative;
-display:none;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
 .heading {
 
 margin-left:5%;
@@ -1776,36 +1572,6 @@ width:21vw;
 
 height:21vw;
 width: 93vw;
-
-}
-
-#chartWrapper1.-view,#chartWrapper2.-view,#chartWrapper3.-view,#chartWrapper4.-view {
-
-height:21vw;
-width: 93vw;
-/*width:84.5em;*/
-display:block;
-position: relative;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#chartWrapper1.-hide,#chartWrapper2.-hide,#chartWrapper3.-hide,#chartWrapper4.-hide {
-
-height:21vw;
-width: 93vw;
-/*width:84.5em;*/
-position: relative;
-display:none;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
 
 }
 
@@ -2033,36 +1799,6 @@ width: 87vw;
 
 }
 
-#chartWrapper1.-view,#chartWrapper2.-view,#chartWrapper3.-view,#chartWrapper4.-view {
-
-height:17vw;
-width: 87vw;
-/*width:84.5em;*/
-display:block;
-position: relative;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#chartWrapper1.-hide,#chartWrapper2.-hide,#chartWrapper3.-hide,#chartWrapper4.-hide {
-
-height:17vw;
-width: 87vw;
-/*width:84.5em;*/
-position: relative;
-display:none;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
 .heading {
 
 margin-left:5%;
@@ -2181,36 +1917,6 @@ width:15.5vw;
 
 height:15.5vw;
 width: 84.5vw;
-
-}
-
-#chartWrapper1.-view,#chartWrapper2.-view,#chartWrapper3.-view,#chartWrapper4.-view {
-
-height:15.5vw;
-width: 84.5vw;
-/*width:84.5em;*/
-display:block;
-position: relative;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
-
-}
-
-#chartWrapper1.-hide,#chartWrapper2.-hide,#chartWrapper3.-hide,#chartWrapper4.-hide {
-
-height:15.5vw;
-width: 84.5vw;
-/*width:84.5em;*/
-position: relative;
-display:none;
-background:#F0FEFF;
-border-radius:8px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
--webkit-transition: all .2s linear 0s;
-transition: all .2s linear 0s;
 
 }
 

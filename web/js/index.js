@@ -109,63 +109,40 @@ $(document).ready(() => {
 	//todo
 	const calculateCondition = (c1,c2,c3,c4) => {
 
-		//rgb(60, 229, 120) - zelena
-		//rgb(229, 66, 66) - cervena
+		//rgb(229, 66, 66) - red
+		let c1bool;
+		let c2bool;
+		let c3bool;
+		let c4bool;
 
-		let c1bool=false;//T
-		let c2bool=false;//A
-		let c3bool=false;//S
-		let c4bool=false;//W
+		if(c1 == "rgb(229, 66, 66)") { c1bool = false; }
+		if(c2 == "rgb(229, 66, 66)") { c2bool = false; }
+		if(c3 == "rgb(229, 66, 66)") { c3bool = false; }
+		if(c4 == "rgb(229, 66, 66)") { c4bool = false; }
 
-		if(c1 == "rgb(229, 66, 66)"){
-			c1bool = true;
-		}
-		else{
-			c1bool = false;
-		}
+		if(c1 == "rgb(60, 229, 120)") { c1bool = true; }
+		if(c2 == "rgb(60, 229, 120)") { c2bool = true; }
+		if(c3 == "rgb(60, 229, 120)") { c3bool = true; }
+		if(c4 == "rgb(60, 229, 120)") { c4bool = true; }
 
-		if(c2 == "rgb(229, 66, 66)"){
-			c2bool = true;
-		}
-		else{
-			c2bool = false;
-		}
+		let array = [];
+		let falseCount=0;
+		let trueCount=0;
+		array.push(c1bool,c2bool,c3bool,c4bool);
 
-		if(c3 == "rgb(229, 66, 66)"){
-			c3bool = true;
-		}
-		else{
-			c3bool = false;
-		}
-
-		if(c4 == "rgb(229, 66, 66)"){
-			c4bool = true;
-		}
-		else{
-			c4bool = false;
-		}
-
-
-		if(	(c1bool == true && c2bool == true && c3bool == true) || 
-			(c2bool == true && c3bool == true && c4bool == true) ||
-			(c1bool == true && c3bool == true && c4bool == true))
-		{
-			health.html("Bad");
-		}
-		else
-		{
-			//health.html("good");
-			if(c1bool == false && c2bool == false && c3bool == false && c4bool == false){
-				health.html("Perfect");
+		for(let i=0;i<4;i++){
+			if(array[i] == true){
+				trueCount++;
 			}
-			else
-			{
-				health.html("Good");
+			if(array[i] == false){
+				falseCount++;
 			}
 		}
 
-
-
+		if(trueCount == 4){	health.html("Perfect").css('color','#3ce578'); }
+		if(trueCount == 2 || trueCount == 3){ health.html("Good").css('color','orange'); }
+		if(trueCount == 1){ health.html("Bad").css('color','#e54242'); }
+		if(falseCount == 4){ health.html("Bad").css('color','#e54242'); }
 	}
  
 	//request for load min max values to range inputs and for get data to compare
@@ -188,55 +165,41 @@ $(document).ready(() => {
 	       //Temp Max range input
 	       slider1.value = obj[0].TemperatureMax;
 	       output1.innerHTML = obj[0].TemperatureMax;
-
 	       //Temp Min range input
 	       slider2.value = obj[0].TemperatureMin;
 	       output2.innerHTML = obj[0].TemperatureMin;
-
 	       //Air Humidity Max range input
 	       slider3.value = obj[0].AirHumidityMax;
 	       output3.innerHTML = obj[0].AirHumidityMax;
-
 	       //Air Humidity Min range input
 	       slider4.value = obj[0].AirHumidityMin;
 	       output4.innerHTML = obj[0].AirHumidityMin;
-
 	       //Soil Humidity Max range input
 	       slider5.value = obj[0].SoilHumidityMax;
 	       output5.innerHTML = obj[0].SoilHumidityMax;
-
 	       //Soil Humidity Min range input
 	       slider6.value = obj[0].SoilHumidityMin;
 	       output6.innerHTML = obj[0].SoilHumidityMin;
-
 	       //Water level range input
 	       slider7.value = obj[0].WaterLevelMin;
 	       output7.innerHTML = obj[0].WaterLevelMin;
 
 	       //Water container capacity
 	       capacity.value = obj[0].ContainerSize;
-
-	       	       //Temp Max to compare
+	       	//Temp Max to compare
 	       tempMax = obj[0].TemperatureMax;
-
 	       //Temp Max to compare
 	       tempMin = obj[0].TemperatureMin;
-
 	       //Air Max to compare
 	       airhMax = obj[0].AirHumidityMax;
-
 	       //Air Min to compare
 	       airhMin = obj[0].AirHumidityMin;
-
 	       //Soil Max to compare
 	       soilhMax = obj[0].SoilHumidityMax;
-
 	       //Soil Min to compare
 	       soilhMin = obj[0].SoilHumidityMin;
-
 	       //Water Min to compare
 	       waterMin = obj[0].WaterLevelMin;
-
 	       waterCapacity = obj[0].ContainerSize;
 
 	       //calculation for water uses
@@ -318,11 +281,6 @@ $(document).ready(() => {
 		let c2 = document.getElementById("barAir").style.backgroundColor;
 		let c3 = document.getElementById("barSoil").style.backgroundColor;
 		let c4 = document.getElementById("barWater").style.backgroundColor;
-
-		console.log(c1);
-		console.log(c2);
-		console.log(c3);
-		console.log(c4);
 
 		calculateCondition(c1,c2,c3,c4);
 
@@ -665,51 +623,6 @@ $(document).ready(() => {
 		setupHeading.toggleClass('-darkmode');
 		rangeText.toggleClass('-darkmode');
 	});
-	/*
-	statsBox1.click(() => {
-		console.log("test1");
-		//divChart1.addClass('-view');
-		divChart1.removeClass().addClass('-view');
-		divChart2.removeClass().addClass('-hide');
-		divChart3.removeClass().addClass('-hide');
-		divChart4.removeClass().addClass('-hide');
-	});
-
-	statsBox2.click(() => {
-		console.log("test2");
-
-		divChart1.removeClass().addClass('-hide');
-		divChart2.removeClass().addClass('-view');
-		divChart3.removeClass().addClass('-hide');
-		divChart4.removeClass().addClass('-hide');
-	});
-
-	statsBox3.click(() => {
-		console.log("test3");
-
-		divChart1.removeClass().addClass('-hide');
-		divChart2.removeClass().addClass('-hide');
-		divChart3.removeClass().addClass('-view');
-		divChart4.removeClass().addClass('-hide');
-	});
-
-	statsBox4.click(() => {
-		console.log("test4");
-
-		divChart1.removeClass().addClass('-hide');
-		divChart2.removeClass().addClass('-hide');
-		divChart3.removeClass().addClass('-hide');
-		divChart4.removeClass().addClass('-view');
-	});
-
-	settings.click(() => {
-		console.log("test settings button");
-
-		middleWrapper.css('display','none');
-		middleSettings.css('display','flex');
-
-	});*/
-	
 	
 	statsBox1.click(() => {
 		console.log("test1");
@@ -785,11 +698,6 @@ $(document).ready(() => {
 	slider7.oninput = function() {
 	  output7.innerHTML = this.value;
 	}
-	
-	/*
-	slider8.oninput = function() {
-	  output8.innerHTML = this.value;
-	}*/
 
 	submitBtn.click(() => {
 
@@ -803,7 +711,7 @@ $(document).ready(() => {
 		$.ajax({
 	    url: 'http://localhost:5485/minmax',
 	    dataType: 'json',
-	    type: 'post',
+	    type: 'put',
 		headers:{"Content-Type":"application/json"},
 	    data: JSON.stringify({
 
@@ -830,6 +738,92 @@ $(document).ready(() => {
 	    success: function( data, textStatus, jQxhr ){
 			console.log("sent successfully");
 			console.log(data);
+
+		   //let obj = JSON.parse(data);
+		   let obj = data;
+	       console.log("data from http");
+	       console.log(obj.optimalValues.TemperatureMax);
+	       //console.log(obj[0].TemperatureMax);
+	       //console.log(slider1);
+
+	       if(obj == 0){
+	       		console.log("cannot get data http request");
+	       }
+	       else
+	       {
+
+	       //Temp Max range input
+	       slider1.value = obj.optimalValues.TemperatureMax;
+	       output1.innerHTML = obj.optimalValues.TemperatureMax;
+	       //Temp Min range input
+	       slider2.value = obj.optimalValues.TemperatureMin;
+	       output2.innerHTML = obj.optimalValues.TemperatureMin;
+	       //Air Humidity Max range input
+	       slider3.value = obj.optimalValues.AirHumidityMax;
+	       output3.innerHTML = obj.optimalValues.AirHumidityMax;
+	       //Air Humidity Min range input
+	       slider4.value = obj.optimalValues.AirHumidityMin;
+	       output4.innerHTML = obj.optimalValues.AirHumidityMin;
+	       //Soil Humidity Max range input
+	       slider5.value = obj.optimalValues.SoilHumidityMax;
+	       output5.innerHTML = obj.optimalValues.SoilHumidityMax;
+	       //Soil Humidity Min range input
+	       slider6.value = obj.optimalValues.SoilHumidityMin;
+	       output6.innerHTML = obj.optimalValues.SoilHumidityMin;
+	       //Water level range input
+	       slider7.value = obj.optimalValues.WaterLevelMin;
+	       output7.innerHTML = obj.optimalValues.WaterLevelMin;
+
+	       //Water container capacity
+	       capacity.value = obj.optimalValues.ContainerSize;
+	       	//Temp Max to compare
+	       tempMax = obj.optimalValues.TemperatureMax;
+	       //Temp Max to compare
+	       tempMin = obj.optimalValues.TemperatureMin;
+	       //Air Max to compare
+	       airhMax = obj.optimalValues.AirHumidityMax;
+	       //Air Min to compare
+	       airhMin = obj.optimalValues.AirHumidityMin;
+	       //Soil Max to compare
+	       soilhMax = obj.optimalValues.SoilHumidityMax;
+	       //Soil Min to compare
+	       soilhMin = obj.optimalValues.SoilHumidityMin;
+	       //Water Min to compare
+	       waterMin = obj.optimalValues.WaterLevelMin;
+	       waterCapacity = obj.optimalValues.ContainerSize;
+
+	       //calculation for water uses
+	       let capacityResult = calculateUses(capacity.value);
+	       usesValue.html(capacityResult);
+	       console.log(capacityResult);
+
+	        let tempHeight = barTemp.height() / barTemp.parent().height()*100;
+			let airHeight = barAir.height() / barAir.parent().height()*100;
+			let soilHeight = barSoil.height() / barSoil.parent().height()*100;
+			let waterHeight = barWater.height() / barWater.parent().height()*100;
+
+ 		    if(tempHeight < tempMin) barTemp.css('background-color', '#e54242');
+			if(airHeight < airhMin) barAir.css('background-color', '#e54242');
+			if(soilHeight < soilhMin) barSoil.css('background-color', '#e54242');
+			if(waterHeight < waterMin) barWater.css('background-color', '#e54242');
+
+			if(tempHeight > tempMax) barTemp.css('background-color', '#e54242');
+			if(airHeight > airhMax) barAir.css('background-color', '#e54242');
+			if(soilHeight > soilhMax) barSoil.css('background-color', '#e54242');
+
+			if(tempHeight < tempMax && tempHeight > tempMin) barTemp.css('background-color', '#3ce578');
+			if(airHeight < airhMax && airHeight > airhMin) barAir.css('background-color', '#3ce578');
+			if(soilHeight < soilhMax && soilHeight > soilhMin) barSoil.css('background-color', '#3ce578');
+			if(waterHeight > waterMin) barWater.css('background-color', '#3ce578');
+
+			let c1 = document.getElementById("barTemp").style.backgroundColor;
+			let c2 = document.getElementById("barAir").style.backgroundColor;
+			let c3 = document.getElementById("barSoil").style.backgroundColor;
+			let c4 = document.getElementById("barWater").style.backgroundColor;
+
+			calculateCondition(c1,c2,c3,c4);
+
+	       }
 	    },
 	    error: function( jqXhr, textStatus, errorThrown ){
 	        console.log( errorThrown );
@@ -843,7 +837,7 @@ $(document).ready(() => {
 
 	water.click(() => {
 		socket.emit('water');
-		console.log($('#usesValue').html());
+		//console.log($('#usesValue').html());
 
 	});
 
