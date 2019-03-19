@@ -249,10 +249,10 @@ $(document).ready(() => {
 		$('#stat3').text(obj[1].humiditySoil);
 		$('#stat4').text(obj[1].watersurface);
 		
-		stat1.text(obj[1].temperature);
-		stat2.text(obj[1].humidityAir);
-		stat3.text(obj[1].humidtySoil);
-		stat4.text(obj[1].watersurface);
+		stat1.text(obj[1].temperature+"°C");
+		stat2.text(obj[1].humidityAir+"%");
+		stat3.text(obj[1].humiditySoil+"%");
+		stat4.text(obj[1].watersurface+"%");
 
 		barTemp.height(obj[1].temperature+'%');
 		barAir.height(obj[1].humidityAir+'%');
