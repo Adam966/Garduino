@@ -16,6 +16,36 @@ transition: all .2s linear 0s;
 
 }
 
+.settingsBtn:hover {
+
+float:right;
+border:none;
+outline:none;
+height:100%;
+width:100px;
+background:url(../img/icon3hover.svg) center / contain no-repeat;
+background-size: 60px 60px;
+cursor:pointer;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+
+}
+
+.settingsBtn:active {
+
+float:right;
+border:none;
+outline:none;
+height:100%;
+width:100px;
+background:url(../img/icon3click.svg) center / contain no-repeat;
+background-size: 60px 60px;
+cursor:pointer;
+-webkit-transition: all .2s linear 0s;
+transition: all .2s linear 0s;
+
+}
+
 #conditionWrapper {
 
 height:100%;
@@ -54,6 +84,33 @@ background-size: 50px 50px;
 cursor:pointer;
 
 }
+
+.waterIcon:hover {
+
+min-height:80px;
+width:50px;
+/*margin-left:1vw;*/
+background:red;
+background:url(../img/icon4hover.svg) center / contain no-repeat;
+/*background: red;*/
+background-size: 50px 50px;
+cursor:pointer;
+
+}
+
+.waterIcon:active {
+
+min-height:80px;
+width:50px;
+/*margin-left:1vw;*/
+background:red;
+background:url(../img/icon4click.svg) center / contain no-repeat;
+/*background: red;*/
+background-size: 50px 50px;
+cursor:pointer;
+
+}
+
 
 #middleWrapper {
 	
