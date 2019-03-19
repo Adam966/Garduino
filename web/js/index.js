@@ -279,15 +279,14 @@ $(document).ready(() => {
 		if(soilHeight < soilhMax && soilHeight > soilhMin) barSoil.css('background-color', '#3ce578');
 		if(waterHeight < waterCapacity && waterHeight > waterMin) barWater.css('background-color', '#3ce578');
 
-		calculateCondition(barTemp);
-
 		let temp = obj[1].temperature;
 		let airH = obj[1].humidityAir;
 		let soilH = obj[1].humiditySoil;
 		let water = obj[1].watersurface;
 		let date = obj[2].date;
 
-		moment(date).format("hh:mm A");
+		date = moment(date).format("hh:mm A");
+		console.log(date)
 
 		//push data to socket variables for Today chart use
 		socketTemp.push(temp);
