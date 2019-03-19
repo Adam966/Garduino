@@ -93,6 +93,8 @@ $(document).ready(() => {
 
 	let health = $('.health');
 
+	let plantName = $('.plantName');
+
 	//barTemp.height('100%');
 	//barTemp.height('100'+'%');
 
@@ -103,7 +105,7 @@ $(document).ready(() => {
 	barWater.height('95%');*/
 
 	const calculateUses = (capacity) => {
-	  return Math.round(capacity/100);
+	  return Math.round(capacity/70);
 	}
 
 	//todo
@@ -234,15 +236,12 @@ $(document).ready(() => {
       obj = Object.values(obj);
       console.log(obj);
 
-		$('#stat1').text(obj[1].temperature);
-		$('#stat2').text(obj[1].humidityAir);
-		$('#stat3').text(obj[1].humiditySoil);
-		$('#stat4').text(obj[1].watersurface);
+      	plantName.html(obj[0].plantname);
 		
-		stat1.text(obj[1].temperature+"°C");
-		stat2.text(obj[1].humidityAir+"%");
-		stat3.text(obj[1].humiditySoil+"%");
-		stat4.text(obj[1].watersurface+"%");
+		stat1.text(Math.round(obj[1].temperature)+"°C");
+		stat2.text(Math.round(obj[1].humidityAir)+"%");
+		stat3.text(Math.round(obj[1].humiditySoil)+"%");
+		stat4.text(Math.round(obj[1].watersurface)+"%");
 
 		barTemp.height(obj[1].temperature+'%');
 		barAir.height(obj[1].humidityAir+'%');
