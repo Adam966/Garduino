@@ -104,14 +104,10 @@ $(document).ready(() => {
 	  return Math.round(capacity/100);
 	}
 
-	//TODO
-	/*const calculateCondition = (tempmax,tempmin,airhmax,airhmin,soilhmax,soilhmin,watermax,watermin) => {
-		
-		if(){
+	//todo
+	const calculateCondition = (barTemp) => {
 
-		}
-		
-	}*/
+	}
  
 	//request for load min max values to range inputs
 	let req = 'http://localhost:5485/minmax';
@@ -162,7 +158,6 @@ $(document).ready(() => {
 	       capacity.value = obj[0].ContainerSize;
 
 	       }
-
 	   }
 	};
 
@@ -283,6 +278,8 @@ $(document).ready(() => {
 		if(airHeight < airhMax && airHeight > airhMin) barAir.css('background-color', '#3ce578');
 		if(soilHeight < soilhMax && soilHeight > soilhMin) barSoil.css('background-color', '#3ce578');
 		if(waterHeight < waterCapacity && waterHeight > waterMin) barWater.css('background-color', '#3ce578');
+
+		calculateCondition(barTemp);
 
 		let temp = obj[1].temperature;
 		let airH = obj[1].humidityAir;
@@ -808,6 +805,8 @@ $(document).ready(() => {
 
 	water.click(() => {
 		socket.emit('water');
+		console.log($('[type=number]').val());
+		console.log($('#usesValue').html());
 
 	});
 
