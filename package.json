@@ -12,6 +12,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mysql": "^2.16.0",
+    "screen": "^0.2.10",
     "socket.io": "^2.2.0"
   }
 }
