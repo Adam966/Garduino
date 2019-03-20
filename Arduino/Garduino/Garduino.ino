@@ -3,12 +3,22 @@
 #include <ArduinoJson.h>
 #include <NTPClient.h>
 #include <WiFi.h>
+#include <LinkedList.h>
+#include "DHT.h"
+#include <PID_v1.h>
+#include <math.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 #define sendInterval 3000
 #define pourInterval 10000
 unsigned long previousMillisSend = 0;
 unsigned long previousMillisPour = 0;
+
+//////////////////////////////////////////////// SENSOR PIN SETUP /////////////////////////////////////
+#define soilHum 35
+#define waterSurf 34
+#define pump 22
+#define humidityTemperatureAir 23
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 SocketIoClient webSocket;
@@ -60,6 +70,9 @@ void setup() {
     //socket event on 
     webSocket.on("water", pourFlower);
     webSocket.on("soilHumidity", getMaxMin);
+    
+    //PIN
+    pinMode(pump, OUTPUT);
 }
 
 /////////////////////////////////////////// WIFI reconection /////////////////////////////////////
@@ -92,13 +105,14 @@ void wifiConection() {
 
 ////////////////////////////////////////// MEASURE DATA ////////////////////////////////////////////
 void measureData() {
-  float temperature = 54; 
-  float humidityAir = 54;
-  float humiditySoil = 45;
-  float waterSurface = 45;
+  float temperature = getTemperature(); 
+  float humidityAir = getHumidity();
+  float humiditySoil = getSoilHumidity();
+  float waterSurface = getWaterSurface();
 
   createJson(temperature, humidityAir, humiditySoil, waterSurface);
 }
+
 
 //////////////////////////////////////// SENSORS FUNCTIONS ////////////////////////////////////////
 //DATE
@@ -116,6 +130,31 @@ String getDate() {
   return date;
 }
 
+
+//SOILHUMIDITY
+float getSoilHumidity() {
+  float soilHumidity = analogRead(soilHum);
+  return round((100 - (soilHumidity / 41)));
+}
+
+//WATER SURFACE
+float getWaterSurface(){
+  float waterSurface = analogRead(waterSurf);
+  return round(waterSurface / 41);
+}
+
+//AIR TEMPERATURE
+float getTemperature(){
+  float temperature = dht.readTemperature();
+  return temperature;
+}
+
+//AIR HUMIDITY
+float getHumidity(){
+  float humidity = dht.readHumidity();
+  return humidity;
+}
+
 //////////////////////////////////////// JSON Creation /////////////////////////////////////////////////
 void createJson(float temperature, float humidityAir, float humiditySoil, float waterSurface) {
     const size_t capacity = JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(3) + JSON_OBJECT_SIZE(4);
@@ -126,7 +165,7 @@ void createJson(float temperature, float humidityAir, float humiditySoil, float 
     JsonObject& identification = root.createNestedObject("identification");
     byte mac[6];
     WiFi.macAddress(mac);
-    identification["id"] = "kgfkds"
+    identification["id"] = (String(mac[0], HEX) + ":" + String(mac[1], HEX) + ":" + String(mac[2], HEX) + ":" + String(mac[3], HEX) + ":" + String(mac[4], HEX) + ":" + String(mac[5], HEX));
     
     JsonObject& info = root.createNestedObject("info");
     info["temperature"] = temperature;
@@ -143,6 +182,28 @@ void createJson(float temperature, float humidityAir, float humiditySoil, float 
 }
 
 //////////////////////////////////////////// SOCKETIO EVENTS //////////////////////////////////
+
+// SEND DATA
+void sendData(char* output) {
+   if(WiFi.status() != WL_CONNECTED) {
+    if(offlineData.size() != 48) {
+      offlineData.add(output);   
+      Serial.println("Element added");
+      Serial.println(offlineData.size());
+    }
+    else
+       Serial.println("Linked list is full");
+   }
+   else{
+     while(offlineData.size() > 0){
+         char* lastElement = offlineData.pop();
+         webSocket.emit("arduinoData", lastElement);
+         Serial.println("LinkedList data sended.");
+     }
+     webSocket.emit("arduinoData", output);
+     Serial.println("Data sended.");
+    }
+}
 
 // POUR WATER
 void pourFlower(const char * payload, size_t length) {
@@ -164,6 +225,13 @@ void disconection(const char * payload, size_t length) {
    webSocket.emit("join", "\"arduinoclient\"");
    webSocket.emit("getSoilHumidity");
 }
+
+//PUMP
+void startPump() {
+  digitalWrite(pump, HIGH);
+  delay(5000);
+  digitalWrite(pump, LOW);    
+}  
 
 /////////////////////////////////////////////// LOOP ///////////////////////////////////////////
 void loop() {
