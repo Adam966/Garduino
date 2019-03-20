@@ -105,8 +105,7 @@ $(document).ready(() => {
 	const calculateUses = (capacity,watersurface) => {
 	  //return Math.round(capacity/70);
 	  let waterHalf = (capacity/100) * watersurface;
-	  let waterLeft = capacity-waterHalf;
-	  let rslt = Math.round(waterLeft/70);
+	  let rslt = Math.round(waterHalf/70);
 
 	  rsltMinus = rslt;
 
