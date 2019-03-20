@@ -100,14 +100,16 @@ $(document).ready(() => {
 
 	let watersurfaceUses;
 
+	let rsltMinus;
+
 	const calculateUses = (capacity,watersurface) => {
 	  //return Math.round(capacity/70);
-
-	  let waterLeft = capacity/watersurface*(capacity/100);
+	  let waterHalf = (capacity/100) * watersurface;
+	  let waterLeft = capacity-waterHalf;
 	  let rslt = Math.round(waterLeft/70);
-	  
 
-	  console.log(isNaN(rslt));
+	  rsltMinus = rslt;
+	  //console.log(isNaN(rslt));
 
 	  if(isNaN(rslt) == true){
 	  	usesValue.html("0");
@@ -231,7 +233,8 @@ $(document).ready(() => {
 	xhttp.send();
 
 	//socket connection
-    const socket = io.connect('http://localhost:5485');
+	const socket = io.connect('http://localhost:5485');
+    //const socket = io.connect('http://itsovy.sk:1205');
 
     //socket connection and data emit
 	socket.on('connect', (data) => {
@@ -517,6 +520,7 @@ $(document).ready(() => {
 	lastWeek.click(() => {
 
 	//let req = 'http://itsovy.sk:1205/weatherData7';
+	let req = 'http://localhost:5485/weatherData7';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -834,8 +838,20 @@ $(document).ready(() => {
 	});
 
 	water.click(() => {
+
+		if(rsltMinus >0){
+			//console.log(usesValue.text());
+			//console.log(rsltMinus);
+			rsltMinus = rsltMinus-1;
+			usesValue.text(rsltMinus);
+		}
+
+		if(rsltMinus == 0){
+			usesValue.html("");
+	   		usesLeft.html("Refill the water");
+		}
+
 		socket.emit('water');
-		//console.log($('#usesValue').html());
 
 	});
 
