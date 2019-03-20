@@ -233,7 +233,7 @@ $(document).ready(() => {
 	socket.on('weatherData', (data) => {
       console.log(data);
 
-      let obj = JSON.parse(data);
+      let obj = data;
       console.log(obj);
       obj = Object.values(obj);
       console.log(obj);
