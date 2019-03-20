@@ -95,6 +95,8 @@ $(document).ready(() => {
 
 	let plantName = $('.plantName');
 
+	let conditionWrapper = $('#conditionWrapper');
+
 	//barTemp.height('100%');
 	//barTemp.height('100'+'%');
 
@@ -141,8 +143,8 @@ $(document).ready(() => {
 			}
 		}
 
-		if(trueCount == 4){	health.html("Perfect").css('color','#3ce578'); }
-		if(trueCount == 2 || trueCount == 3){ health.html("Good").css('color','orange'); }
+		if(trueCount == 4){	health.html("Perfect").css('color','#35CB6B'); }
+		if(trueCount == 2 || trueCount == 3){ health.html("Good").css('color','#E59500'); }
 		if(trueCount == 1){ health.html("Bad").css('color','#e54242'); }
 		if(falseCount == 4){ health.html("Bad").css('color','#e54242'); }
 	}
@@ -659,6 +661,7 @@ $(document).ready(() => {
 		console.log("test settings button");
 		middleWrapper.css('display','none');
 		middleSettings.css('display','flex');
+		conditionWrapper.css('display','none');
 	});
 
 	output1.innerHTML = slider1.value;
@@ -831,6 +834,7 @@ $(document).ready(() => {
 
 		middleWrapper.css('display','flex');
 		middleSettings.css('display','none');
+		conditionWrapper.css('display','flex');
 
 	});
 
