@@ -109,7 +109,6 @@ $(document).ready(() => {
 	  let rslt = Math.round(waterLeft/70);
 
 	  rsltMinus = rslt;
-	  //console.log(isNaN(rslt));
 
 	  if(isNaN(rslt) == true){
 	  	usesValue.html("0");
@@ -161,10 +160,27 @@ $(document).ready(() => {
 		if(trueCount == 1){ health.html("Bad").css('color','#e54242'); }
 		if(falseCount == 4){ health.html("Bad").css('color','#e54242'); }
 	}
+
+	const numberValidate = (capacity) => {
+		let rslt = /^\d+(\.\d)?\d*$/.test(capacity);
+		
+		if(rslt == true){
+			console.log("ok")
+			middleWrapper.css('display','flex');
+			middleSettings.css('display','none');
+			conditionWrapper.css('display','flex');
+			$('.error').html("");
+		}
+		else
+		{
+			console.log("not ok");
+			$('.error').html("You must enter number");
+		}
+	}
  
 	//request for load min max values to range inputs and for get data to compare
-	//let req = 'http://itsovy.sk:1205/minmax';
-	let req = 'http://localhost:5485/minmax';
+	let req = 'http://itsovy.sk:1205/minmax';
+	//let req = 'http://localhost:5485/minmax';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -179,7 +195,6 @@ $(document).ready(() => {
 	       }
 	       else
 	       {
-
 	       //Temp Max range input
 	       slider1.value = obj[0].TemperatureMax;
 	       output1.innerHTML = obj[0].TemperatureMax;
@@ -233,8 +248,8 @@ $(document).ready(() => {
 	xhttp.send();
 
 	//socket connection
-	const socket = io.connect('http://localhost:5485');
-    //const socket = io.connect('http://itsovy.sk:1205');
+	//const socket = io.connect('http://localhost:5485');
+    const socket = io.connect('http://itsovy.sk:1205');
 
     //socket connection and data emit
 	socket.on('connect', (data) => {
@@ -248,7 +263,7 @@ $(document).ready(() => {
 	socket.on('weatherData', (data) => {
       console.log(data);
 
-      let obj = JSON.parse(data);
+      let obj = data;
       console.log(obj);
       obj = Object.values(obj);
       console.log(obj);
@@ -478,8 +493,8 @@ $(document).ready(() => {
 		
 		console.log("testToday");
 
-    	//let req = 'http://itsovy.sk:1205/weatherData1';
-    	let req = 'http://localhost:5485/weatherData1';
+    	let req = 'http://itsovy.sk:1205/weatherData1';
+    	//let req = 'http://localhost:5485/weatherData1';
 		let xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
@@ -519,8 +534,8 @@ $(document).ready(() => {
 	//last week data for charts
 	lastWeek.click(() => {
 
-	//let req = 'http://itsovy.sk:1205/weatherData7';
-	let req = 'http://localhost:5485/weatherData7';
+	let req = 'http://itsovy.sk:1205/weatherData7';
+	//let req = 'http://localhost:5485/weatherData7';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -560,8 +575,8 @@ $(document).ready(() => {
 
 	lastMonth.click(() => {
 
-	//let req = 'http://itsovy.sk:1205/weatherData30';
-	let req = 'http://localhost:5485/weatherData30';
+	let req = 'http://itsovy.sk:1205/weatherData30';
+	//let req = 'http://localhost:5485/weatherData30';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -711,8 +726,8 @@ $(document).ready(() => {
 	    console.log(capacityResult);
 
 		$.ajax({
-	    //url: 'http://itsovy.sk:1205/minmax',
-	    url: 'http://localhost:5485/minmax',
+	    url: 'http://itsovy.sk:1205/minmax',
+	    //url: 'http://localhost:5485/minmax',
 	    dataType: 'json',
 	    type: 'put',
 		headers:{"Content-Type":"application/json"},
@@ -831,9 +846,7 @@ $(document).ready(() => {
 	    }
 	    });
 
-		middleWrapper.css('display','flex');
-		middleSettings.css('display','none');
-		conditionWrapper.css('display','flex');
+		numberValidate(capacity.value);
 
 	});
 

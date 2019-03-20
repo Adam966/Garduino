@@ -359,7 +359,7 @@ margin-top:1%;
 
 #capacity {
 
-margin-top:3%;
+margin-top:2%;
 -webkit-appearance: none;
 outline: none;
 border:none;
@@ -371,6 +371,12 @@ text-align:center;
 opacity: 0.7;
 color:#009E7F;
 border-radius:0.5rem;
+
+}
+
+.error {
+
+color:#e54242;
 
 }
 
