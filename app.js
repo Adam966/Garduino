@@ -54,19 +54,24 @@ app.get('/weatherData1', (req, res) =>{
 
 app.get('/weatherData7', (req, res) =>{
     database.getWeatherData("WEEK" , data =>{
-        res.status(200).send(data);
+        dataAvarageByDays(data, rvalue =>{
+            rvalue = JSON.stringify(rvalue);
+            res.status(200).send(rvalue);
+        });
     });
 });
 
 app.get('/weatherData30', (req, res) =>{
     database.getWeatherData("MONTH" , data =>{
-        res.status(200).send(data);
+        dataAvarageByDays(data, rvalue =>{
+            rvalue = JSON.stringify(rvalue);
+            res.status(200).send(rvalue);
+        });
     });
 });
 
 app.put('/minmax', (req, res) =>{
 
-    console.log("HereIam");
     database.writeMinMax(req.body, issuccess =>{
         console.log(issuccess);
         if(issuccess)
@@ -88,3 +93,52 @@ app.get('/minmax', (req, res) =>{
     });
 });
 server.listen(1205);
+
+
+function dataAvarageByDays(data, rvlaue)
+{
+    let rJSON = [];
+    data = JSON.parse(data);
+    let current = data[0].Date.substr(0, 10);
+    let cdate
+    let counter = 0;
+
+    let temperature = 0;
+    let airhumidity = 0;
+    let soilhumidity = 0;
+    let watersurface = 0;
+    for(let i = 0; i<data.length; i++)
+    {
+        cdate = data[i].Date.substr(0, 10);
+        if(current == cdate)
+        {
+            counter++;
+            temperature += data[i].Temperature;
+            airhumidity += data[i].AirHumidity;
+            soilhumidity += data[i].SoilHumidity;
+            watersurface += data[i].WaterSurface;
+            if(i == data.length-1){pushToArray();}
+        }
+        else
+        {
+            pushToArray();
+        }
+    }
+    function pushToArray()
+    {
+        temperature = Math.round(temperature/counter);
+        airhumidity = Math.round(airhumidity/counter);
+        soilhumidity = Math.round(soilhumidity/counter);
+        watersurface = Math.round(watersurface/counter);
+
+        rJSON.push({"Temperature":temperature, "AirHumidity": airhumidity, "SoilHumidity":soilhumidity, "WaterSurface":watersurface, "Date":current});
+
+        counter = 0;
+        current = cdate;
+        temperature = 0;
+        airhumidity = 0;
+        soilhumidity = 0;
+        watersurface = 0;
+    }
+    rvlaue(rJSON);
+}
