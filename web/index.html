@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Garduino</title>
+<meta name='viewport'content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+<link rel="stylesheet" href="css/styleMain.css" type="text/css">
+<link rel="stylesheet" href="css/styleIndex.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="js/index.js"></script>
+</head>
+<body>
+
+	<div id="barUp">
+        <input type="button" class="colorChange" id="onoffSwitch">
+        <input type="button" class="settingsBtn">
+    </div>
+
+    <div id="nameWrapper">
+        <span class="plantName">Plant 1 </span>
+        <!--<span class="conditionName">Condition:</span>
+        <span class="health">GOOD</span>
+        <div class="waterIcon"></div>-->
+        <div id="conditionWrapper">
+            <span class="conditionName">Condition:</span>
+            <span class="health"></span>
+            <span class="waterIcon" title="Click for water plants" id="water"></span>
+        </div>
+    </div>
+
+    <div id="middleWrapper">
+        
+        <div class="statsBox1">
+            <div id="barTemp"></div>
+        	<div class="headingWrapper"><span class="heading">Temperature</span></div>
+        	<div id="stat1"></div>
+        </div>
+        
+        <div class="statsBox2">
+            <div id="barAir"></div>
+       		<div class="headingWrapper"><span class="heading">Air Humidity</span></div>
+        	<div id="stat2"></div>
+        </div>
+        
+        <div class="statsBox3">
+            <div id="barSoil"></div>
+        	<div class="headingWrapper"><span class="heading">Soil Humidity</span></div>
+        	<div id="stat3"></div>
+        </div>
+        
+        <div class="statsBox4">
+            <div id="barWater"></div>
+        	<div class="headingWrapper"><span class="heading">Water level</span></div>
+        	<div id="stat4"></div>
+            <div class="usesToWaterWrap"><span id="usesValue"></span><span class="usesLeft"></span></div>
+        </div>
+
+        <div id="chartAndTimeWrap">
+            <div id="timeWrapper">
+                <div class="today">Today</div>
+                <div class="lastWeek">Last week</div>
+                <div class="lastMonth">Last month</div>
+            </div>
+
+        	<div id="chartWrapper1">
+            	<canvas id="chartTemp"></canvas>
+            </div>
+
+            <div id="chartWrapper2">
+                <canvas id="chartAirh"></canvas>
+            </div>
+
+             <div id="chartWrapper3">
+                <canvas id="chartSoilh"></canvas>
+            </div>
+
+             <div id="chartWrapper4">
+                <canvas id="chartWater"></canvas>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="middleSettings">
+        <div class="setupWrapperUp">
+            <span class="setupHeading">Temperature</span>
+
+                <div class="rangeWrapperUp">
+                        <span class="rangeText">Enter Max value:</span>
+                        <div id="output1" class="output"></div>
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange1">
+                </div>
+
+                <div class="rangeWrapperB">
+                        <span class="rangeText">Enter Min value:</span>
+                        <div id="output2" class="output"></div>
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange2">
+                </div>
+
+        </div>
+
+        <div class="setupWrapperUp">
+            <span class="setupHeading">Air humidity</span>
+
+                 <div class="rangeWrapperUp">
+                        <span class="rangeText">Enter Max value:</span>
+                        <div id="output3" class="output"></div>
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange3">
+                </div>
+
+                <div class="rangeWrapperB">
+                        <span class="rangeText">Enter Min value:</span>
+                        <div id="output4" class="output"></div>
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange4">
+                </div>
+
+        </div>
+
+        <div class="setupWrapperB">
+            <span class="setupHeading">Soil humidity</span>
+
+                 <div class="rangeWrapperUp">
+                        <span class="rangeText">Enter Max value:</span>
+                        <div id="output5" class="output"></div>
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange5">
+                </div>
+
+                <div class="rangeWrapperB">
+                        <span class="rangeText">Enter Min value:</span>
+                        <div id="output6" class="output"></div>
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange6">
+                </div>
+
+        </div>
+
+        <div class="setupWrapperB">
+            <span class="setupHeading">Water level</span>
+
+                 <div class="rangeWrapperUp">
+                        <span class="rangeText">Enter Min value:</span>
+                        <div id="output7" class="output"></div>
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange7">
+                </div>
+
+                <div class="rangeWrapperB">
+                    <span class="waterMaxText">Enter Container Capacity</span>
+                    <input type="number" id="capacity" value="1">
+                    <div class="error"></div>
+                </div>
+
+               <!-- <div class="rangeWrapperB">
+                        <span class="rangeText">Enter Max value:</span>
+                        <div id="output8" class="output"></div>
+                        <input type="range" min="1" max="100" value="1" class="slider" id="myRange8">
+                </div> -->
+
+        </div>
+
+    <input type="button" value="Submit" id="submitSettings">
+
+    </div>
+
+</body>
+</html>
