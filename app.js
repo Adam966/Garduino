@@ -6,10 +6,11 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
 
-io.set('origins', '*:*'); //itsovy.sk:5485
+io.set('origins', '*:*');
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); //http://itsovy.sk
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
     next();
   });  
 
@@ -30,6 +31,7 @@ io.on('connection', client =>{
 
     client.on('water', () => {
         io.to('arduinoclient').emit('water');
+        console.log("Water the plant");
     });
 
     client.on('getSoilHumidity', ()=>{
@@ -62,13 +64,27 @@ app.get('/weatherData30', (req, res) =>{
     });
 });
 
-app.post('/minmax', (req, res) =>{
-    database.writeMinMax(req.body);
-});
+app.put('/minmax', (req, res) =>{
+
+    console.log("HereIam");
+    database.writeMinMax(req.body, issuccess =>{
+        console.log(issuccess);
+        if(issuccess)
+        {
+            res.send(req.body);
+        }
+        else
+        {
+            res.status(500).send();
+        }
+        
+    });
+
+}); 
 
 app.get('/minmax', (req, res) =>{
     database.getMinMax(data =>{
         res.status(200).send(data);
     });
 });
-server.listen(5485);
+server.listen(1205);

@@ -4,7 +4,8 @@ const con = mysql.createConnection({
   host: "localhost",
   user: "plantserver",
   password: "akademiasovy",
-  database: "plant_database"
+  database: "plant_database",
+  port: "3306"
 });
 
 con.connect(function(err) {
@@ -16,6 +17,7 @@ module.exports = {
     writeData(obj)
     {
       console.log("Writing to database");
+      //obj = JSON.parse(obj);
       if(validJSON(obj))
       {
         writeArduinoData();
@@ -27,7 +29,7 @@ module.exports = {
 
       function writeArduinoData()
       {
-        const query = "INSERT INTO weatherinfo (ArduinoID, Temperature, AirHumidity, SoilHumidity, WaterSurface, Date) VALUES (\'"+obj.identification.id+"\',\'"+ obj.info.temperature+"\',\'"+ obj.info.humidityAir+"\',\'"+ obj.info.humiditySoil+"\',\'"+ obj.info.watersurface+"\',\'"+ obj.date.date+"\')";
+        const query = "INSERT INTO WeatherInfo (ArduinoID, Temperature, AirHumidity, SoilHumidity, WaterSurface, Date) VALUES (\'"+obj.identification.id+"\',\'"+ obj.info.temperature+"\',\'"+ obj.info.humidityAir+"\',\'"+ obj.info.humiditySoil+"\',\'"+ obj.info.watersurface+"\',\'"+ obj.date.date+"\')";
         con.query(query, err => {
           if (err)
           {
@@ -84,7 +86,7 @@ module.exports = {
       });
     },
 
-    writeMinMax(data) //writes the minimal and maximal values to the database what the webclient sent
+    writeMinMax(data, issuccess) //writes the minimal and maximal values to the database what the webclient sent
     {
       console.log("Writing to database");
       if(checkJSON(data))
@@ -117,11 +119,12 @@ module.exports = {
       else
       {
         console.log("BAD DATA");
+        issuccess(false);
       }
 
       function getIDs(arduinoID) //Getting Arduino IDs from database
       {
-          const query = "SELECT ArduinoID from plantcare";
+          const query = "SELECT ArduinoID from PlantCare";
           con.query(query, (err, result) =>{
             if (err)
             {
@@ -133,30 +136,34 @@ module.exports = {
 
       function writeDataMinMax() //writes the minimal and maximal values to the database
       {
-        const query = "INSERT INTO plantcare (ArduinoID, PlantName, TemperatureMin, TemperatureMax, AirHumidityMin, AirHumidityMax, SoilHumidityMin, SoilHumidityMax, WaterLevelMin, ContainerSize) VALUES (\'"+data.identification.id+"\',\'"+ data.identification.plantname+"\',\'"+ data.optimalValues.TemperatureMin+"\',\'"+ data.optimalValues.TemperatureMax+"\',\'"+ data.optimalValues.AirHumidityMin+"\',\'"+  data.optimalValues.AirHumidityMax + "\',\'"+ data.optimalValues.SoilHumidityMin+"\',\'" + data.optimalValues.AirHumidityMax+"\',\'"+ data.optimalValues.WaterLevelMin+"\',\'"+data.optimalValues.ContainerSize+"\')";
+        const query = "INSERT INTO PlantCare (ArduinoID, PlantName, TemperatureMin, TemperatureMax, AirHumidityMin, AirHumidityMax, SoilHumidityMin, SoilHumidityMax, WaterLevelMin, ContainerSize) VALUES (\'"+data.identification.id+"\',\'"+ data.identification.plantname+"\',\'"+ data.optimalValues.TemperatureMin+"\',\'"+ data.optimalValues.TemperatureMax+"\',\'"+ data.optimalValues.AirHumidityMin+"\',\'"+  data.optimalValues.AirHumidityMax + "\',\'"+ data.optimalValues.SoilHumidityMin+"\',\'" + data.optimalValues.AirHumidityMax+"\',\'"+ data.optimalValues.WaterLevelMin+"\',\'"+data.optimalValues.ContainerSize+"\')";
         con.query(query, err => {
           if (err)
           {
             console.log(err);
+            issuccess(false);
           }
           else
           {
             console.log("Record successfully inserted");
+            issuccess(true);
           }
         });
       }
 
       function updateDataMinMax() //updates the minimal and maximal values of a given arduino in the database
       {
-        const query = "UPDATE plantcare SET PlantName=\'"+data.identification.plantname+"\',TemperatureMin=\'"+data.optimalValues.TemperatureMin+"\', TemperatureMax=\'"+data.optimalValues.TemperatureMax+"\', AirHumidityMin=\'"+data.optimalValues.AirHumidityMin+"\', AirHumidityMax=\'"+data.optimalValues.AirHumidityMax+"\', SoilHumidityMin=\'"+data.optimalValues.SoilHumidityMin+"\', SoilHumidityMax=\'"+data.optimalValues.SoilHumidityMax+"\', WaterLevelMin=\'"+data.optimalValues.WaterLevelMin+"\', ContainerSize=\'"+data.optimalValues.ContainerSize+"\'";
+        const query = "UPDATE PlantCare SET PlantName=\'"+data.identification.plantname+"\',TemperatureMin=\'"+data.optimalValues.TemperatureMin+"\', TemperatureMax=\'"+data.optimalValues.TemperatureMax+"\', AirHumidityMin=\'"+data.optimalValues.AirHumidityMin+"\', AirHumidityMax=\'"+data.optimalValues.AirHumidityMax+"\', SoilHumidityMin=\'"+data.optimalValues.SoilHumidityMin+"\', SoilHumidityMax=\'"+data.optimalValues.SoilHumidityMax+"\', WaterLevelMin=\'"+data.optimalValues.WaterLevelMin+"\', ContainerSize=\'"+data.optimalValues.ContainerSize+"\'";
         con.query(query, function (err, result) {
           if (err)
           {
             console.log(err);
+            issuccess(false);
           }
           else
           {
             console.log("Record successfully updated");
+            issuccess(true);
           }
         });
       }
@@ -218,7 +225,7 @@ module.exports = {
 
     getMinMax(data) //returns the minimal and maximal values
     {
-      const query = "SELECT * from plantcare";
+      const query = "SELECT * from PlantCare";
       con.query(query, (err, result) =>{
         if (err)
         {
@@ -234,7 +241,7 @@ module.exports = {
 
     getSoilHumidity(data) //returns soil gumidity min and max
     {
-      const query = "SELECT SoilHumidityMin, SoilHumidityMax from plantcare";
+      const query = "SELECT SoilHumidityMin, SoilHumidityMax from PlantCare";
       con.query(query, (err, result) =>{
            if (err)
            {
