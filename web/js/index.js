@@ -90,6 +90,7 @@ $(document).ready(() => {
 	let socketDate = [];
 
 	let usesValue = $('#usesValue');
+	let usesLeft = $('.usesLeft');
 
 	let health = $('.health');
 
@@ -97,20 +98,30 @@ $(document).ready(() => {
 
 	let conditionWrapper = $('#conditionWrapper');
 
-	//barTemp.height('100%');
-	//barTemp.height('100'+'%');
+	let watersurfaceUses;
 
-	//test 
-	/*barTemp.height('82%');
-	barAir.height('90%');
-	barSoil.height('21%');
-	barWater.height('95%');*/
+	const calculateUses = (capacity,watersurface) => {
+	  //return Math.round(capacity/70);
 
-	const calculateUses = (capacity) => {
-	  return Math.round(capacity/70);
+	  let waterLeft = capacity/watersurface*(capacity/100);
+	  let rslt = Math.round(waterLeft/70);
+	  
+
+	  console.log(isNaN(rslt));
+
+	  if(isNaN(rslt) == true){
+	  	usesValue.html("0");
+	  	console.log("test");
+	  	usesLeft.html("water uses left");
+	  }
+	  else
+	  {
+
+	   usesValue.html(rslt);
+	   usesLeft.html("water uses left");
+	  }
 	}
-
-	//todo
+ 
 	const calculateCondition = (c1,c2,c3,c4) => {
 
 		//rgb(229, 66, 66) - red
@@ -150,6 +161,7 @@ $(document).ready(() => {
 	}
  
 	//request for load min max values to range inputs and for get data to compare
+	//let req = 'http://itsovy.sk:1205/minmax';
 	let req = 'http://localhost:5485/minmax';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -233,10 +245,13 @@ $(document).ready(() => {
 	socket.on('weatherData', (data) => {
       console.log(data);
 
-      let obj = data;
+      let obj = JSON.parse(data);
       console.log(obj);
       obj = Object.values(obj);
       console.log(obj);
+
+      	watersurfaceUses = Math.round(obj[1].watersurface);
+      	console.log("test "+watersurfaceUses);
 
       	plantName.html(obj[0].plantname);
 		
@@ -285,18 +300,14 @@ $(document).ready(() => {
 
 		calculateCondition(c1,c2,c3,c4);
 
+		calculateUses(capacity.value,watersurfaceUses);
+
 		//push data to socket variables for Today chart use
 		socketTemp.push(temp);
 		socketAirh.push(airH);
 		socketSoilh.push(soilH);
 		socketWater.push(water);
 		socketDate.push(date);
-
-		/*console.log(socketTemp);
-		console.log(socketAirh);
-		console.log(socketSoilh);
-		console.log(socketWater);
-		console.log(socketDate);*/
 
 		//dataset update with concat function
 		Chart1.data.datasets[0].data = Chart1.data.datasets[0].data.concat(temp);
@@ -464,6 +475,7 @@ $(document).ready(() => {
 		
 		console.log("testToday");
 
+    	//let req = 'http://itsovy.sk:1205/weatherData1';
     	let req = 'http://localhost:5485/weatherData1';
 		let xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -476,11 +488,6 @@ $(document).ready(() => {
 		let soilhToChart = obj.map(({ SoilHumidity }) => SoilHumidity);
 		let waterToChart = obj.map(({ WaterSurface }) => WaterSurface);
 		let date = obj.map(({ Date }) => moment(Date).format("hh:mm A"));
-		/*console.log(tempToChart);
-		console.log(airhToChart);
-		console.log(soilhToChart);
-		console.log(waterToChart);
-		console.log(date);*/
 
     	Chart1.data.datasets[0].data = tempToChart;
     	Chart1.data.labels = date;
@@ -509,7 +516,7 @@ $(document).ready(() => {
 	//last week data for charts
 	lastWeek.click(() => {
 
-	let req = 'http://localhost:5485/weatherData7';
+	//let req = 'http://itsovy.sk:1205/weatherData7';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -522,12 +529,6 @@ $(document).ready(() => {
 	   let waterToChart = obj.map(({ WaterSurface }) => WaterSurface);
 	   //let date = obj.map(({ Date }) => Date.slice(0,10));
 	   let date = obj.map(({ Date }) => moment(Date).format('DD-MMM-YYYY'));
-
-	    /*console.log(tempToChart);
-		console.log(airhToChart);
-		console.log(soilhToChart);
-		console.log(waterToChart);
-		console.log(date);*/
 
     	Chart1.data.datasets[0].data = tempToChart;
     	Chart1.data.labels = date;
@@ -555,6 +556,7 @@ $(document).ready(() => {
 
 	lastMonth.click(() => {
 
+	//let req = 'http://itsovy.sk:1205/weatherData30';
 	let req = 'http://localhost:5485/weatherData30';
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -568,12 +570,6 @@ $(document).ready(() => {
 	   let waterToChart = obj.map(({ WaterSurface }) => WaterSurface);
 	   //let date = obj.map(({ Date }) => Date.slice(0,10));
 	   let date = obj.map(({ Date }) => moment(Date).format('DD-MMM-YYYY'));
-
-	   /*console.log(tempToChart);
-	   console.log(airhToChart);
-	   console.log(soilhToChart);
-	   console.log(waterToChart);
-	   console.log(date);*/
 
        Chart1.data.datasets[0].data = tempToChart;
        Chart1.data.labels = date;
@@ -711,6 +707,7 @@ $(document).ready(() => {
 	    console.log(capacityResult);
 
 		$.ajax({
+	    //url: 'http://itsovy.sk:1205/minmax',
 	    url: 'http://localhost:5485/minmax',
 	    dataType: 'json',
 	    type: 'put',
@@ -795,9 +792,7 @@ $(document).ready(() => {
 	       waterCapacity = obj.optimalValues.ContainerSize;
 
 	       //calculation for water uses
-	       let capacityResult = calculateUses(capacity.value);
-	       usesValue.html(capacityResult);
-	       console.log(capacityResult);
+	       calculateUses(capacity.value,watersurfaceUses);
 
 	        let tempHeight = barTemp.height() / barTemp.parent().height()*100;
 			let airHeight = barAir.height() / barAir.parent().height()*100;
